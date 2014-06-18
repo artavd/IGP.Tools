@@ -10,7 +10,7 @@
     internal sealed class ValueProviderFixture
     {
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void GetNextValueShouldThrowExceptionIfValuesAreNotAdded()
         {
             // Given
@@ -18,6 +18,33 @@
             
             // When
             provider.GetNextValue();
+        }
+
+        [TestCase("")]
+        [TestCase(null)]
+        [TestCase("   ")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddEmptyValueInProviderShouldThrowException(string value)
+        {
+            // Given
+            var provider = new ValueProvider("Provider for test");
+
+            // When
+            provider.AddValue(value);
+        }
+
+        [TestCase("")]
+        [TestCase(null)]
+        [TestCase("   ")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddValueRangeWithEmptyValueInProviderShouldThrowException(string value)
+        {
+            // Given
+            var provider = new ValueProvider("Provider for test");
+            var range = new[] { "1", "2", value, "4" };
+
+            // When
+            provider.AddValueRange(range);
         }
 
         [Test]

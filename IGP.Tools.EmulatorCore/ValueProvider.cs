@@ -1,5 +1,6 @@
 ﻿namespace IGP.Tools.EmulatorCore
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -9,12 +10,9 @@
     {
         public string Name { get; set; }
 
-        public string ValueFormat { get; set; }
-
         public ValueProvider(string name)
         {
             Name = name;
-            ValueFormat = "F2";
         }
 
         public void AddValue(string value)
@@ -31,13 +29,11 @@
 
         public string GetNextValue()
         {
-            Guard.That(_values.Count, "Values count").IsGreaterThan(0);
+            if (_values.Count == 0)
+            {
+                throw new InvalidOperationException("Unnable to get next value from empty value set");
+            }
 
-            return GetNextValueAndMovePointer();
-        }
-
-        private string GetNextValueAndMovePointer()
-        {
             string result = _values.ElementAt(_nextValueIndex);
 
             _nextValueIndex = (_values.Count == ++_nextValueIndex) ? 0 : _nextValueIndex;
