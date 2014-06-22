@@ -1,5 +1,7 @@
 ﻿namespace IGP.Tools.EmulatorCore.Tests
 {
+    using Moq;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -38,14 +40,77 @@
             Assert.AreEqual(valueCount, message.Values.Count);
         }
 
-        // TODO: make mock for ValueProvider
-        [Ignore]
-        public void GetNextMessageShouldWorkCorrectly()
+        [Test]
+        public void GetNextMessageForNonInitializedMessageProviderShouldReturnNullPlaceholders()
         {
             // Given
-            var message = new MessageProvider("format {0} string {1}");
+            var format = "format {0} string {1}";
+            var nullValue = new VoidValueProvider().GetNextValue();
+            var message = new MessageProvider(format);
+
+            // When
+            var generatedMessage = message.GetNextMessage();
 
             // Then
+            Assert.AreEqual(string.Format(format, nullValue, nullValue), generatedMessage);
+        }
+
+        [TestCase(1, "format {0} string")]
+        [TestCase(1, "format {0} string {1}")]
+        [TestCase(1, "format {0} string {1} {2}")]
+        [TestCase(2, "format {0} string")]
+        [TestCase(2, "format {0} string {1}")]
+        [TestCase(2, "format {0} string {1} {2}")]
+        [TestCase(3, "format {0} string")]
+        [TestCase(3, "format {0} string {1}")]
+        [TestCase(3, "format {0} string {1} {2}")]
+
+        public void GetNextMessageForInitializedMessageProviderShouldCallGetNextValueForAllValueProviderForEveryCall(int callCount, string format)
+        {
+            // Given
+            var message = new MessageProvider(format);
+
+            var mocks = new Mock<IValueProvider>[message.Values.Count];
+            for (int i = 0; i < message.Values.Count; i++)
+            {
+                mocks[i] = new Mock<IValueProvider>();
+                mocks[i].Setup(vp => vp.GetNextValue()).Returns("<value>");
+                message.Values[i] = mocks[i].Object;
+            }
+
+            // When
+            for (int i = 0; i < callCount; i++)
+            {
+                message.GetNextMessage();
+            }
+
+            // Then
+            foreach (var mock in mocks)
+            {
+                mock.Verify(vp => vp.GetNextValue(), Times.Exactly(callCount));
+            }
+        }
+
+        [TestCase("format {0} string", new [] { "1" })]
+        [TestCase("format {0} string {1} {2}", new [] { "1", "2", "3" })]
+        public void GetNextMessageShouldReturnCorrectMessageString(string format, string[] values)
+        {
+            // Given
+            var message = new MessageProvider(format);
+
+            var mocks = new Mock<IValueProvider>[message.Values.Count];
+            for (int i = 0; i < message.Values.Count; i++)
+            {
+                mocks[i] = new Mock<IValueProvider>();
+                mocks[i].Setup(vp => vp.GetNextValue()).Returns(values[i]);
+                message.Values[i] = mocks[i].Object;
+            }
+
+            // When
+            var result = message.GetNextMessage();
+
+            // Then
+            Assert.AreEqual(string.Format(format, values), result);
         }
 
         [Test]
