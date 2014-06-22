@@ -14,7 +14,7 @@
         public void GetNextValueShouldThrowExceptionIfValuesAreNotAdded()
         {
             // Given
-            var provider = new ValueProvider("Provider for test");
+            var provider = new CyclicValueProvider("Provider for test");
             
             // When
             provider.GetNextValue();
@@ -27,7 +27,7 @@
         public void AddEmptyValueInProviderShouldThrowException(string value)
         {
             // Given
-            var provider = new ValueProvider("Provider for test");
+            var provider = new CyclicValueProvider("Provider for test");
 
             // When
             provider.AddValue(value);
@@ -40,7 +40,7 @@
         public void AddValueRangeWithEmptyValueInProviderShouldThrowException(string value)
         {
             // Given
-            var provider = new ValueProvider("Provider for test");
+            var provider = new CyclicValueProvider("Provider for test");
             var range = new[] { "1", "2", value, "4" };
 
             // When
@@ -51,7 +51,7 @@
         public void GetNextValueShouldReturnCorrectValueIfItIsOnlyOne()
         {
             // Given
-            var provider = new ValueProvider("Provider for test");
+            var provider = new CyclicValueProvider("Provider for test");
             var value = "10";
             provider.AddValue(value);
             
@@ -71,7 +71,7 @@
         public void GetNextValueShouldReturnLoopSequenceOfContainedValues()
         {
             // Given
-            var provider = new ValueProvider("Provider for test");
+            var provider = new CyclicValueProvider("Provider for test");
             var values = new[] { "1", "2", "3", "4" };
             provider.AddValueRange(values);
 

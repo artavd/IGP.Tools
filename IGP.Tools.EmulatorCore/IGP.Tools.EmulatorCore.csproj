@@ -54,9 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IncorrectFormatStringException.cs" />
+    <Compile Include="IValueProvider.cs" />
     <Compile Include="MessageProvider.cs" />
-    <Compile Include="ValueProvider.cs" />
+    <Compile Include="CyclicValueProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VoidValueProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

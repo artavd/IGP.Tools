@@ -6,11 +6,11 @@
 
     using Seterlund.CodeGuard;
 
-    internal sealed class ValueProvider
+    internal sealed class CyclicValueProvider : IValueProvider
     {
         public string Name { get; set; }
 
-        public ValueProvider(string name)
+        public CyclicValueProvider(string name)
         {
             Name = name;
         }

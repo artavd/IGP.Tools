@@ -1,7 +1,10 @@
 ﻿namespace IGP.Tools.EmulatorCore
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text.RegularExpressions;
+
+    using Microsoft.Practices.ObjectBuilder2;
 
     using Seterlund.CodeGuard.Internals;
 
@@ -15,7 +18,7 @@
             set { _formatString = ProceedFormatString(value); }
         }
 
-        public IList<ValueProvider> Values { get; private set; }
+        public IList<IValueProvider> Values { get; private set; }
 
         public MessageProvider(string formatString)
         {
@@ -92,12 +95,8 @@
 
         private void RecreateValueProviderArray(int length)
         {
-            Values = new ValueProvider[length];
-
-            for (int i = 0; i < Values.Count; i++)
-            {
-                Values[i] = new ValueProvider("Value " + (i + 1));
-            }
+            Values = new IValueProvider[length];
+            Enumerable.Range(0, length).ForEach(i => Values[i] = new VoidValueProvider());
         }
 
         private string _formatString;
