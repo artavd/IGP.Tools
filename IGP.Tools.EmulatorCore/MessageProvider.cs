@@ -1,6 +1,5 @@
 ﻿namespace IGP.Tools.EmulatorCore
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
 
@@ -8,7 +7,7 @@
 
     using Seterlund.CodeGuard.Internals;
 
-    internal sealed class MessageProvider
+    internal sealed class MessageProvider : IMessageProvider
     {
         public string Name { get; set; }
 
@@ -18,7 +17,7 @@
             set { _formatString = ProceedFormatString(value); }
         }
 
-        public IList<IValueProvider> Values { get; private set; }
+        public IValueProvider[] Values { get; private set; }
 
         public MessageProvider(string formatString)
         {
@@ -27,8 +26,8 @@
 
         public string GetNextMessage()
         {
-            var valuesArray = new object[Values.Count];
-            for (int i = 0; i < Values.Count; i++)
+            var valuesArray = new object[Values.Length];
+            for (int i = 0; i < Values.Length; i++)
             {
                 valuesArray[i] = Values[i].GetNextValue();
             }

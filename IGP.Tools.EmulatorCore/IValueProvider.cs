@@ -1,7 +1,9 @@
 ﻿namespace IGP.Tools.EmulatorCore
 {
-    internal interface IValueProvider
+    public interface IValueProvider
     {
+        string Name { get; set; }
+
         string GetNextValue();
     }
 }

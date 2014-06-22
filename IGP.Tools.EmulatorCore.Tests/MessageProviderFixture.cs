@@ -37,17 +37,17 @@
             var message = new MessageProvider(formatString);
 
             // Then
-            Assert.AreEqual(valueCount, message.Values.Count);
+            Assert.AreEqual(valueCount, message.Values.Length);
         }
 
         [Test]
         public void GetNextMessageForNonInitializedMessageProviderShouldReturnNullPlaceholders()
         {
             // Given
-            var format = "format {0} string {1}";
+            const string format = "format {0} string {1}";
             var nullValue = new VoidValueProvider().GetNextValue();
             var message = new MessageProvider(format);
-
+            
             // When
             var generatedMessage = message.GetNextMessage();
 
@@ -70,8 +70,8 @@
             // Given
             var message = new MessageProvider(format);
 
-            var mocks = new Mock<IValueProvider>[message.Values.Count];
-            for (int i = 0; i < message.Values.Count; i++)
+            var mocks = new Mock<IValueProvider>[message.Values.Length];
+            for (int i = 0; i < message.Values.Length; i++)
             {
                 mocks[i] = new Mock<IValueProvider>();
                 mocks[i].Setup(vp => vp.GetNextValue()).Returns("<value>");
@@ -98,8 +98,8 @@
             // Given
             var message = new MessageProvider(format);
 
-            var mocks = new Mock<IValueProvider>[message.Values.Count];
-            for (int i = 0; i < message.Values.Count; i++)
+            var mocks = new Mock<IValueProvider>[message.Values.Length];
+            for (int i = 0; i < message.Values.Length; i++)
             {
                 mocks[i] = new Mock<IValueProvider>();
                 mocks[i].Setup(vp => vp.GetNextValue()).Returns(values[i]);
