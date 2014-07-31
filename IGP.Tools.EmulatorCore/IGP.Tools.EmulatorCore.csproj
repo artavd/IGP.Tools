@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\DeviceEmulatorConfigurationElement.cs" />
+    <Compile Include="Configuration\DeviceEmulatorFactory.cs" />
+    <Compile Include="Configuration\IDeviceFactory.cs" />
     <Compile Include="Configuration\MessageConfigurationElement.cs" />
     <Compile Include="Configuration\ValueSetConfigurationElement.cs" />
     <Compile Include="DeviceEmulator.cs" />
