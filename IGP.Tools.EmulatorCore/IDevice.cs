@@ -1,9 +1,12 @@
 ﻿namespace IGP.Tools.EmulatorCore
 {
     using System;
+    using System.Collections.Generic;
 
     public interface IDevice
     {
-        IObservable<byte[]> Messages { get; }
+        string Name { get; }
+
+        IList<IObservable<byte[]>> Messages { get; }
     }
 }

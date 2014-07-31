@@ -2,7 +2,7 @@
 {
     public interface IValueProvider
     {
-        string Name { get; set; }
+        string Name { get; }
 
         string GetNextValue();
     }

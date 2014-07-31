@@ -1,5 +1,6 @@
 ﻿namespace IGP.Tools.EmulatorCore
 {
+    using System;
     using System.Linq;
     using System.Text.RegularExpressions;
 
@@ -9,7 +10,9 @@
 
     internal sealed class MessageProvider : IMessageProvider
     {
-        public string Name { get; set; }
+        private const uint DefaultIntervalInSeconds = 15;
+
+        public TimeSpan Interval { get; set; }
 
         public string FormatString
         {
@@ -22,6 +25,8 @@
         public MessageProvider(string formatString)
         {
             FormatString = formatString;
+
+            Interval = TimeSpan.FromSeconds(DefaultIntervalInSeconds);
         }
 
         public string GetNextMessage()
@@ -94,6 +99,7 @@
 
         private void RecreateValueProviderArray(int length)
         {
+            // TODO: AA Use existing ValueProviders when recreate
             Values = new IValueProvider[length];
             Enumerable.Range(0, length).ForEach(i => Values[i] = new VoidValueProvider());
         }
