@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\DeviceEmulatorConfigurationElement.cs" />
+    <Compile Include="Configuration\MessageConfigurationElement.cs" />
+    <Compile Include="Configuration\ValueSetConfigurationElement.cs" />
     <Compile Include="DeviceEmulator.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="IMessageProvider.cs" />
