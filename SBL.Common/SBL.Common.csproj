@@ -39,8 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\Guard.cs" />
+    <Compile Include="Contract.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="ContractException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
