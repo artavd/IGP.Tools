@@ -36,6 +36,7 @@
 
                 if (provider.Values.Length != m.ValuesSets.Length)
                 {
+                    // TODO: #12 Own factory exception type
                     throw new FormatException("Configuration file format exception: wrong number of value sets");
                 }
 
@@ -68,8 +69,7 @@
             }
             catch (Exception ex)
             {
-                // TODO: move all strings to Resources
-                // TODO: create own factory exception type
+                // TODO: #12 Own factory exception type
                 throw new FormatException(string.Format("Unable to create device of {0} type", deviceType), ex);
             }
         }
