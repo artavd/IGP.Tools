@@ -71,6 +71,10 @@
       <Project>{86b9bcb5-8e72-4627-bb05-8e640c083ba3}</Project>
       <Name>IGP.Tools.EmulatorCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SBL.Common\SBL.Common.csproj">
+      <Project>{7CFD3478-C25C-48DC-8129-1317447C9CBB}</Project>
+      <Name>SBL.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

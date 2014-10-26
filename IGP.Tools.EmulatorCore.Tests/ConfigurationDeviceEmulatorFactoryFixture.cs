@@ -6,6 +6,7 @@
     using IGP.Tools.EmulatorCore.Configuration;
     using IGP.Tools.EmulatorCore.Contracts;
     using NUnit.Framework;
+    using SBL.Common.Extensions;
 
     [TestFixture]
     internal class ConfigurationDeviceEmulatorFactoryFixture
@@ -57,13 +58,7 @@
                         "Unknown device type");
                 }
 
-                // TODO: move to SBL.Common extension methods
-                var stream = new MemoryStream();
-                var writer = new StreamWriter(stream);
-                writer.Write(_configTable[deviceType]);
-                writer.Flush();
-                stream.Position = 0;
-                return stream;
+                return _configTable[deviceType].ToStream();
             }
         }
     }
