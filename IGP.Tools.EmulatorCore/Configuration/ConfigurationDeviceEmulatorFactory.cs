@@ -2,24 +2,24 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Xml.Serialization;
+    using System.Xml.Linq;
     using IGP.Tools.EmulatorCore.Contracts;
     using IGP.Tools.EmulatorCore.Implementation;
     using Microsoft.Practices.ObjectBuilder2;
 
-    internal class ConfigurationDeviceEmulatorFactory : IDeviceFactory
+    internal sealed class ConfigurationDeviceEmulatorFactory : IDeviceFactory
     {
-        public IDevice Create(string filename)
+        private readonly IDeviceConfigurationRepository _repository;
+
+        public ConfigurationDeviceEmulatorFactory(IDeviceConfigurationRepository repository)
         {
-            var file = new FileStream(filename, FileMode.Open);
-            return Create(new StreamReader(file));
+            _repository = repository;
         }
 
-        public IDevice Create(TextReader text)
+        public IDevice Create(string deviceType)
         {
-            var configElement = LoadConfiguration(text);
+            var configElement = LoadConfiguration(deviceType);
 
             var messageProviders = new List<IMessageProvider>();
             foreach (var m in configElement.Messages)
@@ -53,10 +53,20 @@
             return emulator;
         }
 
-        private DeviceEmulatorConfigurationElement LoadConfiguration(TextReader text)
+        private DeviceEmulatorConfigurationElement LoadConfiguration(string deviceType)
         {
-            var serializer = new XmlSerializer(typeof(DeviceEmulatorConfigurationElement));
-            return (DeviceEmulatorConfigurationElement)serializer.Deserialize(text);
+            try
+            {
+                var configStream = _repository.GetDeviceConfigurationStream(deviceType);
+                var xmlElement = XElement.Load(configStream);
+                return xmlElement.DeserializeDeviceEmulator();
+            }
+            catch (Exception ex)
+            {
+                // TODO: move all strings to Resources
+                // TODO: create own factory exception type
+                throw new FormatException(string.Format("Unable to create device of {0} type", deviceType), ex);
+            }
         }
     }
 }
