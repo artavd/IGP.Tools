@@ -1,9 +1,9 @@
-﻿namespace IGP.Tools.EmulatorCore
+﻿namespace IGP.Tools.EmulatorCore.Implementation
 {
     using System;
     using System.Linq;
     using System.Text.RegularExpressions;
-
+    using IGP.Tools.EmulatorCore.Contracts;
     using Microsoft.Practices.ObjectBuilder2;
 
     using Seterlund.CodeGuard.Internals;

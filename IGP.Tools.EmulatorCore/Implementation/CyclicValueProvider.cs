@@ -1,9 +1,9 @@
-﻿namespace IGP.Tools.EmulatorCore
+﻿namespace IGP.Tools.EmulatorCore.Implementation
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using IGP.Tools.EmulatorCore.Contracts;
     using Seterlund.CodeGuard;
 
     internal sealed class CyclicValueProvider : IValueProvider

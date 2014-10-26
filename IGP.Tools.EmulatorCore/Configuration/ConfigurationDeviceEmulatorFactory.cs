@@ -5,10 +5,11 @@
     using System.IO;
     using System.Linq;
     using System.Xml.Serialization;
-
+    using IGP.Tools.EmulatorCore.Contracts;
+    using IGP.Tools.EmulatorCore.Implementation;
     using Microsoft.Practices.ObjectBuilder2;
 
-    internal class DeviceEmulatorFactory : IDeviceFactory
+    internal class ConfigurationDeviceEmulatorFactory : IDeviceFactory
     {
         public IDevice Create(string filename)
         {

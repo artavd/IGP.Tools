@@ -1,5 +1,7 @@
 ﻿namespace IGP.Tools.EmulatorCore.Tests
 {
+    using IGP.Tools.EmulatorCore.Contracts;
+    using IGP.Tools.EmulatorCore.Implementation;
     using Moq;
 
     using NUnit.Framework;
@@ -64,7 +66,6 @@
         [TestCase(3, "format {0} string")]
         [TestCase(3, "format {0} string {1}")]
         [TestCase(3, "format {0} string {1} {2}")]
-
         public void GetNextMessageForInitializedMessageProviderShouldCallGetNextValueForAllValueProviderForEveryCall(int callCount, string format)
         {
             // Given

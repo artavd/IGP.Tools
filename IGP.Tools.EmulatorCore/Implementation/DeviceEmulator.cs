@@ -1,9 +1,10 @@
-﻿namespace IGP.Tools.EmulatorCore
+﻿namespace IGP.Tools.EmulatorCore.Implementation
 {
     using System;
     using System.Collections.Generic;
     using System.Reactive.Linq;
     using System.Text;
+    using IGP.Tools.EmulatorCore.Contracts;
 
     internal class DeviceEmulator : IDevice
     {

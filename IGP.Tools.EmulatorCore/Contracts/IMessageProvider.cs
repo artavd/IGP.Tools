@@ -1,8 +1,8 @@
-﻿namespace IGP.Tools.EmulatorCore
+﻿namespace IGP.Tools.EmulatorCore.Contracts
 {
     using System;
 
-    internal interface IMessageProvider
+    public interface IMessageProvider
     {
         TimeSpan Interval { get; }
 

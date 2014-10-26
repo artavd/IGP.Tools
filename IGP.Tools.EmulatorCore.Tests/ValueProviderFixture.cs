@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using IGP.Tools.EmulatorCore.Implementation;
     using NUnit.Framework;
 
     [TestFixture]

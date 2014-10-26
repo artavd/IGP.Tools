@@ -1,4 +1,4 @@
-﻿namespace IGP.Tools.EmulatorCore
+﻿namespace IGP.Tools.EmulatorCore.Contracts
 {
     using System;
     using System.Collections.Generic;
