@@ -6,8 +6,6 @@
     using IGP.Tools.EmulatorCore.Contracts;
     using Microsoft.Practices.ObjectBuilder2;
 
-    using Seterlund.CodeGuard.Internals;
-
     internal sealed class MessageProvider : IMessageProvider
     {
         private const uint DefaultIntervalInSeconds = 15;
@@ -24,6 +22,7 @@
 
         public MessageProvider(string formatString)
         {
+            // Guard not needed here - all checks of format string are in message setter.
             FormatString = formatString;
 
             Interval = TimeSpan.FromSeconds(DefaultIntervalInSeconds);
@@ -42,7 +41,7 @@
 
         private string ProceedFormatString(string formatString)
         {
-            if (formatString.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(formatString))
             {
                 throw new IncorrectFormatStringException(
                     "Format string must be non-empty.");
@@ -99,7 +98,7 @@
 
         private void RecreateValueProviderArray(int length)
         {
-            // TODO: AA Use existing ValueProviders when recreate
+            // TODO: #10 AA Use existing ValueProviders when recreate
             Values = new IValueProvider[length];
             Enumerable.Range(0, length).ForEach(i => Values[i] = new VoidValueProvider());
         }

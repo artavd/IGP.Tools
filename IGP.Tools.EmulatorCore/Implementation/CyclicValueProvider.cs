@@ -4,7 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using IGP.Tools.EmulatorCore.Contracts;
-    using Seterlund.CodeGuard;
+    using Microsoft.Practices.ObjectBuilder2;
+    using SBL.Common;
 
     internal sealed class CyclicValueProvider : IValueProvider
     {
@@ -17,14 +18,16 @@
 
         public void AddValue(string value)
         {
-            Guard.That(() => value).IsNotNullOrWhiteSpace();
-            
+            Contract.ArgumentIsNotNull(value, () => value);
+
             _values.Add(value);
         }
 
         public void AddValueRange(IEnumerable<string> values)
         {
-            values.ToList().ForEach(AddValue);
+            Contract.ArgumentIsNotNull(values, () => values);
+
+            values.ForEach(AddValue);
         }
 
         public string GetNextValue()

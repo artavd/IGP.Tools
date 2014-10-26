@@ -7,6 +7,7 @@
     using IGP.Tools.EmulatorCore.Contracts;
     using IGP.Tools.EmulatorCore.Implementation;
     using Microsoft.Practices.ObjectBuilder2;
+    using SBL.Common;
 
     internal sealed class ConfigurationDeviceEmulatorFactory : IDeviceFactory
     {
@@ -14,11 +15,15 @@
 
         public ConfigurationDeviceEmulatorFactory(IDeviceConfigurationRepository repository)
         {
+            Contract.ArgumentIsNotNull(repository, () => repository);
+
             _repository = repository;
         }
 
         public IDevice Create(string deviceType)
         {
+            Contract.ArgumentIsNotNull(deviceType, () => deviceType);
+
             var configElement = LoadConfiguration(deviceType);
 
             var messageProviders = new List<IMessageProvider>();

@@ -9,7 +9,7 @@
         {
             if (value == null)
             {
-                throw new GuardException(string.Format("Argument '{0}' is null", valueName.GetFieldName()));
+                throw new ContractException(string.Format("Argument '{0}' is null", valueName.GetFieldName()));
             }
         }
 
@@ -19,7 +19,7 @@
             {
                 string message = messageProvider == null ? string.Format("Object is null") : messageProvider();
 
-                throw new GuardException(message);
+                throw new ContractException(message);
             }
         }
 
@@ -31,7 +31,7 @@
                     string.Format("Expression should be true but was false") :
                     messageProvider();
 
-                throw new GuardException(message);
+                throw new ContractException(message);
             }
         }
 
@@ -46,7 +46,7 @@
                         value.GetType().ToString()) :
                     messageProvider();
 
-                throw new GuardException(message);
+                throw new ContractException(message);
             }
         }
 

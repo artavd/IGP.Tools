@@ -5,6 +5,7 @@
     using System.Reactive.Linq;
     using System.Text;
     using IGP.Tools.EmulatorCore.Contracts;
+    using SBL.Common;
 
     internal class DeviceEmulator : IDevice
     {
@@ -16,6 +17,9 @@
 
         public DeviceEmulator(string name, IEnumerable<IMessageProvider> messageProviders)
         {
+            Contract.ArgumentIsNotNull(name, () => name);
+            Contract.ArgumentIsNotNull(messageProviders, () => messageProviders);
+
             Name = name;
             IsTimeIncluded = false;
 
@@ -30,7 +34,7 @@
             }
         }
 
-        // TODO: AA Move encoder to service
+        // TODO: #9 Create service for encoding
         private static byte[] Encode(string data)
         {
             return Encoding.ASCII.GetBytes(data);
