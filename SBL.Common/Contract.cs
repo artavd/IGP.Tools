@@ -9,7 +9,17 @@
         {
             if (value == null)
             {
-                throw new ContractException(string.Format("Argument '{0}' is null", valueName.GetFieldName()));
+                throw new ArgumentNullException(
+                    string.Format("Argument '{0}' is null", valueName.GetFieldName()));
+            }
+        }
+
+        public static void ArgumentSatisfied<T>(T value, Expression<Func<T>> valueName, Func<T, bool> checker)
+        {
+            if (!checker(value))
+            {
+                throw new ArgumentException(
+                    string.Format("Argument '{0}' doesn't satisfied expression", valueName.GetFieldName()));
             }
         }
 

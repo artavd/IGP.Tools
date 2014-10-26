@@ -18,7 +18,7 @@
 
         public void AddValue(string value)
         {
-            Contract.ArgumentIsNotNull(value, () => value);
+            Contract.ArgumentSatisfied(value, () => value, v => !string.IsNullOrWhiteSpace(v));
 
             _values.Add(value);
         }
