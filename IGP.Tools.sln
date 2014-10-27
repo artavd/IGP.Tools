@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{45357C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBL.Common", "SBL.Common\SBL.Common.csproj", "{7CFD3478-C25C-48DC-8129-1317447C9CBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.IO", "IGP.Tools.IO\IGP.Tools.IO.csproj", "{08EF7824-A7E9-4D86-93F1-FB3321D4E580}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.IO.Tests", "IGP.Tools.IO.Tests\IGP.Tools.IO.Tests.csproj", "{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,11 +40,20 @@ Global
 		{7CFD3478-C25C-48DC-8129-1317447C9CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CFD3478-C25C-48DC-8129-1317447C9CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CFD3478-C25C-48DC-8129-1317447C9CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08EF7824-A7E9-4D86-93F1-FB3321D4E580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08EF7824-A7E9-4D86-93F1-FB3321D4E580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08EF7824-A7E9-4D86-93F1-FB3321D4E580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08EF7824-A7E9-4D86-93F1-FB3321D4E580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FD21C195-19E1-4C1D-A993-2BF3EBB26075} = {AD2426FE-8604-4B92-AAA7-C8AA032605FF}
+		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324} = {AD2426FE-8604-4B92-AAA7-C8AA032605FF}
 	EndGlobalSection
 EndGlobal
