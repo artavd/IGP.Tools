@@ -6,3 +6,5 @@
 *.user
 
 /packages
+
+*.sublime-workspace
