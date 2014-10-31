@@ -6,7 +6,7 @@
     using SBL.Common;
     using SBL.Common.Extensions;
 
-    internal abstract class PortBase : IPort
+    internal abstract class PortBase : IPort, IDisposable
     {
         protected PortBase()
         {
@@ -16,7 +16,6 @@
 
         public abstract bool IsOpened { get; }
 
-        // TODO: implement filtering for received data in base class
         public IObservable<byte[]> Received
         {
             get { return ReceivedImplementation.Select(InFilter.Filter).Where(x => x != null); }
@@ -40,9 +39,21 @@
             TransmitImplementation(dataForTransmit);
         }
 
-        public abstract void Open();
+        public virtual void Open()
+        {
+            if (!IsOpened)
+            {
+                OpenImplementation();
+            }
+        }
 
-        public abstract void Close();
+        public virtual void Close()
+        {
+            if (IsOpened)
+            {
+                CloseImplementation();
+            }
+        }
 
         public void AddInputFilter(IPortFilter filter)
         {
@@ -62,8 +73,27 @@
 
         protected FilterChain OutFilter { get; private set; }
 
-        protected abstract IObservable<byte[]> ReceivedImplementation { get; } 
+        protected abstract void OpenImplementation();
+
+        protected abstract void CloseImplementation();
+
+        protected abstract IObservable<byte[]> ReceivedImplementation { get; }
 
         protected abstract void TransmitImplementation(byte[] data);
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~PortBase()
+        {
+            Dispose(false);
+        }
+
+        protected abstract void Dispose(bool disposing);
+        #endregion
     }
 }

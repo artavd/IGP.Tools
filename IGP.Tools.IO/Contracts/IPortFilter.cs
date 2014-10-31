@@ -2,6 +2,8 @@
 {
     public interface IPortFilter
     {
+        bool IsEnabled { get; set; }
+
         byte[] Filter(byte[] data);
     }
 }

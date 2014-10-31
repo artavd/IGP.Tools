@@ -8,8 +8,15 @@
     {
         private readonly IList<IPortFilter> _filters = new List<IPortFilter>();
 
+        public bool IsEnabled { get; set; }
+
         public byte[] Filter(byte[] data)
         {
+            if (!IsEnabled)
+            {
+                return data;
+            }
+
             byte[] buffer = data;
             foreach (var filter in _filters)
             {
