@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Xml;
     using System.Xml.Linq;
     using IGP.Tools.EmulatorCore.Implementation;
     using SBL.Common;
@@ -66,7 +68,7 @@
             {
                 using (var configStream = _repository.GetDeviceConfigurationStream(deviceType))
                 {
-                    var xmlElement = XElement.Load(configStream);
+                    var xmlElement = LoadXElementWithInvalidCharacters(configStream);
                     return xmlElement.DeserializeDeviceEmulator();
                 }
             }
@@ -74,6 +76,16 @@
             {
                 // TODO: #12 Own factory exception type
                 throw new FormatException(string.Format("Unable to create device of {0} type", deviceType), ex);
+            }
+        }
+
+        private static XElement LoadXElementWithInvalidCharacters(Stream stream)
+        {
+            var xmlReaderSettings = new XmlReaderSettings { CheckCharacters = false };
+            using (var xmlReader = XmlReader.Create(stream, xmlReaderSettings))
+            {
+                xmlReader.MoveToContent();
+                return XElement.Load(xmlReader);
             }
         }
     }
