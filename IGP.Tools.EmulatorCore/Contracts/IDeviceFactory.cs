@@ -5,6 +5,6 @@
     public interface IDeviceFactory
     {
         [NotNull]
-        IDevice Create([NotNull] string deviceType);
+        IDevice CreateDevice([NotNull] string deviceType);
     }
 }

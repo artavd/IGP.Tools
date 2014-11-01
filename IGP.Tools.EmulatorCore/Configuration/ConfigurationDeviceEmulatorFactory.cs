@@ -21,7 +21,7 @@
             _repository = repository;
         }
 
-        public IDevice Create(string deviceType)
+        public IDevice CreateDevice(string deviceType)
         {
             Contract.ArgumentIsNotNull(deviceType, () => deviceType);
 

@@ -99,7 +99,7 @@
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
 
-            factory.Create(deviceType);
+            factory.CreateDevice(deviceType);
         }
 
         [Test]
@@ -108,7 +108,7 @@
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
 
-            factory.Create(DeviceWithIncorrectValueSetNumber);
+            factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
         }
 
         [Test]
@@ -117,7 +117,7 @@
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
 
-            factory.Create(DeviceWithIncorrectValueSetNumber);
+            factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
         }
 
         [Test]
@@ -125,7 +125,7 @@
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
 
-            var device = factory.Create(EmptyDevice);
+            var device = factory.CreateDevice(EmptyDevice);
 
             Assert.AreEqual(EmptyDevice, device.Name);
             Assert.IsEmpty(device.Messages);
@@ -136,7 +136,7 @@
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
 
-            var device = factory.Create(GoodDevice);
+            var device = factory.CreateDevice(GoodDevice);
 
             Assert.AreEqual(GoodDevice, device.Name);
             Assert.AreEqual(2, device.Messages.Count);
