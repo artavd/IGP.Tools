@@ -2,6 +2,7 @@
 {
     using System;
     using IGP.Tools.EmulatorCore.Module;
+    using IGP.Tools.IO.Module;
     using Microsoft.Practices.Unity;
 
     internal static class Program
@@ -30,6 +31,7 @@
             var container = new UnityContainer();
 
             container.AddExtension(new EmulatorCoreExtension(options.DeviceRepository));
+            container.AddExtension(new IOExtension());
 
             container.RegisterInstance(options);
 
