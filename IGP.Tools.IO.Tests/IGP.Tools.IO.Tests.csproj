@@ -57,9 +57,20 @@
   <ItemGroup>
     <Compile Include="PortBaseFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WellKnownPortTypesPortFactoryFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IGP.Tools.IO\IGP.Tools.IO.csproj">
+      <Project>{08EF7824-A7E9-4D86-93F1-FB3321D4E580}</Project>
+      <Name>IGP.Tools.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SBL.Common\SBL.Common.csproj">
+      <Project>{7CFD3478-C25C-48DC-8129-1317447C9CBB}</Project>
+      <Name>SBL.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
