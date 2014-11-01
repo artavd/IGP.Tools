@@ -5,6 +5,6 @@
     public interface IPortFactory
     {
         [NotNull]
-        IPort CreatePort([NotNull] string portName, [NotNull] string parameters);
+        IPort CreatePort([NotNull] string portName, [CanBeNull] string parameters = null);
     }
 }

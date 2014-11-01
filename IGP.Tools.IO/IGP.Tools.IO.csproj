@@ -67,8 +67,10 @@
     <Compile Include="Contracts\IPortFilter.cs" />
     <Compile Include="Contracts\PortBase.cs" />
     <Compile Include="Implementation\FilePort.cs" />
+    <Compile Include="Implementation\Creators\FilePortCreator.cs" />
     <Compile Include="Implementation\FilterChain.cs" />
-    <Compile Include="Implementation\WellKnownPortsPortFactory.cs" />
+    <Compile Include="Implementation\Creators\PortCreatorBase.cs" />
+    <Compile Include="Implementation\WellKnownPortTypesPortFactory.cs" />
     <Compile Include="Module\IOExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WellKnownPortTypes.cs" />

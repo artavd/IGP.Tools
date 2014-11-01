@@ -9,16 +9,17 @@
 
     public class FilePort : PortBase
     {
-        private readonly string _filename;
-
         private Stream _transmitStream;
 
         public FilePort([NotNull] string filename)
         {
             Contract.ArgumentIsNotNull(filename, () => filename);
+            Contract.ArgumentSatisfied(filename, () => filename, x => !string.IsNullOrWhiteSpace(x));
 
-            _filename = filename;
+            OutputFilePath = Path.GetFullPath(filename);
         }
+
+        public string OutputFilePath { get; private set; }
 
         public override string PortType
         {
@@ -32,7 +33,7 @@
 
         protected override void OpenImplementation()
         {
-            _transmitStream = new FileStream(_filename, FileMode.OpenOrCreate);
+            _transmitStream = new FileStream(OutputFilePath, FileMode.OpenOrCreate);
         }
 
         protected async override void CloseImplementation()
