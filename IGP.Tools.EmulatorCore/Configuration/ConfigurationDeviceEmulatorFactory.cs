@@ -63,9 +63,11 @@
         {
             try
             {
-                var configStream = _repository.GetDeviceConfigurationStream(deviceType);
-                var xmlElement = XElement.Load(configStream);
-                return xmlElement.DeserializeDeviceEmulator();
+                using (var configStream = _repository.GetDeviceConfigurationStream(deviceType))
+                {
+                    var xmlElement = XElement.Load(configStream);
+                    return xmlElement.DeserializeDeviceEmulator();
+                }
             }
             catch (Exception ex)
             {

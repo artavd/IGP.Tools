@@ -65,6 +65,7 @@
     <Compile Include="Configuration\ConfigurationElementDeserializationExtensions.cs" />
     <Compile Include="Configuration\DeviceEmulatorConfigurationElement.cs" />
     <Compile Include="Configuration\ConfigurationDeviceEmulatorFactory.cs" />
+    <Compile Include="Configuration\FileSystemDeviceConfigurationRepository.cs" />
     <Compile Include="Contracts\IDeviceConfigurationRepository.cs" />
     <Compile Include="Contracts\IDeviceFactory.cs" />
     <Compile Include="Configuration\MessageConfigurationElement.cs" />

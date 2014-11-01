@@ -9,7 +9,7 @@
     using SBL.Common.Extensions;
 
     [TestFixture]
-    internal class ConfigurationDeviceEmulatorFactoryFixture
+    internal sealed class ConfigurationDeviceEmulatorFactoryFixture
     {
         private MockDeviceConfigurationRepository _mockRepository = new MockDeviceConfigurationRepository();
 

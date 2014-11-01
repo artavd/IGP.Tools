@@ -59,6 +59,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConfigurationDeviceEmulatorFactoryFixture.cs" />
+    <Compile Include="FileSystemDeviceConfigurationRepositoryFixture.cs" />
     <Compile Include="MessageProviderFixture.cs" />
     <Compile Include="ValueProviderFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
