@@ -1,13 +1,14 @@
 ﻿namespace SBL.Common.Extensions
 {
     using System;
+    using SBL.Common.Annotations;
 
     public static class ObjectExtensions
     {
         public static TResult Eval<T, TResult>(
-            this T obj,
-            Func<T, TResult> func,
-            Func<TResult> defaultProvider = null) where T : class
+            [CanBeNull] this T obj,
+            [NotNull] Func<T, TResult> func,
+            [CanBeNull] Func<TResult> defaultProvider = null) where T : class
         {
             Contract.ArgumentIsNotNull(func, () => func);
 
@@ -24,7 +25,7 @@
             return result;
         }
 
-        public static TResult As<TResult>(this object obj)
+        public static TResult As<TResult>([CanBeNull] this object obj)
         {
             return (TResult)obj;
         }

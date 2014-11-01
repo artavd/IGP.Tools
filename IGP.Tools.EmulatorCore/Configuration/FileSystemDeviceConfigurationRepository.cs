@@ -5,6 +5,7 @@
     using System.Linq;
     using IGP.Tools.EmulatorCore.Contracts;
     using SBL.Common;
+    using SBL.Common.Annotations;
 
     internal sealed class FileSystemDeviceConfigurationRepository : IDeviceConfigurationRepository
     {
@@ -12,7 +13,7 @@
 
         private readonly string _repositoryPath;
 
-        public FileSystemDeviceConfigurationRepository(string repositoryPath)
+        public FileSystemDeviceConfigurationRepository([NotNull] string repositoryPath)
         {
             Contract.ArgumentIsNotNull(repositoryPath, () => repositoryPath);
 

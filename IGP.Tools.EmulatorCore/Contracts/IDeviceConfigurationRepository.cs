@@ -2,11 +2,14 @@
 {
     using System.Collections.Generic;
     using System.IO;
+    using SBL.Common.Annotations;
 
     public interface IDeviceConfigurationRepository
     {
+        [NotNull]
         IEnumerable<string> KnownDeviceTypes { get; }
 
-        Stream GetDeviceConfigurationStream(string deviceType);
+        [NotNull]
+        Stream GetDeviceConfigurationStream([NotNull] string deviceType);
     }
 }

@@ -4,12 +4,13 @@
     using IGP.Tools.EmulatorCore.Contracts;
     using Microsoft.Practices.Unity;
     using SBL.Common;
+    using SBL.Common.Annotations;
 
     public sealed class EmulatorCoreExtension : UnityContainerExtension
     {
         private readonly string _configRepoPath;
 
-        public EmulatorCoreExtension(string configRepoPath)
+        public EmulatorCoreExtension([NotNull] string configRepoPath)
         {
             Contract.ArgumentIsNotNull(configRepoPath, () => configRepoPath);
 

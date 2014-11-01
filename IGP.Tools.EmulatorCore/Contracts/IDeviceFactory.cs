@@ -1,7 +1,10 @@
 ﻿namespace IGP.Tools.EmulatorCore.Contracts
 {
+    using SBL.Common.Annotations;
+
     public interface IDeviceFactory
     {
-        IDevice Create(string deviceType);
+        [NotNull]
+        IDevice Create([NotNull] string deviceType);
     }
 }

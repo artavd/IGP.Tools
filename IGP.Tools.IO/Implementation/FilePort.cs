@@ -3,16 +3,18 @@
     using System;
     using System.IO;
     using System.Reactive.Linq;
+    using IGP.Tools.IO.Contracts;
     using SBL.Common;
+    using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
-    internal class FilePort : PortBase
+    public class FilePort : PortBase
     {
         private readonly string _filename;
 
         private Stream _transmitStream;
 
-        public FilePort(string filename)
+        public FilePort([NotNull] string filename)
         {
             Contract.ArgumentIsNotNull(filename, () => filename);
 

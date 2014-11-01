@@ -5,25 +5,26 @@
     using System.Linq;
     using IGP.Tools.EmulatorCore.Contracts;
     using SBL.Common;
+    using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
     internal sealed class CyclicValueProvider : IValueProvider
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public CyclicValueProvider(string name)
+        public CyclicValueProvider([NotNull] string name)
         {
             Name = name;
         }
 
-        public void AddValue(string value)
+        public void AddValue([NotNull] string value)
         {
             Contract.ArgumentSatisfied(value, () => value, v => !string.IsNullOrWhiteSpace(v));
 
             _values.Add(value);
         }
 
-        public void AddValueRange(IEnumerable<string> values)
+        public void AddValueRange([NotNull] IEnumerable<string> values)
         {
             Contract.ArgumentIsNotNull(values, () => values);
 

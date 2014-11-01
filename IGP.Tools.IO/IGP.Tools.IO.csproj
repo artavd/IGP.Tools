@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Contracts\IPort.cs" />
     <Compile Include="Contracts\IPortFilter.cs" />
-    <Compile Include="Implementation\PortBase.cs" />
+    <Compile Include="Contracts\PortBase.cs" />
     <Compile Include="Implementation\FilePort.cs" />
     <Compile Include="Implementation\FilterChain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

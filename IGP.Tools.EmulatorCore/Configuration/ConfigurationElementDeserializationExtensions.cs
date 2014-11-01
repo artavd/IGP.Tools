@@ -1,9 +1,9 @@
 ﻿namespace IGP.Tools.EmulatorCore.Configuration
 {
-    using System;
     using System.Linq;
     using System.Xml.Linq;
     using SBL.Common;
+    using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
     internal static class ConfigurationElementDeserializationExtensions
@@ -21,7 +21,9 @@
         private const string ValueSetRootName = "ValueSet";
         private const string ValueSetValueName = "Value";
 
-        public static DeviceEmulatorConfigurationElement DeserializeDeviceEmulator(this XElement element)
+        [NotNull]
+        public static DeviceEmulatorConfigurationElement DeserializeDeviceEmulator(
+            [NotNull] this XElement element)
         {
             Contract.ArgumentIsNotNull(element, () => element);
             Contract.IsTrue(
@@ -44,7 +46,8 @@
             return result;
         }
 
-        public static MessageConfigurationElement DeserializeMessage(this XElement element)
+        [NotNull]
+        public static MessageConfigurationElement DeserializeMessage([NotNull] this XElement element)
         {
             Contract.ArgumentIsNotNull(element, () => element);
             Contract.IsTrue(
@@ -62,7 +65,8 @@
             return result;
         }
 
-        public static ValueSetConfigurationElement DeserializeValueSet(this XElement element)
+        [NotNull]
+        public static ValueSetConfigurationElement DeserializeValueSet([NotNull] this XElement element)
         {
             Contract.ArgumentIsNotNull(element, () => element);
             Contract.IsTrue(

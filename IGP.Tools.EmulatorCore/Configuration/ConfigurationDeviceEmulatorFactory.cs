@@ -7,13 +7,15 @@
     using IGP.Tools.EmulatorCore.Contracts;
     using IGP.Tools.EmulatorCore.Implementation;
     using SBL.Common;
+    using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
     internal sealed class ConfigurationDeviceEmulatorFactory : IDeviceFactory
     {
         private readonly IDeviceConfigurationRepository _repository;
 
-        public ConfigurationDeviceEmulatorFactory(IDeviceConfigurationRepository repository)
+        public ConfigurationDeviceEmulatorFactory(
+            [NotNull] IDeviceConfigurationRepository repository)
         {
             Contract.ArgumentIsNotNull(repository, () => repository);
 

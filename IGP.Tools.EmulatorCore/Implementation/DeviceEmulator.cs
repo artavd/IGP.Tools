@@ -6,16 +6,19 @@
     using System.Text;
     using IGP.Tools.EmulatorCore.Contracts;
     using SBL.Common;
+    using SBL.Common.Annotations;
 
     internal class DeviceEmulator : IDevice
     {
         public IList<IObservable<byte[]>> Messages { get; private set; }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         public bool IsTimeIncluded { get; set; }
 
-        public DeviceEmulator(string name, IEnumerable<IMessageProvider> messageProviders)
+        public DeviceEmulator(
+            [NotNull] string name,
+            [NotNull] IEnumerable<IMessageProvider> messageProviders)
         {
             Contract.ArgumentIsNotNull(name, () => name);
             Contract.ArgumentIsNotNull(messageProviders, () => messageProviders);

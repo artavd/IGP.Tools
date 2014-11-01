@@ -1,10 +1,11 @@
 ﻿namespace SBL.Common.Extensions
 {
     using System.IO;
+    using SBL.Common.Annotations;
 
     public static class StringExtensions
     {
-        public static Stream ToStream(this string str)
+        public static Stream ToStream([NotNull] this string str)
         {
             Contract.ArgumentIsNotNull(str, () => str);
 

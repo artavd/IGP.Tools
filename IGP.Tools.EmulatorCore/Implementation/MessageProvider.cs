@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using IGP.Tools.EmulatorCore.Contracts;
+    using SBL.Common;
+    using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
     internal sealed class MessageProvider : IMessageProvider
@@ -12,19 +14,21 @@
 
         public TimeSpan Interval { get; set; }
 
+        [NotNull]
         public string FormatString
         {
             get { return _formatString; }
             set { _formatString = ProceedFormatString(value); }
         }
 
+        [NotNull]
         public IValueProvider[] Values { get; private set; }
 
-        public MessageProvider(string formatString)
+        public MessageProvider([NotNull] string formatString)
         {
-            // Guard not needed here - all checks of format string are in message setter.
-            FormatString = formatString;
+            Contract.ArgumentIsNotNull(formatString, () => formatString);
 
+            FormatString = formatString;
             Interval = TimeSpan.FromSeconds(DefaultIntervalInSeconds);
         }
 

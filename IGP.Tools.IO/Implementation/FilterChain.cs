@@ -12,6 +12,8 @@
 
         public byte[] Filter(byte[] data)
         {
+            Contract.ArgumentIsNotNull(data, () => data);
+
             if (!IsEnabled)
             {
                 return data;
