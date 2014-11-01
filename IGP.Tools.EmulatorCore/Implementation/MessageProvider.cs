@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using IGP.Tools.EmulatorCore.Contracts;
-    using Microsoft.Practices.ObjectBuilder2;
+    using SBL.Common.Extensions;
 
     internal sealed class MessageProvider : IMessageProvider
     {
@@ -100,7 +100,7 @@
         {
             // TODO: #10 AA Use existing ValueProviders when recreate
             Values = new IValueProvider[length];
-            Enumerable.Range(0, length).ForEach(i => Values[i] = new VoidValueProvider());
+            Enumerable.Range(0, length).Foreach(i => Values[i] = new VoidValueProvider());
         }
 
         private string _formatString;

@@ -6,8 +6,8 @@
     using System.Xml.Linq;
     using IGP.Tools.EmulatorCore.Contracts;
     using IGP.Tools.EmulatorCore.Implementation;
-    using Microsoft.Practices.ObjectBuilder2;
     using SBL.Common;
+    using SBL.Common.Extensions;
 
     internal sealed class ConfigurationDeviceEmulatorFactory : IDeviceFactory
     {
@@ -42,7 +42,7 @@
 
                 m.ValuesSets
                  .Select((v, i) => new { Provider = v, Index = i })
-                 .ForEach(x =>
+                 .Foreach(x =>
                           {
                               var value = new CyclicValueProvider(x.Provider.Name);
                               value.AddValueRange(x.Provider.Values);

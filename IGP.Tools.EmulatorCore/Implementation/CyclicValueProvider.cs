@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using IGP.Tools.EmulatorCore.Contracts;
-    using Microsoft.Practices.ObjectBuilder2;
     using SBL.Common;
+    using SBL.Common.Extensions;
 
     internal sealed class CyclicValueProvider : IValueProvider
     {
@@ -27,7 +27,7 @@
         {
             Contract.ArgumentIsNotNull(values, () => values);
 
-            values.ForEach(AddValue);
+            values.Foreach(AddValue);
         }
 
         public string GetNextValue()
