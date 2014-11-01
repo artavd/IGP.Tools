@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using IGP.Tools.EmulatorCore.Configuration;
-    using IGP.Tools.EmulatorCore.Contracts;
     using NUnit.Framework;
     using SBL.Common.Extensions;
 

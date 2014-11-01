@@ -1,4 +1,4 @@
-﻿namespace IGP.Tools.EmulatorCore.Contracts
+﻿namespace IGP.Tools.EmulatorCore
 {
     using SBL.Common.Annotations;
 

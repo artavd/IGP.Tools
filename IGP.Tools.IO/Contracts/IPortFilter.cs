@@ -1,4 +1,4 @@
-﻿namespace IGP.Tools.IO.Contracts
+﻿namespace IGP.Tools.IO
 {
     using SBL.Common.Annotations;
 

@@ -1,7 +1,6 @@
 ﻿namespace IGP.Tools.EmulatorCore.Module
 {
     using IGP.Tools.EmulatorCore.Configuration;
-    using IGP.Tools.EmulatorCore.Contracts;
     using Microsoft.Practices.Unity;
     using SBL.Common;
     using SBL.Common.Annotations;

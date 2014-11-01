@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Reactive.Linq;
     using System.Text;
-    using IGP.Tools.EmulatorCore.Contracts;
     using SBL.Common;
     using SBL.Common.Annotations;
 

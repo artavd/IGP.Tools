@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using IGP.Tools.EmulatorCore.Contracts;
     using SBL.Common;
     using SBL.Common.Annotations;
     using SBL.Common.Extensions;

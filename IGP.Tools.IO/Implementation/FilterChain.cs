@@ -1,7 +1,6 @@
 ﻿namespace IGP.Tools.IO.Implementation
 {
     using System.Collections.Generic;
-    using IGP.Tools.IO.Contracts;
     using SBL.Common;
 
     internal sealed class FilterChain : IPortFilter

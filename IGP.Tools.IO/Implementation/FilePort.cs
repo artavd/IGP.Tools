@@ -3,7 +3,6 @@
     using System;
     using System.IO;
     using System.Reactive.Linq;
-    using IGP.Tools.IO.Contracts;
     using SBL.Common;
     using SBL.Common.Annotations;
     using SBL.Common.Extensions;

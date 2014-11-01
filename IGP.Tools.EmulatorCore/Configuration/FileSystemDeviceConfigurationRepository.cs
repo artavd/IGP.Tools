@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using IGP.Tools.EmulatorCore.Contracts;
     using SBL.Common;
     using SBL.Common.Annotations;
 

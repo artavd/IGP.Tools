@@ -1,6 +1,5 @@
 ﻿namespace IGP.Tools.EmulatorCore.Tests
 {
-    using IGP.Tools.EmulatorCore.Contracts;
     using IGP.Tools.EmulatorCore.Implementation;
     using Moq;
 
