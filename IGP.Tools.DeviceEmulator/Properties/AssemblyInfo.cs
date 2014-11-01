@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("IGP")]
 [assembly: AssemblyProduct("IGP.Tools.DeviceEmulator")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©  2014 Artem Avdosev")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
