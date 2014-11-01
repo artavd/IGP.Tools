@@ -9,6 +9,8 @@
     {
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += OnException;
+
             var options = ApplicationOptions.Parse(args);
             if (options.HasError || options.Help)
             {
@@ -36,6 +38,15 @@
             container.RegisterInstance(options);
 
             return container;
+        }
+
+        private static void OnException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine("Application error occured:");
+            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+            Environment.Exit(1);
         }
     }
 }
