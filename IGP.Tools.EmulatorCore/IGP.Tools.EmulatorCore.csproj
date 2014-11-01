@@ -74,6 +74,8 @@
     <Compile Include="Contracts\IDeviceFactory.cs" />
     <Compile Include="Configuration\MessageConfigurationElement.cs" />
     <Compile Include="Configuration\ValueSetConfigurationElement.cs" />
+    <Compile Include="Contracts\IEncoder.cs" />
+    <Compile Include="Implementation\AsciiEncoder.cs" />
     <Compile Include="Implementation\DeviceEmulator.cs" />
     <Compile Include="Contracts\IDevice.cs" />
     <Compile Include="Contracts\IMessageProvider.cs" />

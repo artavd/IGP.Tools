@@ -14,13 +14,17 @@
     internal sealed class ConfigurationDeviceEmulatorFactory : IDeviceFactory
     {
         private readonly IDeviceConfigurationRepository _repository;
+        private readonly IEncoder _encoder;
 
         public ConfigurationDeviceEmulatorFactory(
-            [NotNull] IDeviceConfigurationRepository repository)
+            [NotNull] IDeviceConfigurationRepository repository,
+            [NotNull] IEncoder encoder)
         {
             Contract.ArgumentIsNotNull(repository, () => repository);
+            Contract.ArgumentIsNotNull(encoder, () => encoder);
 
             _repository = repository;
+            _encoder = encoder;
         }
 
         public IDevice CreateDevice(string deviceType)
@@ -54,7 +58,8 @@
                 
                 messageProviders.Add(provider);
             }
-            var emulator = new DeviceEmulator(configElement.DeviceName, messageProviders)
+
+            var emulator = new DeviceEmulator(configElement.DeviceName, messageProviders, _encoder)
                            {
                                IsTimeIncluded = configElement.IsTimeIncluded
                            };

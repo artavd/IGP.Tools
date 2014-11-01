@@ -4,13 +4,15 @@
     using System.Collections.Generic;
     using System.IO;
     using IGP.Tools.EmulatorCore.Configuration;
+    using Moq;
     using NUnit.Framework;
     using SBL.Common.Extensions;
 
     [TestFixture]
     internal sealed class ConfigurationDeviceEmulatorFactoryFixture
     {
-        private MockDeviceConfigurationRepository _mockRepository = new MockDeviceConfigurationRepository();
+        private readonly MockDeviceConfigurationRepository _mockRepository = new MockDeviceConfigurationRepository();
+        private readonly IEncoder _mockEncoder = Mock.Of<IEncoder>(e => e.Encode(It.IsAny<string>()) == new byte[0]);
 
         private const string EmptyDevice = "Empty";
         private const string EmptyDeviceConfig = @"<DeviceEmulator DeviceName=""Empty"" />";
@@ -97,7 +99,7 @@
         [ExpectedException(typeof(FormatException))]
         public void CreatingOfDeviceWithoutNameShouldThrowException(string deviceType)
         {
-            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
+            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
             factory.CreateDevice(deviceType);
         }
@@ -106,7 +108,7 @@
         [ExpectedException(typeof(FormatException))]
         public void CreatingOfDeviceWithValueSetsNumberInappropriateToFormatStringShouldThrowException()
         {
-            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
+            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
             factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
         }
@@ -115,7 +117,7 @@
         [ExpectedException(typeof(FormatException))]
         public void CreatingOfDeviceWithMessageWithoutFormatStringOrTimeIntervalShouldThrowException()
         {
-            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
+            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
             factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
         }
@@ -123,7 +125,7 @@
         [Test]
         public void CreatingOfEmptyDeviceShouldBeCorrect()
         {
-            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
+            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
             var device = factory.CreateDevice(EmptyDevice);
 
@@ -134,7 +136,7 @@
         [Test]
         public void CreatingOfNormallyFilledMessageShouldBeCorrect()
         {
-            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository);
+            var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
             var device = factory.CreateDevice(GoodDevice);
 

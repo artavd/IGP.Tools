@@ -1,7 +1,6 @@
 ﻿namespace IGP.Tools.DeviceEmulator
 {
     using System;
-    using System.Reactive.Linq;
     using IGP.Tools.EmulatorCore;
     using IGP.Tools.IO;
     using SBL.Common;
@@ -14,19 +13,23 @@
 
         private readonly IDeviceFactory _deviceFactory;
         private readonly IPortFactory _portFactory;
+        private readonly IEncoder _encoder;
 
         public DeviceEmulatorApplication(
             [NotNull] ApplicationOptions options,
             [NotNull] IDeviceFactory deviceFactory,
-            [NotNull] IPortFactory portFactory)
+            [NotNull] IPortFactory portFactory,
+            [NotNull] IEncoder encoder)
         {
             Contract.ArgumentIsNotNull(options, () => options);
             Contract.ArgumentIsNotNull(deviceFactory, () => deviceFactory);
             Contract.ArgumentIsNotNull(portFactory, () => portFactory);
+            Contract.ArgumentIsNotNull(encoder, () => encoder);
 
             _options = options;
             _deviceFactory = deviceFactory;
             _portFactory = portFactory;
+            _encoder = encoder;
         }
 
         public void Start()

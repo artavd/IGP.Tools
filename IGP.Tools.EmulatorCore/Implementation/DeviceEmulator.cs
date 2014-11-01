@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Reactive.Linq;
-    using System.Text;
     using SBL.Common;
     using SBL.Common.Annotations;
 
@@ -17,10 +16,12 @@
 
         public DeviceEmulator(
             [NotNull] string name,
-            [NotNull] IEnumerable<IMessageProvider> messageProviders)
+            [NotNull] IEnumerable<IMessageProvider> messageProviders,
+            [NotNull] IEncoder encoder)
         {
             Contract.ArgumentIsNotNull(name, () => name);
             Contract.ArgumentIsNotNull(messageProviders, () => messageProviders);
+            Contract.ArgumentIsNotNull(encoder, () => encoder);
 
             Name = name;
             IsTimeIncluded = false;
@@ -30,16 +31,10 @@
             {
                 var messageFeed = Observable
                     .Interval(mp.Interval)
-                    .Select(_ => Encode(mp.GetNextMessage()));
+                    .Select(_ => encoder.Encode(mp.GetNextMessage()));
 
                 Messages.Add(messageFeed);
             }
-        }
-
-        // TODO: #9 Create service for encoding
-        private static byte[] Encode(string data)
-        {
-            return Encoding.ASCII.GetBytes(data);
         }
     }
 }
