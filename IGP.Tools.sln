@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.IO", "IGP.Tools.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.IO.Tests", "IGP.Tools.IO.Tests\IGP.Tools.IO.Tests.csproj", "{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.DeviceEmulator", "IGP.Tools.DeviceEmulator\IGP.Tools.DeviceEmulator.csproj", "{31B531D1-6316-49A3-865C-26BAA3966D04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31B531D1-6316-49A3-865C-26BAA3966D04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B531D1-6316-49A3-865C-26BAA3966D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31B531D1-6316-49A3-865C-26BAA3966D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31B531D1-6316-49A3-865C-26BAA3966D04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

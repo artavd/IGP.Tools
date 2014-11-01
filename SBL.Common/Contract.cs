@@ -3,6 +3,8 @@
     using System;
     using System.Linq.Expressions;
 
+    // TODO: add caller name
+    // TODO: non browsable by debugger
     public static class Contract
     {
         public static void ArgumentIsNotNull<T>(T value, Expression<Func<T>> valueName) where T : class

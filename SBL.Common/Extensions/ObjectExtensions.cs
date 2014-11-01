@@ -23,5 +23,10 @@
 
             return result;
         }
+
+        public static TResult As<TResult>(this object obj)
+        {
+            return (TResult)obj;
+        }
     }
 }
