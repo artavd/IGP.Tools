@@ -1,9 +1,12 @@
 ﻿namespace IGP.Tools.DeviceEmulator
 {
+    using System;
+    using System.Reactive.Linq;
     using IGP.Tools.EmulatorCore;
     using IGP.Tools.IO;
     using SBL.Common;
     using SBL.Common.Annotations;
+    using SBL.Common.Extensions;
 
     internal sealed class DeviceEmulatorApplication
     {
@@ -28,6 +31,12 @@
 
         public void Start()
         {
+            var port = _portFactory.CreatePort(_options.Port, _options.PortParameters);
+            port.Open();
+
+            var device = _deviceFactory.CreateDevice(_options.DeviceType);
+
+            device.Messages.Foreach(m => m.Subscribe(port.Transmit));
         }
     }
 }

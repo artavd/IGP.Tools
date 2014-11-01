@@ -28,7 +28,7 @@
                         _repositoryPath,
                         string.Format("*{0}", DeviceFileFormat),
                         SearchOption.TopDirectoryOnly)
-                    .Select(x => x.Replace(DeviceFileFormat, string.Empty));
+                    .Select(Path.GetFileNameWithoutExtension);
             }
         }
 
@@ -37,7 +37,9 @@
             Contract.ArgumentIsNotNull(deviceType, () => deviceType);
             Contract.ArgumentSatisfied(deviceType, () => deviceType, KnownDeviceTypes.Contains);
 
-            return File.OpenRead(string.Format("{0}{1}", deviceType, DeviceFileFormat));
+            return File.OpenRead(Path.Combine(
+                _repositoryPath, 
+                string.Format("{0}{1}", deviceType, DeviceFileFormat)));
         }
     }
 }

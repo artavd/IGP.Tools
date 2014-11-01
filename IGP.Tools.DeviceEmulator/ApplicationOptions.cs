@@ -10,11 +10,12 @@
     internal sealed class ApplicationOptions
     {
         // TODO: #11 Move all UI strings to Resources
-        private const string PortHelpText = "Output port (i.e. COM1, TCP4001, TCPIN3021).";
+        private const string PortHelpText = "Output port (i.e. COM1, TCP4001, TCPIN3021, FILE).";
         private const string DeviceHelpText = "Device emulator type which will be looked up from repository.";
         private const string RepoHelpText = "Path to device emulator types repository.";
         private const string ComHelpText = "If output port is Serial Port (COM) then this option contains it's parameters (i.e. '9600-8-N-1', '1200-7-E-1')";
         private const string AddressHelpText = "If output port is TCP Port then this option contains destination IP address (i.e. '127.0.0.1', '192.168.12.14')";
+        private const string OutputFileHelpText = "If output port is File Port then this option contains output file path.";
 
         private const string SplitterString = "----------------------------------------------------------------------";
         private const string ErrorsHeaderText = "Argument parsing error(s):";
@@ -38,11 +39,19 @@
         [Option("repository", DefaultValue = "devices", HelpText = RepoHelpText)]
         public string DeviceRepository { get; set; }
 
+        public string PortParameters
+        {
+            get { return Address ?? ComParameters ?? OutputFile; }
+        }
+
         [Option("com", MutuallyExclusiveSet = "serial", HelpText = ComHelpText)]
         public string Address { get; set; }
 
         [Option("address", MutuallyExclusiveSet = "network", HelpText = AddressHelpText)]
         public string ComParameters { get; set; }
+        
+        [Option("output-file", MutuallyExclusiveSet = "file", HelpText = OutputFileHelpText)]
+        public string OutputFile { get; set; }
 
         [ParserState]
         public IParserState LastParserState { get; set; }
