@@ -1,9 +1,9 @@
 ﻿namespace IGP.Tools.IO.Tests
 {
-    using System;
     using System.IO;
     using IGP.Tools.IO.Implementation;
     using NUnit.Framework;
+    using SBL.Common;
     using SBL.Common.Extensions;
 
     [TestFixture]
@@ -12,7 +12,7 @@
         [TestCase("FIEL")]
         [TestCase("smb4500")]
         [TestCase("TPCIN231")]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(FactoryException<WellKnownPortTypesPortFactory, IPort>))]
         public void CreatePortShouldThrowExceptionForUnknownPortTypes(string portName)
         {
             IPortFactory factory = new WellKnownPortTypesPortFactory();

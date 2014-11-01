@@ -45,6 +45,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="ContractException.cs" />
     <Compile Include="Annotations.cs" />
+    <Compile Include="FactoryException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
