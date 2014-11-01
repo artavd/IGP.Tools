@@ -1,0 +1,5 @@
+<DeviceEmulator DeviceName="WT521 (only wind,rand)" IsTimeIncluded="False">
+  <Message TimeInterval="1000" FormatString="$WIMWV,{0},R,{1},M,A*3A&#xD;&#xA;">
+    <ValueSet Name="Wind Direction" RandomValuesEnabled="True" ValueFormat="F0" LowerBound="50" UpperBound="300" />
+	<ValueSet Name="Wind Speed" RandomValuesEnabled="True" ValueFormat="F1" LowerBound="2" UpperBound="7" />  </Message>
+</DeviceEmulator>

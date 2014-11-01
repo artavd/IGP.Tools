@@ -1,0 +1,52 @@
+<DeviceEmulator DeviceName="LT31" IsTimeIncluded="False">
+  <Message TimeInterval="5000" FormatString="&#x1;LT1&#x2;VIS {0} AL {1} BL {2} AL {3} WMO {4} WMO15M {5} WMO60M {6} RN1M {7} RNSUM {8} SNSUM {9} TMP {10} AL {11}&#x3;{12}&#x4;&#xD;&#xA;">
+    <ValueSet Name="VIS">
+      <Value>1000.0</Value>
+      <Value>900.0</Value>
+      <Value>800.0</Value>
+      <Value>700.0</Value>
+      <Value>600.0</Value>
+    </ValueSet>
+    <ValueSet Name="AL">
+      <Value>00000000000000000000</Value>
+    </ValueSet>
+    <ValueSet Name="BL">
+      <Value>01000</Value>
+      <Value>01000</Value>
+    </ValueSet>
+    <ValueSet Name="AL(2)">
+      <Value>0</Value>
+    </ValueSet>
+    <ValueSet Name="WMO">
+      <Value>61</Value>
+    </ValueSet>
+    <ValueSet Name="WMO15M">
+      <Value>61</Value>
+    </ValueSet>
+    <ValueSet Name="WMO60M">
+      <Value>61</Value>
+    </ValueSet>
+    <ValueSet Name="RN1M">
+      <Value>0.33</Value>
+    </ValueSet>
+    <ValueSet Name="RNSUM">
+      <Value>12.16</Value>
+    </ValueSet>
+    <ValueSet Name="SNSUM">
+      <Value>999</Value>
+    </ValueSet>
+    <ValueSet Name="TMP">
+      <Value>23.0</Value>
+      <Value>24.0</Value>
+      <Value>25.0</Value>
+      <Value>26.0</Value>
+      <Value>27.0</Value>
+    </ValueSet>
+    <ValueSet Name="AL(3)">
+      <Value>0</Value>
+    </ValueSet>
+    <ValueSet Name="CHECKSUM">
+      <Value>0000</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

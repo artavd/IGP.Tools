@@ -1,0 +1,16 @@
+<DeviceEmulator DeviceName="MITRAS" IsTimeIncluded="False">
+  <Message TimeInterval="5000" FormatString="&#x2;ID {0} V {1} B {2} S{3} &#xD;&#xA;&#x3;">
+    <ValueSet Name="ID">
+      <Value>0</Value>
+    </ValueSet>
+    <ValueSet Name="Visibility">
+      <Value>012345</Value>
+    </ValueSet>
+    <ValueSet Name="Bluminance">
+      <Value>01000</Value>
+    </ValueSet>
+    <ValueSet Name="Status">
+      <Value>0000</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

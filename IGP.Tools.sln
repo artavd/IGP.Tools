@@ -24,6 +24,34 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.IO.Tests", "IGP.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.DeviceEmulator", "IGP.Tools.DeviceEmulator\IGP.Tools.DeviceEmulator.csproj", "{31B531D1-6316-49A3-865C-26BAA3966D04}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configs", "Configs", "{2EEBFDD8-99A1-4E10-8D33-058431F032B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devices", "Devices", "{02411E82-9693-440A-925F-424716734FEB}"
+	ProjectSection(SolutionItems) = preProject
+		Configs\devices\CL31.xml = Configs\devices\CL31.xml
+		Configs\devices\DVO_2M_NEW.xml = Configs\devices\DVO_2M_NEW.xml
+		Configs\devices\DVO_2M_rand.xml = Configs\devices\DVO_2M_rand.xml
+		Configs\devices\FD12_mes6.xml = Configs\devices\FD12_mes6.xml
+		Configs\devices\FD12P_mes2.xml = Configs\devices\FD12P_mes2.xml
+		Configs\devices\FD12P_mes7.xml = Configs\devices\FD12P_mes7.xml
+		Configs\devices\FS11_mes2.xml = Configs\devices\FS11_mes2.xml
+		Configs\devices\HMP155.xml = Configs\devices\HMP155.xml
+		Configs\devices\LT31.xml = Configs\devices\LT31.xml
+		Configs\devices\Metronom.xml = Configs\devices\Metronom.xml
+		Configs\devices\MITRAS.xml = Configs\devices\MITRAS.xml
+		Configs\devices\PTB00 and TU1.xml = Configs\devices\PTB00 and TU1.xml
+		Configs\devices\PTB220.xml = Configs\devices\PTB220.xml
+		Configs\devices\QLI.xml = Configs\devices\QLI.xml
+		Configs\devices\ROSA.xml = Configs\devices\ROSA.xml
+		Configs\devices\TSS928.xml = Configs\devices\TSS928.xml
+		Configs\devices\WAT15.xml = Configs\devices\WAT15.xml
+		Configs\devices\WT521+T.xml = Configs\devices\WT521+T.xml
+		Configs\devices\WT521.xml = Configs\devices\WT521.xml
+		Configs\devices\YURA_WIND.xml = Configs\devices\YURA_WIND.xml
+		Configs\devices\ДОЛ-2.xml = Configs\devices\ДОЛ-2.xml
+		Configs\devices\ИПВ-У.xml = Configs\devices\ИПВ-У.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,5 +89,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FD21C195-19E1-4C1D-A993-2BF3EBB26075} = {AD2426FE-8604-4B92-AAA7-C8AA032605FF}
 		{3F0062B0-5D5F-4EFA-93CD-702E4F8F8324} = {AD2426FE-8604-4B92-AAA7-C8AA032605FF}
+		{02411E82-9693-440A-925F-424716734FEB} = {2EEBFDD8-99A1-4E10-8D33-058431F032B8}
 	EndGlobalSection
 EndGlobal

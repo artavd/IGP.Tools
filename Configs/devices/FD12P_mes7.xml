@@ -1,0 +1,43 @@
+<DeviceEmulator DeviceName="FD12P message 7" IsTimeIncluded="False">
+<!-- 00 6839 7505 L 52 61 61 0.33 12.16 0 23.4 12345 -->
+  <Message TimeInterval="5000" FormatString="&#x1;FD 1&#x2;{0} {1} {2} {3} {4} {5} {6} {7} {8} 0 {9} {10}&#xD;&#xA;">
+    <ValueSet Name="Device Status">
+      <Value>00</Value>
+    </ValueSet>
+    <ValueSet Name="Visibility 1">
+      <Value>22000</Value>
+    </ValueSet>    <ValueSet Name="Visibility 10">
+      <Value>15000</Value>
+    </ValueSet>
+	<ValueSet Name="NWS code">
+	  <Value>L</Value>
+	</ValueSet>
+	<ValueSet Name="Instant weather code">
+	  <Value>52</Value>
+	</ValueSet>
+	<ValueSet Name="15 minute weather code">
+	  <Value>61</Value>
+	</ValueSet>
+	<ValueSet Name="One hour weather code">
+	  <Value>61</Value>
+	</ValueSet>
+	<ValueSet Name="Precipitation water intencity (mm/h)">
+	  <Value>0.33</Value>
+	</ValueSet>
+	<ValueSet Name="Cumulative water sum">
+	  <Value>12.16</Value>
+	</ValueSet>
+    <ValueSet Name="Temperature">
+      <Value>24.2</Value>
+      <Value>23.4</Value>
+      <Value>22.3</Value>
+      <Value>22.9</Value>
+      <Value>23.1</Value>
+      <Value>23.8</Value>
+      <Value>24.0</Value>
+    </ValueSet>
+    <ValueSet Name="Bluminance">
+      <Value>01000</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

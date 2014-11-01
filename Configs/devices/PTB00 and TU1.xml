@@ -1,0 +1,30 @@
+<DeviceEmulator DeviceName="PTB and TU" IsTimeIncluded="False">
+  <Message TimeInterval="5000" FormatString="&#x1;TU1   &#x2;{0} {1} 00&#x3;&#xD;&#xA;&#x4;">
+    <ValueSet Name="Temperature">
+      <Value>23.5</Value>
+      <Value>21.3</Value>
+      <Value>22.6</Value>
+      <Value>22.8</Value>
+    </ValueSet>
+    <ValueSet Name="Humidity">
+      <Value>63</Value>
+      <Value>67</Value>
+      <Value>72</Value>
+    </ValueSet>
+  </Message>
+  <Message TimeInterval="3000" FormatString="&#x1;PTB00&#x2;{0} {1} 00&#x3;&#xD;&#xA;&#x4;">
+    <ValueSet Name="Device Status">
+      <Value>000</Value>
+      <Value>001</Value>
+    </ValueSet>
+    <ValueSet Name="Pressure">
+      <Value>1024.2</Value>
+      <Value>1023.4</Value>
+      <Value>1022.3</Value>
+      <Value>1022.9</Value>
+      <Value>1023.1</Value>
+      <Value>1023.8</Value>
+      <Value>1024.0</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

@@ -1,0 +1,19 @@
+<DeviceEmulator DeviceName="CL31" IsTimeIncluded="False">
+  <Message TimeInterval="5000" FormatString="&#x1;CT02010&#x2;&#xD;&#xA;{0} {1} {2} {3} 01000001&#xD;&#xA;&#x3;&#xD;&#xA;">
+    <ValueSet Name="Detect clouds">
+      <Value>40</Value>
+    </ValueSet>    
+    <ValueSet Name="First layer">
+      <Value>00840</Value>
+      <Value>00865</Value>
+      <Value>00839</Value>
+    </ValueSet>    <ValueSet Name="Second layer">
+      <Value>01234</Value>
+      <Value>01214</Value>
+      <Value>01156</Value>
+    </ValueSet>
+    <ValueSet Name="Third layer">
+      <Value>/////</Value>
+    </ValueSet>  
+  </Message>
+</DeviceEmulator>

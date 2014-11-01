@@ -1,0 +1,25 @@
+<DeviceEmulator DeviceName="WAT15" IsTimeIncluded="False">
+  <Message TimeInterval="3000" FormatString="A{0}{1}&#x2;">
+  	<ValueSet Name="Wind Speed">
+		<Value>045</Value>
+		<Value>078</Value>
+		<Value>094</Value>
+		<Value>123</Value>
+		<Value>164</Value>
+		<Value>114</Value>
+		<Value>092</Value>
+		<Value>069</Value>
+		<Value>032</Value>
+	</ValueSet>
+    <ValueSet Name="Wind Direction">
+		<Value>30</Value>
+		<Value>31</Value>
+		<Value>32</Value>
+		<Value>33</Value>
+		<Value>34</Value>
+		<Value>25</Value>
+		<Value>26</Value>
+		<Value>25</Value>
+	</ValueSet>	
+  </Message>
+</DeviceEmulator>

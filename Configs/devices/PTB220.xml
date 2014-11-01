@@ -1,0 +1,8 @@
+<DeviceEmulator DeviceName="PTB220" IsTimeIncluded="False">
+  <Message TimeInterval="1000" FormatString=" {0} &#xD;&#xA;">
+    <ValueSet Name="Pressure">
+      <Value>976.5</Value>
+      <Value>976.5</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

@@ -1,0 +1,10 @@
+<DeviceEmulator DeviceName="HMP155" IsTimeIncluded="False">
+  <Message TimeInterval="3000" FormatString="&#x1;TU1&#x2;{0} {1} 0000&#x3;&#x0D;&#x0A;&#x4;ERR=ERR&#x0D;&#x0A;">
+    <ValueSet Name="Temperature">
+      <Value>23.4</Value>
+    </ValueSet>
+	<ValueSet Name="Humidity">
+	  <Value>100</Value>
+	</ValueSet>
+  </Message>
+</DeviceEmulator>

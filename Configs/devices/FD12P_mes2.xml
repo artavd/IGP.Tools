@@ -1,0 +1,12 @@
+<DeviceEmulator DeviceName="FD12P message 2" IsTimeIncluded="False">
+  <Message TimeInterval="5000" FormatString="&#x1;FD 1&#x2;{0} {1} {2} //// // // // ////// ////// ////&#x3;">
+    <ValueSet Name="Device Status">
+      <Value>00</Value>
+    </ValueSet>
+    <ValueSet Name="Visibility 1">
+      <Value>022000</Value>
+    </ValueSet>    <ValueSet Name="Visibility 10">
+      <Value>22000</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

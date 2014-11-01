@@ -1,0 +1,58 @@
+<DeviceEmulator DeviceName="QLI" IsTimeIncluded="False">
+  <Message TimeInterval="2000" FormatString="D 01 {0}; 02 {1}; 04 {2}; 05 {3}; 98 {4}; 99 {5}; &#x0D;&#x0A;">
+    <ValueSet Name="Temperature">
+      <Value>24.2</Value>
+      <Value>23.4</Value>
+      <Value>22.3</Value>
+      <Value>22.9</Value>
+      <Value>23.1</Value>
+      <Value>23.8</Value>
+      <Value>24.0</Value>
+    </ValueSet>
+    <ValueSet Name="Humidity">
+      <Value>84.2</Value>
+      <Value>83.4</Value>
+      <Value>82.3</Value>
+      <Value>82.9</Value>
+      <Value>83.1</Value>
+      <Value>83.8</Value>
+      <Value>84.0</Value>
+    </ValueSet>
+    <ValueSet Name="Wind Speed">
+      <Value>4.2</Value>
+      <Value>3.4</Value>
+      <Value>2.3</Value>
+      <Value>2.9</Value>
+      <Value>3.1</Value>
+      <Value>3.8</Value>
+      <Value>4.0</Value>
+    </ValueSet>
+    <ValueSet Name="Wind Direction">
+      <Value>104.2</Value>
+      <Value>53.4</Value>
+      <Value>62.3</Value>
+      <Value>72.9</Value>
+      <Value>83.1</Value>
+      <Value>93.8</Value>
+      <Value>4.0</Value>
+    </ValueSet>
+    <ValueSet Name="Controller Temperature">
+      <Value>4.2</Value>
+      <Value>3.4</Value>
+      <Value>2.3</Value>
+      <Value>2.9</Value>
+      <Value>3.1</Value>
+      <Value>3.8</Value>
+      <Value>4.0</Value>
+    </ValueSet>
+    <ValueSet Name="Controller Voltage">
+      <Value>14.2</Value>
+      <Value>13.4</Value>
+      <Value>12.3</Value>
+      <Value>12.9</Value>
+      <Value>13.1</Value>
+      <Value>13.8</Value>
+      <Value>14.0</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

@@ -1,0 +1,21 @@
+<DeviceEmulator DeviceName="IPV-U" IsTimeIncluded="False">
+  <Message TimeInterval="1000" 
+		   FormatString="&#x1;IPVU 090024&#x2;{0} 00.0 {1} 00.0 00.0 00.0 00.0 00.0 00.0 000 {2} 000 000 000 000 00.0 00.0 00.0 00.0 0000.0 0000.0 0000 0000 0000 0000 0000&#x3;062B&#x4;">
+    <ValueSet Name="Status">
+		<Value>2</Value>
+	</ValueSet>
+	<ValueSet Name="Wind Speed">
+		<Value>2.3</Value>
+		<Value>2.9</Value>
+		<Value>3.2</Value>
+		<Value>3.7</Value>
+		<Value>2.1</Value>
+		<Value>2.5</Value>
+		<Value>2.2</Value>
+	</ValueSet>
+	<ValueSet Name="Wind Direction">
+		<Value>150</Value>
+		<Value>154</Value>
+		<Value>159</Value>
+	</ValueSet>  </Message>
+</DeviceEmulator>

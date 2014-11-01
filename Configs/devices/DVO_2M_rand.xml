@@ -1,0 +1,5 @@
+﻿<DeviceEmulator DeviceName="ДВО-2М (rand)" IsTimeIncluded="False">
+  <Message TimeInterval="1000" FormatString="H0{0}&#xD;&#xA;">
+    <ValueSet Name="Pressure" RandomValuesEnabled="True" ValueFormat="F0" LowerBound="100" UpperBound="100" />
+  </Message>
+</DeviceEmulator>

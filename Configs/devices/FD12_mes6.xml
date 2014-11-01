@@ -1,0 +1,26 @@
+<DeviceEmulator DeviceName="FD12 message 6" IsTimeIncluded="False">
+  <Message TimeInterval="15000" FormatString="&#x1;FD12&#x2;ID 1 V {0} B {1} S{2} &#xD;&#xA;&#x3;">
+    <ValueSet Name="Visibility">
+      <Value>11323</Value>
+      <Value>9232</Value>
+      <Value>8876</Value>
+      <Value>7246</Value>
+      <Value>6663</Value>
+      <Value>4234</Value>
+      <Value>3189</Value>
+      <Value>2187</Value>
+      <Value>1485</Value>
+      <Value>974</Value>
+      <Value>1287</Value>
+      <Value>3234</Value>
+      <Value>5843</Value>
+      <Value>7256</Value>
+    </ValueSet>
+    <ValueSet Name="Bluminance">
+      <Value>/////</Value>
+    </ValueSet>
+    <ValueSet Name="Status">
+      <Value>0300</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

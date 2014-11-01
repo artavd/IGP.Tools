@@ -1,0 +1,37 @@
+<DeviceEmulator DeviceName="FS11 message 2" IsTimeIncluded="False">	
+  <Message TimeInterval="15000" FormatString="&#x1;FSA&#x2;VIS {0} AL 0 BL {1} AL 0&#x3;0000&#x4;&#xD;&#xA;">    
+    <ValueSet Name="Visibility">
+      <Value>02000</Value>
+	  <Value>01900</Value>
+	  <Value>01800</Value>
+	  <Value>01750</Value>
+	  <Value>01650</Value>
+	  <Value>01550</Value>
+	  <Value>01321</Value>
+	  <Value>01311</Value>
+	  <Value>01301</Value>
+	  <Value>01291</Value>
+	  <Value>02291</Value>
+	  <Value>03291</Value>
+	  <Value>04291</Value>
+	  <Value>05291</Value>
+	  <Value>06001</Value>
+	  <Value>07002</Value>
+	  <Value>08003</Value>
+	  <Value>09000</Value>
+	  <Value>10000</Value>
+	  <Value>11000</Value>
+	  <Value>12000</Value>
+	  <Value>13000</Value>
+	  <Value>14000</Value>
+	  <Value>15000</Value>
+	  <Value>16000</Value>
+	  <Value>07865</Value>
+	  <Value>06541</Value>
+	  <Value>13291</Value>	
+    </ValueSet>    
+    <ValueSet Name="Bluminance">
+      <Value>01000</Value>      
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

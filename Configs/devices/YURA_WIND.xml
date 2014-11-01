@@ -1,0 +1,14 @@
+<DeviceEmulator DeviceName="ёрин контроллер (ветер)" IsTimeIncluded="False">
+  <Message TimeInterval="1000" FormatString="asb&#xFF;{0}{1}dgh">
+    <ValueSet Name="Wind Speed">
+      <Value>&#x10;</Value>
+	  <Value>&#x11;</Value>
+	  <Value>&#x12;</Value>
+	  <Value>&#x13;</Value>
+	  <Value>&#x14;</Value>
+    </ValueSet>
+    <ValueSet Name="Wind Direction">
+      <Value>&#x20;</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>

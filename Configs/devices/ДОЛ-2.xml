@@ -1,0 +1,56 @@
+<DeviceEmulator DeviceName="днк-2" IsTimeIncluded="False">
+  <Message TimeInterval="5000" FormatString="&#x1;DOL2 {0}&#x2;{1} {2} {3} {4} {5}&#x3;0000&#x4;&#xA;&#xD;">
+    <ValueSet Name="NUM">
+      <Value>000000</Value>
+    </ValueSet>
+    <ValueSet Name="STATE">
+      <Value>0</Value>
+    </ValueSet>
+    <ValueSet Name="VNGO1">
+      <Value>1000</Value>
+      <Value>1100</Value>
+      <Value>1200</Value>
+      <Value>1300</Value>
+      <Value>1400</Value>
+      <Value>1500</Value>
+      <Value>1400</Value>
+      <Value>1300</Value>
+      <Value>1200</Value>
+      <Value>1100</Value>
+    </ValueSet>
+    <ValueSet Name="VNGO2">
+      <Value>2000</Value>
+      <Value>2100</Value>
+      <Value>2200</Value>
+      <Value>2300</Value>
+      <Value>2400</Value>
+      <Value>2500</Value>
+      <Value>2400</Value>
+      <Value>2300</Value>
+      <Value>2200</Value>
+      <Value>2100</Value>
+    </ValueSet>
+    <ValueSet Name="VV">
+      <Value>1000</Value>
+      <Value>1100</Value>
+      <Value>1200</Value>
+      <Value>1300</Value>
+      <Value>1400</Value>
+      <Value>1500</Value>
+      <Value>1400</Value>
+      <Value>1300</Value>
+      <Value>1200</Value>
+      <Value>1100</Value>
+    </ValueSet>
+    <ValueSet Name="Sploch">
+      <Value>61</Value>
+      <Value>62</Value>
+      <Value>63</Value>
+      <Value>64</Value>
+      <Value>61</Value>
+      <Value>60</Value>
+      <Value>55</Value>
+      <Value>50</Value>
+    </ValueSet>
+  </Message>
+</DeviceEmulator>
