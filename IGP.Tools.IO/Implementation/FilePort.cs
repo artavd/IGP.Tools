@@ -47,9 +47,10 @@
             get { return Observable.Empty<byte[]>(); }
         }
 
-        protected override void TransmitImplementation(byte[] data)
+        protected async override void TransmitImplementation(byte[] data)
         {
-            _transmitStream.WriteAsync(data, 0, data.Length);
+            await _transmitStream.WriteAsync(data, 0, data.Length);
+            await _transmitStream.FlushAsync();
         }
 
         protected override void Dispose(bool disposing)
