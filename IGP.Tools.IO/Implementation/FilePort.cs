@@ -20,6 +20,11 @@
             _filename = filename;
         }
 
+        public override string PortType
+        {
+            get { return WellKnownPortTypes.FilePort; }
+        }
+
         public override bool IsOpened
         {
             get { return _transmitStream.Eval(s => s.CanWrite, () => false); }

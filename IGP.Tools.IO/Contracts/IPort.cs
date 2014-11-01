@@ -5,6 +5,9 @@
 
     public interface IPort
     {
+        [NotNull]
+        string PortType { get; }
+
         bool IsOpened { get; }
 
         [NotNull]

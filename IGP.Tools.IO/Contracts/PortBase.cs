@@ -12,6 +12,8 @@
         private readonly FilterChain _inFilter = new FilterChain();
         private readonly FilterChain _outFilter = new FilterChain();
 
+        public abstract string PortType { get; }
+
         public abstract bool IsOpened { get; }
 
         public IObservable<byte[]> Received

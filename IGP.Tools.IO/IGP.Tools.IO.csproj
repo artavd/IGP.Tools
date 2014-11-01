@@ -59,6 +59,7 @@
     <Compile Include="Implementation\FilePort.cs" />
     <Compile Include="Implementation\FilterChain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WellKnownPortTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SBL.Common\SBL.Common.csproj">
