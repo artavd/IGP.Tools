@@ -23,7 +23,7 @@
         private IPort _port;
         private IDevice _device;
 
-        private DisposableChain _finisher = new DisposableChain();
+        private readonly DisposableChain _finisher = new DisposableChain();
 
         public DeviceEmulatorApplication(
             [NotNull] ApplicationOptions options,
@@ -60,6 +60,7 @@
 
         private void Control(char symbol)
         {
+            var controller = CheckControl(_device);
             switch (symbol)
             {
                 case 'q': case 'Q':
@@ -72,13 +73,31 @@
                     break;
 
                 case 's': case 'S':
-                    // TODO: Start/Stop emulator
+                    if (controller.IsStarted)
+                    {
+                        controller.Stop();
+                    }
+                    else
+                    {
+                        controller.Start();
+                    }
                     break;
 
                 case 't': case 'T':
-                    // TODO: Include/Exclude time from message
+                    controller.IsTimeIncluded = !controller.IsTimeIncluded;
                     break;
             }
+        }
+
+        private IDeviceEmulator CheckControl(IDevice device)
+        {
+            var controller = device as IDeviceEmulator;
+            if (controller == null)
+            {
+                _port.Transmit(_encoder.Encode("Error! Can't control device."));
+            }
+
+            return controller;
         }
 
         private string GetHelloString()
