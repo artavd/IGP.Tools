@@ -71,6 +71,7 @@
     <Compile Include="Configuration\ConfigurationDeviceEmulatorFactory.cs" />
     <Compile Include="Configuration\FileSystemDeviceConfigurationRepository.cs" />
     <Compile Include="Contracts\IDeviceConfigurationRepository.cs" />
+    <Compile Include="Contracts\IDeviceEmulator.cs" />
     <Compile Include="Contracts\IDeviceFactory.cs" />
     <Compile Include="Configuration\MessageConfigurationElement.cs" />
     <Compile Include="Configuration\ValueSetConfigurationElement.cs" />
