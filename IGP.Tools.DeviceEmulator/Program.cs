@@ -1,22 +1,23 @@
 ﻿namespace IGP.Tools.DeviceEmulator
 {
     using System;
+    using System.Threading;
     using IGP.Tools.EmulatorCore.Module;
     using IGP.Tools.IO.Module;
     using Microsoft.Practices.Unity;
 
     internal static class Program
     {
+        public static readonly object ExitLock = new object();
+
         private static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.UnhandledException += OnException;
+            // AppDomain.CurrentDomain.UnhandledException += OnException;
 
             var options = ApplicationOptions.Parse(args);
             if (options.HasError || options.Help)
             {
-                Console.WriteLine("Press any key to exit.");
-                Console.ReadKey();
-                return;
+                Exit(null, 1);
             }
 
             var container = InitializeContainer(options);
@@ -24,8 +25,29 @@
 
             application.Start();
 
-            Console.WriteLine("Device Emulator work finished. Press any key to exit.");
+            WaitForExitSignal();
+            Exit("Device Emulator work finished. Press any key to exit.");
+        }
+
+        private static void WaitForExitSignal()
+        {
+            lock (ExitLock)
+            {
+                Monitor.Wait(ExitLock);
+            }
+        }
+
+        private static void Exit(string message, int exitCode = 0)
+        {
+            if (message != null)
+            {
+                Console.WriteLine(message);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Press any key to continue");
             Console.ReadKey();
+            Environment.Exit(exitCode);
         }
 
         private static IUnityContainer InitializeContainer(ApplicationOptions options)
@@ -42,11 +64,9 @@
 
         private static void OnException(object sender, UnhandledExceptionEventArgs e)
         {
-            Console.WriteLine("Application error occured:");
-            Console.WriteLine(e.ExceptionObject.ToString());
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
-            Environment.Exit(1);
+            Exit(string.Format(
+                "Application error occured:{0}{1}",
+                Environment.NewLine, e.ExceptionObject.ToString()), 1);
         }
     }
 }

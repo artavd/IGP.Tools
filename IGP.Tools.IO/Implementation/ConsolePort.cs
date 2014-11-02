@@ -11,9 +11,9 @@
         private static readonly Lazy<IObservable<byte[]>> ReceivedStream =
             new Lazy<IObservable<byte[]>>(() =>
             {
-                Func<ConsoleKeyInfo> consoleReadFunc = Console.ReadKey;
+                Func<bool, ConsoleKeyInfo> consoleReadFunc = Console.ReadKey;
                 var published = Observable
-                    .Defer(() => consoleReadFunc.ToTask().ToObservable())
+                    .Defer(() => consoleReadFunc.ToTask(true).ToObservable())
                     .Select(key => new[] { (byte)key.KeyChar })
                     .Repeat()
                     .Publish();
