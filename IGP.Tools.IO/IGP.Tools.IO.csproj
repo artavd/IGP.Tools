@@ -70,6 +70,8 @@
     <Compile Include="Contracts\IPortFactory.cs" />
     <Compile Include="Contracts\IPortFilter.cs" />
     <Compile Include="Contracts\PortBase.cs" />
+    <Compile Include="Implementation\ConsolePort.cs" />
+    <Compile Include="Implementation\Creators\ConsolePortCreator.cs" />
     <Compile Include="Implementation\FilePort.cs" />
     <Compile Include="Implementation\Creators\FilePortCreator.cs" />
     <Compile Include="Implementation\FilterChain.cs" />

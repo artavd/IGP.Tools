@@ -69,7 +69,7 @@
         [TestCase("file")]
         [TestCase("File")]
         [TestCase("fIlE")]
-        public void CreatePortShouldBeCaseInsensitive(string portType)
+        public void CreateFilePortShouldBeCaseInsensitive(string portType)
         {
             const string FilePath = "D:\\absolute_file_name.txt";
             IPortFactory factory = new WellKnownPortTypesPortFactory();
@@ -80,6 +80,21 @@
             Assert.AreEqual(WellKnownPortTypes.FilePort, port.PortType);
             Assert.AreEqual(false, port.IsOpened);
             Assert.AreEqual(FilePath, port.As<FilePort>().OutputFilePath);
+        }
+
+        [TestCase("console")]
+        [TestCase("Console")]
+        [TestCase("CONSOLE")]
+        [TestCase("cOnSoLe")]
+        public void CreateConsolePortShouldBeCaseInsensitive(string portType)
+        {
+            IPortFactory factory = new WellKnownPortTypesPortFactory();
+
+            var port = factory.CreatePort(portType);
+
+            Assert.IsInstanceOf<ConsolePort>(port);
+            Assert.AreEqual(WellKnownPortTypes.ConsolePort, port.PortType);
+            Assert.AreEqual(false, port.IsOpened);
         }
     }
 }

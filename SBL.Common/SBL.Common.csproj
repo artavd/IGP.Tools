@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Contract.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\FuncExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="ContractException.cs" />
