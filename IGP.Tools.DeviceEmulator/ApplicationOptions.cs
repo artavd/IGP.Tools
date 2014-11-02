@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Reflection;
     using CommandLine;
     using CommandLine.Text;
     using SBL.Common;
@@ -13,8 +14,8 @@
         private const string PortHelpText = "Output port (i.e. COM1, TCP4001, TCPIN3021, FILE).";
         private const string DeviceHelpText = "Device emulator type which will be looked up from repository.";
         private const string RepoHelpText = "Path to device emulator types repository.";
-        private const string ComHelpText = "If output port is Serial Port (COM) then this option contains it's parameters (i.e. '9600-8-N-1', '1200-7-E-1')";
-        private const string AddressHelpText = "If output port is TCP Port then this option contains destination IP address (i.e. '127.0.0.1', '192.168.12.14')";
+        private const string ComHelpText = "If output port is Serial Port (COM) then this option contains it's parameters (i.e. '9600-8-N-1', '1200-7-E-1').";
+        private const string AddressHelpText = "If output port is TCP Port then this option contains destination IP address (i.e. '127.0.0.1', '192.168.12.14').";
         private const string OutputFileHelpText = "If output port is File Port then this option contains output file path.";
 
         private const string SplitterString = "----------------------------------------------------------------------";
@@ -59,9 +60,10 @@
         [HelpOption]
         public string GetUsage()
         {
+            var assembly = Assembly.GetEntryAssembly().GetName();
             var help = new HelpText
             {
-                Heading = new HeadingInfo("Device Emulator", "Version 0.1"),
+                Heading = new HeadingInfo(assembly.Name, string.Format("Version {0}", assembly.Version.ToString(2))),
                 Copyright = new CopyrightInfo("Artem Avdosev", 2014),
                 AddDashesToOption = true
             };
