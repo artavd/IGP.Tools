@@ -12,7 +12,7 @@
 
         private static void Main(string[] args)
         {
-            // AppDomain.CurrentDomain.UnhandledException += OnException;
+            AppDomain.CurrentDomain.UnhandledException += OnException;
 
             var options = ApplicationOptions.Parse(args);
             if (options.HasError || options.Help)
@@ -26,7 +26,7 @@
             application.Start();
 
             WaitForExitSignal();
-            Exit("Device Emulator work finished. Press any key to exit.");
+            Exit();
         }
 
         private static void WaitForExitSignal()
@@ -37,15 +37,15 @@
             }
         }
 
-        private static void Exit(string message, int exitCode = 0)
+        private static void Exit(string message = null, int exitCode = 0)
         {
             if (message != null)
             {
                 Console.WriteLine(message);
-                Console.WriteLine();
             }
 
-            Console.WriteLine("Press any key to continue");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Environment.Exit(exitCode);
         }

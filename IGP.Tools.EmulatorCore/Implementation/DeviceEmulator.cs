@@ -6,7 +6,7 @@
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    internal class DeviceEmulator : IDevice
+    internal sealed class DeviceEmulator : IDevice
     {
         public IList<IObservable<byte[]>> Messages { get; private set; }
 
@@ -36,5 +36,23 @@
                 Messages.Add(messageFeed);
             }
         }
+
+        #region Disposing
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~DeviceEmulator()
+        {
+            Dispose(false);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing) { }
+        }
+        #endregion
     }
 }

@@ -10,6 +10,7 @@
     using SBL.Common;
     using SBL.Common.Annotations;
     using SBL.Common.Extensions;
+    using SBL.Common.Utils;
 
     internal sealed class DeviceEmulatorApplication
     {
@@ -18,6 +19,11 @@
         private readonly IDeviceFactory _deviceFactory;
         private readonly IPortFactory _portFactory;
         private readonly IEncoder _encoder;
+
+        private IPort _port;
+        private IDevice _device;
+
+        private DisposableChain _finisher = new DisposableChain();
 
         public DeviceEmulatorApplication(
             [NotNull] ApplicationOptions options,
@@ -38,15 +44,18 @@
 
         public void Start()
         {
-            var port = _portFactory.CreatePort(_options.Port, _options.PortParameters);
-            port.Open();
+            _port = _portFactory.CreatePort(_options.Port, _options.PortParameters);
+            _port.Open();
 
-            port.Transmit(_encoder.Encode(GetHelloString()));
+            _port.Transmit(_encoder.Encode(GetHelloString()));
 
-            port.Received.Select(data => (char)data[0]).Subscribe(Control);
+            _finisher.AddToChain(_port.Received.Select(data => (char)data[0]).Subscribe(Control));
 
-            var device = _deviceFactory.CreateDevice(_options.DeviceType);
-            device.Messages.Foreach(m => m.Subscribe(port.Transmit));
+            _device = _deviceFactory.CreateDevice(_options.DeviceType);
+            _device.Messages.Foreach(m => _finisher.AddToChain(m.Subscribe(_port.Transmit)));
+
+            _finisher.AddToChain(_port);
+            _finisher.AddToChain(_device);
         }
 
         private void Control(char symbol)
@@ -56,6 +65,8 @@
                 case 'q': case 'Q':
                     lock (Program.ExitLock)
                     {
+                        _port.Transmit(_encoder.Encode(GetGoodbyeString()));
+                        _finisher.Dispose();
                         Monitor.Pulse(Program.ExitLock);
                     }
                     break;
@@ -87,6 +98,11 @@
             sb.AppendLine();
 
             return sb.ToString();
+        }
+
+        private string GetGoodbyeString()
+        {
+            return "Device emulator work finished.";
         }
 
         private string GetHeader()

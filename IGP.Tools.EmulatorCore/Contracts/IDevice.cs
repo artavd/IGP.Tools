@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using SBL.Common.Annotations;
 
-    public interface IDevice
+    public interface IDevice : IDisposable
     {
         [NotNull]
         string Name { get; }
