@@ -43,7 +43,7 @@
             var port = factory.CreatePort("FILE", AbsolutePath);
 
             Assert.IsInstanceOf<FilePort>(port);
-            Assert.AreEqual(WellKnownPortTypes.FilePort, port.PortType);
+            Assert.AreEqual(WellKnownPortTypes.FilePort, port.Type);
             Assert.AreEqual(false, port.IsOpened);
 
             Assert.AreEqual(AbsolutePath, port.As<FilePort>().OutputFilePath);
@@ -58,7 +58,7 @@
             var port = factory.CreatePort("FILE", relativePath);
 
             Assert.IsInstanceOf<FilePort>(port);
-            Assert.AreEqual(WellKnownPortTypes.FilePort, port.PortType);
+            Assert.AreEqual(WellKnownPortTypes.FilePort, port.Type);
             Assert.AreEqual(false, port.IsOpened);
 
             string expectedPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
@@ -77,7 +77,7 @@
             var port = factory.CreatePort(portType, FilePath);
 
             Assert.IsInstanceOf<FilePort>(port);
-            Assert.AreEqual(WellKnownPortTypes.FilePort, port.PortType);
+            Assert.AreEqual(WellKnownPortTypes.FilePort, port.Type);
             Assert.AreEqual(false, port.IsOpened);
             Assert.AreEqual(FilePath, port.As<FilePort>().OutputFilePath);
         }
@@ -93,7 +93,7 @@
             var port = factory.CreatePort(portType);
 
             Assert.IsInstanceOf<ConsolePort>(port);
-            Assert.AreEqual(WellKnownPortTypes.ConsolePort, port.PortType);
+            Assert.AreEqual(WellKnownPortTypes.ConsolePort, port.Type);
             Assert.AreEqual(false, port.IsOpened);
         }
     }

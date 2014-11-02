@@ -21,9 +21,14 @@
 
         public string OutputFilePath { get; private set; }
 
-        public override string PortType
+        public override string Type
         {
             get { return WellKnownPortTypes.FilePort; }
+        }
+
+        public override string Name
+        {
+            get { return string.Format("File Port [{0}]", OutputFilePath); }
         }
 
         public override bool IsOpened

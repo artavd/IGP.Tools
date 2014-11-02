@@ -3,10 +3,13 @@
     using System;
     using SBL.Common.Annotations;
 
-    public interface IPort
+    public interface IPort : IDisposable
     {
         [NotNull]
-        string PortType { get; }
+        string Type { get; }
+
+        [NotNull]
+        string Name { get; }
 
         bool IsOpened { get; }
 

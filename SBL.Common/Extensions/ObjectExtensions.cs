@@ -29,5 +29,13 @@
         {
             return (TResult)obj;
         }
+
+        public static void DisposeIfPossible([NotNull] this object obj)
+        {
+            if (obj is IDisposable)
+            {
+                obj.As<IDisposable>().Dispose();
+            }
+        }
     }
 }

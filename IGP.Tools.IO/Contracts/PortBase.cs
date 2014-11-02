@@ -7,23 +7,31 @@
     using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
-    public abstract class PortBase : IPort, IDisposable
+    public abstract class PortBase : IPort
     {
         private readonly FilterChain _inFilter = new FilterChain();
         private readonly FilterChain _outFilter = new FilterChain();
 
-        public abstract string PortType { get; }
+        public abstract string Type { get; }
+
+        public abstract string Name { get; }
 
         public abstract bool IsOpened { get; }
 
         public IObservable<byte[]> Received
         {
-            get { return ReceivedImplementation.Select(_inFilter.Filter).Where(x => x != null); }
+            get
+            {
+                CheckOnDisposed();
+                return ReceivedImplementation.Select(_inFilter.Filter).Where(x => x != null);
+            }
         }
 
         public void Transmit(byte[] data)
         {
             Contract.ArgumentIsNotNull(data, () => data);
+            
+            CheckOnDisposed();
 
             if (!IsOpened)
             {
@@ -41,6 +49,7 @@
 
         public virtual void Open()
         {
+            CheckOnDisposed();
             if (!IsOpened)
             {
                 OpenImplementation();
@@ -49,6 +58,7 @@
 
         public virtual void Close()
         {
+            CheckOnDisposed();
             if (IsOpened)
             {
                 CloseImplementation();
@@ -59,6 +69,7 @@
         {
             Contract.ArgumentIsNotNull(filter, () => filter);
 
+            CheckOnDisposed();
             _inFilter.AddFilter(filter);
         }
 
@@ -66,6 +77,7 @@
         {
             Contract.ArgumentIsNotNull(filter, () => filter);
 
+            CheckOnDisposed();
             _outFilter.AddFilter(filter);
         }
 
@@ -79,18 +91,31 @@
         protected abstract void TransmitImplementation([NotNull] byte[] data);
 
         #region IDisposable
+        private bool _isDisposed = false;
+
         public void Dispose()
         {
             Dispose(true);
+            _isDisposed = true;
+
             GC.SuppressFinalize(this);
         }
 
         ~PortBase()
         {
             Dispose(false);
+            _isDisposed = true;
         }
 
         protected abstract void Dispose(bool disposing);
+
+        private void CheckOnDisposed()
+        {
+            if (_isDisposed)
+            {
+                throw new ObjectDisposedException(Name);
+            }
+        }
         #endregion
     }
 }
