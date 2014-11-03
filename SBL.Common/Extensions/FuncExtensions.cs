@@ -1,25 +1,31 @@
 ﻿namespace SBL.Common.Extensions
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using SBL.Common.Annotations;
 
     public static class FuncExtensions
     {
-        [NotNull]
-        public static Task<TResult> ToTask<TResult>([NotNull] this Func<TResult> func)
+        public static async Task<TResult> StartInTask<TResult>([NotNull] this Func<TResult> func)
         {
             Contract.ArgumentIsNotNull(func, () => func);
 
-            return Task<TResult>.Factory.FromAsync(func.BeginInvoke, func.EndInvoke, null);
+            return await Task.Factory.StartNew(func);
         }
 
-        [NotNull]
-        public static Task<TResult> ToTask<T, TResult>([NotNull] this Func<T, TResult> func, T param)
+        public static async Task<TResult> StartInTask<TResult>([NotNull] this Func<TResult> func, CancellationToken token)
         {
             Contract.ArgumentIsNotNull(func, () => func);
 
-            return Task<TResult>.Factory.FromAsync(func.BeginInvoke, func.EndInvoke, param, null);
+            return await Task.Factory.StartNew(func, token);
+        }
+
+        public static async Task<TResult> StartInTask<TResult>([NotNull] this Func<object, TResult> func, object parameter, CancellationToken token)
+        {
+            Contract.ArgumentIsNotNull(func, () => func);
+
+            return await Task.Factory.StartNew(func, parameter, token);
         }
     }
 }

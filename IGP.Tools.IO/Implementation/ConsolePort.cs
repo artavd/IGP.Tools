@@ -5,15 +5,18 @@
     using System.Linq;
     using System.Reactive.Linq;
     using System.Reactive.Threading.Tasks;
+    using System.Threading;
     using SBL.Common.Extensions;
 
     public class ConsolePort : PortBase
     {
         private static readonly object ConsolePortLock = new object();
-        private static readonly IList<int> OpenedPortNumbers = new List<int>();
-        private static int s_LastPortNumber = 0;
+        private static readonly CancellationTokenSource s_Cancellation = new CancellationTokenSource();
 
         private static Lazy<IObservable<byte[]>> s_ReceivedStream = null;
+
+        private static readonly IList<int> OpenedPortNumbers = new List<int>();
+        private static int s_LastPortNumber = 0;
 
         private readonly int _portNumber = s_LastPortNumber + 1;
         private bool _isOpened = false;
@@ -73,8 +76,9 @@
             lock (ConsolePortLock)
             {
                 OpenedPortNumbers.Remove(_portNumber);
-                if (!OpenedPortNumbers.Any())
+                if (s_ReceivedStream != null)
                 {
+                    s_Cancellation.Cancel();
                     s_ReceivedStream.DisposeIfPossible();
                     s_ReceivedStream = null;
                 }
@@ -83,9 +87,9 @@
 
         private static IObservable<byte[]> CreateConsoleReadObservable()
         {
-            Func<bool, ConsoleKeyInfo> consoleReadFunc = Console.ReadKey;
+            Func<object, ConsoleKeyInfo> consoleReadFunc = o => Console.ReadKey((bool)o);
             var published = Observable
-                .Defer(() => consoleReadFunc.ToTask(true).ToObservable())
+                .Defer(() => consoleReadFunc.StartInTask(true, s_Cancellation.Token).ToObservable())
                 .Select(key => new[] { (byte)key.KeyChar })
                 .Repeat()
                 .Publish();
