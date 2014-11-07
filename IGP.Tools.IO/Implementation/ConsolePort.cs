@@ -11,7 +11,7 @@
     public class ConsolePort : PortBase
     {
         private static readonly object ConsolePortLock = new object();
-        private static readonly CancellationTokenSource s_Cancellation = new CancellationTokenSource();
+        private static readonly CancellationTokenSource PortStopper = new CancellationTokenSource();
 
         private static Lazy<IObservable<byte[]>> s_ReceivedStream = null;
 
@@ -78,7 +78,7 @@
                 OpenedPortNumbers.Remove(_portNumber);
                 if (s_ReceivedStream != null)
                 {
-                    s_Cancellation.Cancel();
+                    PortStopper.Cancel();
                     s_ReceivedStream.DisposeIfPossible();
                     s_ReceivedStream = null;
                 }
@@ -89,7 +89,7 @@
         {
             Func<object, ConsoleKeyInfo> consoleReadFunc = o => Console.ReadKey((bool)o);
             var published = Observable
-                .Defer(() => consoleReadFunc.StartInTask(true, s_Cancellation.Token).ToObservable())
+                .Defer(() => consoleReadFunc.StartInTask(true, PortStopper.Token).ToObservable())
                 .Select(key => new[] { (byte)key.KeyChar })
                 .Repeat()
                 .Publish();

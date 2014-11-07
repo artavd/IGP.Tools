@@ -77,7 +77,10 @@
 
         private void Dispose(bool disposing)
         {
-            Messages.Foreach(m => m.DisposeIfPossible());
+            if (disposing)
+            {
+                Messages.Foreach(m => m.DisposeIfPossible());
+            }
         }
         #endregion
     }

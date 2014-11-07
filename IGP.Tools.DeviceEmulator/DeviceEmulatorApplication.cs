@@ -1,6 +1,7 @@
 ﻿namespace IGP.Tools.DeviceEmulator
 {
     using System;
+    using System.Reactive.Disposables;
     using System.Reactive.Linq;
     using System.Reflection;
     using System.Text;
@@ -10,7 +11,6 @@
     using SBL.Common;
     using SBL.Common.Annotations;
     using SBL.Common.Extensions;
-    using SBL.Common.Utils;
 
     internal sealed class DeviceEmulatorApplication
     {
@@ -23,7 +23,7 @@
         private IPort _port;
         private IDevice _device;
 
-        private readonly DisposableChain _finisher = new DisposableChain();
+        private readonly CompositeDisposable _finisher = new CompositeDisposable();
 
         public DeviceEmulatorApplication(
             [NotNull] ApplicationOptions options,
@@ -49,13 +49,13 @@
 
             _port.Transmit(_encoder.Encode(GetHelloString()));
 
-            _finisher.AddToChain(_port.Received.Select(data => (char)data[0]).Subscribe(Control));
+            _finisher.Add(_port.Received.Select(data => (char)data[0]).Subscribe(Control));
 
             _device = _deviceFactory.CreateDevice(_options.DeviceType);
-            _device.Messages.Foreach(m => _finisher.AddToChain(m.Subscribe(_port.Transmit)));
+            _device.Messages.Foreach(m => _finisher.Add(m.Subscribe(_port.Transmit)));
 
-            _finisher.AddToChain(_port);
-            _finisher.AddToChain(_device);
+            _finisher.Add(_port);
+            _finisher.Add(_device);
         }
 
         private void Control(char symbol)
