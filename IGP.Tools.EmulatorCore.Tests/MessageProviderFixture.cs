@@ -10,7 +10,6 @@
     {
         [TestCase("")]
         [TestCase("   ")]
-        [TestCase(null)]
         [TestCase("incorrect {} format string")]
         [TestCase("incorrect {0}} format string")]
         [TestCase("incorrect format { string")]
