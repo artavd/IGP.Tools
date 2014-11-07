@@ -14,7 +14,10 @@
         bool IsOpened { get; }
 
         [NotNull]
-        IObservable<byte[]> Received { get; } 
+        IObservable<bool> StateStream { get; }
+
+        [NotNull]
+        IObservable<byte[]> ReceivedStream { get; } 
 
         void Transmit([NotNull] byte[] data);
 

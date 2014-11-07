@@ -2,6 +2,7 @@
 {
     using System;
     using System.Reactive.Linq;
+    using System.Reactive.Subjects;
     using IGP.Tools.IO.Implementation;
     using SBL.Common;
     using SBL.Common.Annotations;
@@ -12,13 +13,27 @@
         private readonly FilterChain _inFilter = new FilterChain();
         private readonly FilterChain _outFilter = new FilterChain();
 
+        private readonly BehaviorSubject<bool> _stateSubject = new BehaviorSubject<bool>(false);
+
         public abstract string Type { get; }
 
         public abstract string Name { get; }
 
-        public abstract bool IsOpened { get; }
+        public bool IsOpened
+        {
+            get { return _stateSubject.Value; }
+        }
 
-        public IObservable<byte[]> Received
+        public IObservable<bool> StateStream
+        {
+            get
+            {
+                CheckOnDisposed();
+                return _stateSubject;
+            }
+        }
+
+        public IObservable<byte[]> ReceivedStream
         {
             get
             {
@@ -81,6 +96,11 @@
             _outFilter.AddFilter(filter);
         }
 
+        protected void ChangeState(bool isOpened)
+        {
+            _stateSubject.OnNext(isOpened);
+        }
+
         protected abstract void OpenImplementation();
 
         protected abstract void CloseImplementation();
@@ -107,7 +127,13 @@
             _isDisposed = true;
         }
 
-        protected abstract void Dispose(bool disposing);
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _stateSubject.Dispose();
+            }
+        }
 
         private void CheckOnDisposed()
         {

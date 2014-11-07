@@ -19,7 +19,6 @@
         private static int s_LastPortNumber = 0;
 
         private readonly int _portNumber = s_LastPortNumber + 1;
-        private bool _isOpened = false;
 
         public ConsolePort()
         {
@@ -44,19 +43,14 @@
             get { return string.Format("Console Port [{0}]", _portNumber); }
         }
 
-        public override bool IsOpened
-        {
-            get { return _isOpened; }
-        }
-
         protected override void OpenImplementation()
         {
-            _isOpened = true;
+            ChangeState(true);
         }
 
         protected override void CloseImplementation()
         {
-            _isOpened = false;
+            ChangeState(false);
         }
 
         protected override void TransmitImplementation(byte[] data)

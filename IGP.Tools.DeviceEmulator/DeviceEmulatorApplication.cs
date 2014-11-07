@@ -49,7 +49,7 @@
 
             _port.Transmit(_encoder.Encode(GetHelloString()));
 
-            _finisher.Add(_port.Received.Select(data => (char)data[0]).Subscribe(Control));
+            _finisher.Add(_port.ReceivedStream.Select(data => (char)data[0]).Subscribe(Control));
 
             _device = _deviceFactory.CreateDevice(_options.DeviceType);
             _device.Messages.Foreach(m => _finisher.Add(m.Subscribe(_port.Transmit)));

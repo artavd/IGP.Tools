@@ -31,20 +31,22 @@
             get { return string.Format("File Port [{0}]", OutputFilePath); }
         }
 
-        public override bool IsOpened
-        {
-            get { return _transmitStream.Eval(s => s.CanWrite, () => false); }
-        }
-
         protected override void OpenImplementation()
         {
             _transmitStream = new FileStream(OutputFilePath, FileMode.OpenOrCreate);
+            
+            if (_transmitStream.CanWrite)
+            {
+                ChangeState(true);
+            }
         }
 
         protected async override void CloseImplementation()
         {
             await _transmitStream.FlushAsync();
             _transmitStream.Close();
+
+            ChangeState(false);
         }
 
         protected override IObservable<byte[]> ReceivedImplementation
