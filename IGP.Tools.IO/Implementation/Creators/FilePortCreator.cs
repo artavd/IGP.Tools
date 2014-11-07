@@ -1,5 +1,6 @@
 ﻿namespace IGP.Tools.IO.Implementation.Creators
 {
+    using System;
     using System.Text.RegularExpressions;
     using SBL.Common;
 
@@ -12,11 +13,17 @@
         public override IPort CreatePort(string portName, string parameters)
         {
             Contract.ArgumentIsNotNull(portName, () => portName);
-            Contract.ArgumentSatisfied(portName, () => portName, CanBeCreatedFrom);
 
-            Contract.IsNotNull(parameters, () => "Unable to create FilePort with unspecified file name.");
+            CheckPortName<FilePort>(portName);
 
-            return new FilePort(parameters);
+            try
+            {
+                return new FilePort(parameters);
+            }
+            catch (ArgumentException e)
+            {
+                throw new FactoryException(this.GetType(), typeof (FilePort), "Cannot create file port", parameters);
+            }
         }
 
         protected override Regex GetMatchingRegex()

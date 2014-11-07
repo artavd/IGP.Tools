@@ -1,5 +1,6 @@
 ﻿namespace IGP.Tools.IO.Implementation
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using IGP.Tools.IO.Implementation.Creators;
@@ -7,7 +8,7 @@
 
     internal class WellKnownPortTypesPortFactory : IPortFactory
     {
-        private readonly IDictionary<string, PortCreatorBase> _portCreators = 
+        private readonly IDictionary<string, PortCreatorBase> _portCreators =
             new Dictionary<string, PortCreatorBase>();
 
         public WellKnownPortTypesPortFactory()
@@ -23,9 +24,11 @@
             var creator = _portCreators.Values.SingleOrDefault(x => x.CanBeCreatedFrom(portName));
             if (creator == null)
             {
-                throw new FactoryException<WellKnownPortTypesPortFactory, IPort>(
+                throw new FactoryException(
+                    typeof (WellKnownPortTypesPortFactory),
+                    typeof (IPort),
                     string.Format("Unable to find a creator for port with '{0}' name", portName),
-                    portName);
+                    parameters);
             }
 
             return creator.CreatePort(portName, parameters);

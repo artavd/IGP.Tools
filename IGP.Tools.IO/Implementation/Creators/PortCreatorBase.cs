@@ -29,5 +29,14 @@
         {
             return new Regex(string.Format("^{0}([0-9]+)$", Type.ToLower()));
         }
+
+        protected void CheckPortName<T>([NotNull] string portName) where T : IPort
+        {
+            if (!CanBeCreatedFrom(portName))
+            {
+                string message = string.Format("{0} port cannot be created from {1}", Type, portName);
+                throw new FactoryException(this.GetType(), typeof (T), message);
+            }
+        }
     }
 }

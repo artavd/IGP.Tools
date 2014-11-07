@@ -5,7 +5,6 @@
     using System.Reactive.Linq;
     using SBL.Common;
     using SBL.Common.Annotations;
-    using SBL.Common.Extensions;
 
     public class FilePort : PortBase
     {

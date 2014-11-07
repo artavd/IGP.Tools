@@ -12,7 +12,7 @@
         [TestCase("FIEL")]
         [TestCase("smb4500")]
         [TestCase("TPCIN231")]
-        [ExpectedException(typeof(FactoryException<WellKnownPortTypesPortFactory, IPort>))]
+        [ExpectedException(typeof(FactoryException))]
         public void CreatePortShouldThrowExceptionForUnknownPortTypes(string portName)
         {
             IPortFactory factory = new WellKnownPortTypesPortFactory();
@@ -26,7 +26,7 @@
         [TestCase("file|name")]
         [TestCase("file\"name")]
         [TestCase("file\0name")]
-        [ExpectedException]
+        [ExpectedException(typeof(FactoryException))]
         public void CreateFilePortWithIncorrectParametersShouldThrowException(string incorrectPath)
         {
             IPortFactory factory = new WellKnownPortTypesPortFactory();

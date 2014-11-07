@@ -37,33 +37,35 @@
             foreach (var m in configElement.Messages)
             {
                 var provider = new MessageProvider(m.FormatString)
-                               {
-                                   Interval = TimeSpan.FromMilliseconds(m.TimeInterval)
-                               };
+                {
+                    Interval = TimeSpan.FromMilliseconds(m.TimeInterval)
+                };
 
                 if (provider.Values.Length != m.ValuesSets.Length)
                 {
-                    throw new FactoryException<ConfigurationDeviceEmulatorFactory, DeviceEmulator>(
+                    throw new FactoryException(
+                        typeof (ConfigurationDeviceEmulatorFactory),
+                        typeof (DeviceEmulator),
                         "Configuration file format exception: wrong number of value sets",
                         deviceType);
                 }
 
                 m.ValuesSets
-                 .Select((v, i) => new { Provider = v, Index = i })
-                 .Foreach(x =>
-                          {
-                              var value = new CyclicValueProvider(x.Provider.Name);
-                              value.AddValueRange(x.Provider.Values);
-                              provider.Values[x.Index] = value;
-                          });
-                
+                    .Select((v, i) => new { Provider = v, Index = i })
+                    .Foreach(x =>
+                    {
+                        var value = new CyclicValueProvider(x.Provider.Name);
+                        value.AddValueRange(x.Provider.Values);
+                        provider.Values[x.Index] = value;
+                    });
+
                 messageProviders.Add(provider);
             }
 
             var emulator = new DeviceEmulator(configElement.DeviceName, messageProviders, _encoder)
-                           {
-                               IsTimeIncluded = configElement.IsTimeIncluded
-                           };
+            {
+                IsTimeIncluded = configElement.IsTimeIncluded
+            };
 
             return emulator;
         }
@@ -80,7 +82,9 @@
             }
             catch (Exception ex)
             {
-                throw new FactoryException<ConfigurationDeviceEmulatorFactory, DeviceEmulator>(
+                throw new FactoryException(
+                    typeof (ConfigurationDeviceEmulatorFactory),
+                    typeof (DeviceEmulator),
                     string.Format("Unable to create device of {0} type.", deviceType),
                     deviceType,
                     ex);

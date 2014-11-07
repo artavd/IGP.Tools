@@ -2,11 +2,18 @@
 {
     using System;
 
-    public class FactoryException<TFactory, TCreated> : Exception
+    public class FactoryException : Exception
     {
         private readonly object _parameters;
+        private readonly Type _factoryType;
+        private readonly Type _createdType;
 
-        public FactoryException(string message = null, object parameters = null, Exception innerException = null)
+        public FactoryException(
+            Type factoryType,
+            Type createdType,
+            string message = null,
+            object parameters = null,
+            Exception innerException = null)
             : base(message, innerException)
         {
             _parameters = parameters;
@@ -20,8 +27,8 @@
                     "{0}{1}Error occurs while creating '{2}' object with '{3}' factory.",
                     base.Message,
                     Environment.NewLine,
-                    typeof (TCreated).Name,
-                    typeof (TFactory).Name);
+                    _factoryType.Name,
+                    _createdType.Name);
 
                 if (_parameters != null)
                 {

@@ -6,6 +6,7 @@
     using IGP.Tools.EmulatorCore.Configuration;
     using Moq;
     using NUnit.Framework;
+    using SBL.Common;
     using SBL.Common.Extensions;
 
     [TestFixture]
@@ -96,7 +97,7 @@
 
         [TestCase(DeviceWithoutName)]
         [TestCase(FilledDeviceWithoutName)]
-        [ExpectedException(typeof(FormatException))]
+        [ExpectedException(typeof(FactoryException))]
         public void CreatingOfDeviceWithoutNameShouldThrowException(string deviceType)
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
@@ -105,7 +106,7 @@
         }
 
         [Test]
-        [ExpectedException(typeof(FormatException))]
+        [ExpectedException(typeof(FactoryException))]
         public void CreatingOfDeviceWithValueSetsNumberInappropriateToFormatStringShouldThrowException()
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
@@ -114,7 +115,7 @@
         }
 
         [Test]
-        [ExpectedException(typeof(FormatException))]
+        [ExpectedException(typeof(FactoryException))]
         public void CreatingOfDeviceWithMessageWithoutFormatStringOrTimeIntervalShouldThrowException()
         {
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);

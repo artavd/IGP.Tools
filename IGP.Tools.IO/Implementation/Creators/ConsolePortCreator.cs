@@ -12,7 +12,8 @@
         public override IPort CreatePort(string portName, string parameters)
         {
             Contract.ArgumentIsNotNull(portName, () => portName);
-            Contract.ArgumentSatisfied(portName, () => portName, CanBeCreatedFrom);
+            
+            CheckPortName<ConsolePort>(portName);
 
             return new ConsolePort();
         }
