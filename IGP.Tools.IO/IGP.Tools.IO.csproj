@@ -78,7 +78,9 @@
     <Compile Include="Implementation\Creators\PortCreatorBase.cs" />
     <Compile Include="Implementation\WellKnownPortTypesPortFactory.cs" />
     <Compile Include="Module\IOExtension.cs" />
+    <Compile Include="PortState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WellKnownPortStates.cs" />
     <Compile Include="WellKnownPortTypes.cs" />
   </ItemGroup>
   <ItemGroup>

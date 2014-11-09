@@ -13,7 +13,7 @@
         private static readonly object ConsolePortLock = new object();
         private static readonly CancellationTokenSource PortStopper = new CancellationTokenSource();
 
-        private static Lazy<IObservable<byte[]>> s_ReceivedStream = null;
+        private static Lazy<IObservable<byte>> s_ReceivedStream = null;
 
         private static readonly IList<int> OpenedPortNumbers = new List<int>();
         private static int s_LastPortNumber = 0;
@@ -28,7 +28,7 @@
                 s_LastPortNumber = _portNumber;
                 if (s_ReceivedStream == null)
                 {
-                    s_ReceivedStream = new Lazy<IObservable<byte[]>>(CreateConsoleReadObservable);
+                    s_ReceivedStream = new Lazy<IObservable<byte>>(CreateConsoleReadObservable);
                 }
             }
         }
@@ -43,14 +43,14 @@
             get { return string.Format("Console Port [{0}]", _portNumber); }
         }
 
-        protected override void OpenImplementation()
+        protected override void ConnectImplementation()
         {
-            ChangeState(true);
+            ChangeState(WellKnownPortStates.Connected);
         }
 
-        protected override void CloseImplementation()
+        protected override void DisconnectImplementation()
         {
-            ChangeState(false);
+            ChangeState(WellKnownPortStates.Disconnected);
         }
 
         protected override void TransmitImplementation(byte[] data)
@@ -58,14 +58,14 @@
             data.Select(x => (char)x).Foreach(Console.Write);
         }
 
-        protected override IObservable<byte[]> ReceivedImplementation
+        protected override IObservable<byte> ReceivedImplementation
         {
-            get { return s_ReceivedStream.Value.Where(_ => IsOpened); }
+            get { return s_ReceivedStream.Value.Where(_ => CurrentState == WellKnownPortStates.Connected); }
         }
 
         protected override void Dispose(bool disposing)
         {
-            Close();
+            Disconnect();
 
             lock (ConsolePortLock)
             {
@@ -79,12 +79,12 @@
             }
         }
 
-        private static IObservable<byte[]> CreateConsoleReadObservable()
+        private static IObservable<byte> CreateConsoleReadObservable()
         {
             Func<object, ConsoleKeyInfo> consoleReadFunc = o => Console.ReadKey((bool)o);
             var published = Observable
                 .Defer(() => consoleReadFunc.StartInTask(true, PortStopper.Token).ToObservable())
-                .Select(key => new[] { (byte)key.KeyChar })
+                .Select(key => (byte)key.KeyChar)
                 .Repeat()
                 .Publish();
 

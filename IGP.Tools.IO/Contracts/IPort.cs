@@ -11,22 +11,18 @@
         [NotNull]
         string Name { get; }
 
-        bool IsOpened { get; }
+        PortState CurrentState { get; }
 
         [NotNull]
-        IObservable<bool> StateStream { get; }
+        IObservable<PortState> StateFeed { get; }
 
         [NotNull]
-        IObservable<byte[]> ReceivedStream { get; } 
+        IObservable<byte> ReceivedFeed { get; }
 
         void Transmit([NotNull] byte[] data);
 
-        void Open();
+        void Connect();
 
-        void Close();
-
-        void AddInputFilter([NotNull] IPortFilter filter);
-
-        void AddOutputFilter([NotNull] IPortFilter filter);
+        void Disconnect();
     }
 }

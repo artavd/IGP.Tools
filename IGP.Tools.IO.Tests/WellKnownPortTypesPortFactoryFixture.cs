@@ -44,7 +44,7 @@
 
             Assert.IsInstanceOf<FilePort>(port);
             Assert.AreEqual(WellKnownPortTypes.FilePort, port.Type);
-            Assert.AreEqual(false, port.IsOpened);
+            Assert.AreEqual(WellKnownPortStates.Disconnected, port.CurrentState);
 
             Assert.AreEqual(AbsolutePath, port.As<FilePort>().OutputFilePath);
         }
@@ -59,7 +59,7 @@
 
             Assert.IsInstanceOf<FilePort>(port);
             Assert.AreEqual(WellKnownPortTypes.FilePort, port.Type);
-            Assert.AreEqual(false, port.IsOpened);
+            Assert.AreEqual(WellKnownPortStates.Disconnected, port.CurrentState);
 
             string expectedPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
             Assert.AreEqual(expectedPath, port.As<FilePort>().OutputFilePath);
@@ -78,7 +78,7 @@
 
             Assert.IsInstanceOf<FilePort>(port);
             Assert.AreEqual(WellKnownPortTypes.FilePort, port.Type);
-            Assert.AreEqual(false, port.IsOpened);
+            Assert.AreEqual(WellKnownPortStates.Disconnected, port.CurrentState);
             Assert.AreEqual(FilePath, port.As<FilePort>().OutputFilePath);
         }
 
@@ -94,7 +94,7 @@
 
             Assert.IsInstanceOf<ConsolePort>(port);
             Assert.AreEqual(WellKnownPortTypes.ConsolePort, port.Type);
-            Assert.AreEqual(false, port.IsOpened);
+            Assert.AreEqual(WellKnownPortStates.Disconnected, port.CurrentState);
         }
     }
 }

@@ -30,27 +30,37 @@
             get { return string.Format("File Port [{0}]", OutputFilePath); }
         }
 
-        protected override void OpenImplementation()
+        protected override void ConnectImplementation()
         {
             _transmitStream = new FileStream(OutputFilePath, FileMode.OpenOrCreate);
-            
+
             if (_transmitStream.CanWrite)
             {
-                ChangeState(true);
+                ChangeState(WellKnownPortStates.Connected);
+            }
+            else
+            {
+                var error = new PortState(
+                    name: "file connecting error",
+                    description: string.Format("{0} cannot open file to write", Name),
+                    isError: true,
+                    canTransmit: false);
+
+                ChangeState(error);
             }
         }
 
-        protected async override void CloseImplementation()
+        protected async override void DisconnectImplementation()
         {
             await _transmitStream.FlushAsync();
             _transmitStream.Close();
 
-            ChangeState(false);
+            ChangeState(WellKnownPortStates.Disconnected);
         }
 
-        protected override IObservable<byte[]> ReceivedImplementation
+        protected override IObservable<byte> ReceivedImplementation
         {
-            get { return Observable.Empty<byte[]>(); }
+            get { return Observable.Empty<byte>(); }
         }
 
         protected async override void TransmitImplementation(byte[] data)
@@ -61,7 +71,7 @@
 
         protected override void Dispose(bool disposing)
         {
-            Close();
+            Disconnect();
         }
     }
 }

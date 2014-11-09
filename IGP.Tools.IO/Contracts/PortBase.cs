@@ -1,30 +1,25 @@
 ﻿namespace IGP.Tools.IO
 {
     using System;
-    using System.Reactive.Linq;
     using System.Reactive.Subjects;
-    using IGP.Tools.IO.Implementation;
     using SBL.Common;
     using SBL.Common.Annotations;
-    using SBL.Common.Extensions;
 
     public abstract class PortBase : IPort
     {
-        private readonly FilterChain _inFilter = new FilterChain();
-        private readonly FilterChain _outFilter = new FilterChain();
-
-        private readonly BehaviorSubject<bool> _stateSubject = new BehaviorSubject<bool>(false);
+        private readonly BehaviorSubject<PortState> _stateSubject = 
+            new BehaviorSubject<PortState>(WellKnownPortStates.Disconnected);
 
         public abstract string Type { get; }
 
         public abstract string Name { get; }
 
-        public bool IsOpened
+        public PortState CurrentState
         {
             get { return _stateSubject.Value; }
         }
 
-        public IObservable<bool> StateStream
+        public IObservable<PortState> StateFeed
         {
             get
             {
@@ -33,12 +28,12 @@
             }
         }
 
-        public IObservable<byte[]> ReceivedStream
+        public IObservable<byte> ReceivedFeed
         {
             get
             {
                 CheckOnDisposed();
-                return ReceivedImplementation.Select(_inFilter.Filter).Where(x => x != null);
+                return ReceivedImplementation;
             }
         }
 
@@ -48,65 +43,43 @@
             
             CheckOnDisposed();
 
-            if (!IsOpened)
+            if (!CurrentState.CanTransmit)
             {
                 throw new InvalidOperationException("Only opened port can transmit data.");
             }
 
-            var dataForTransmit = _outFilter.Eval(x => x.Filter(data), () => data);
-            if (dataForTransmit == null)
-            {
-                return;
-            }
-
-            TransmitImplementation(dataForTransmit);
+            TransmitImplementation(data);
         }
 
-        public virtual void Open()
+        public virtual void Connect()
         {
             CheckOnDisposed();
-            if (!IsOpened)
+            if (CurrentState != WellKnownPortStates.Connected)
             {
-                OpenImplementation();
+                ConnectImplementation();
             }
         }
 
-        public virtual void Close()
+        public virtual void Disconnect()
         {
             CheckOnDisposed();
-            if (IsOpened)
+            if (CurrentState != WellKnownPortStates.Disconnected)
             {
-                CloseImplementation();
+                DisconnectImplementation();
             }
         }
 
-        public void AddInputFilter(IPortFilter filter)
+        protected void ChangeState(PortState newState)
         {
-            Contract.ArgumentIsNotNull(filter, () => filter);
-
-            CheckOnDisposed();
-            _inFilter.AddFilter(filter);
+            _stateSubject.OnNext(newState);
         }
 
-        public void AddOutputFilter(IPortFilter filter)
-        {
-            Contract.ArgumentIsNotNull(filter, () => filter);
+        protected abstract void ConnectImplementation();
 
-            CheckOnDisposed();
-            _outFilter.AddFilter(filter);
-        }
-
-        protected void ChangeState(bool isOpened)
-        {
-            _stateSubject.OnNext(isOpened);
-        }
-
-        protected abstract void OpenImplementation();
-
-        protected abstract void CloseImplementation();
+        protected abstract void DisconnectImplementation();
 
         [NotNull]
-        protected abstract IObservable<byte[]> ReceivedImplementation { get; }
+        protected abstract IObservable<byte> ReceivedImplementation { get; }
 
         protected abstract void TransmitImplementation([NotNull] byte[] data);
 
