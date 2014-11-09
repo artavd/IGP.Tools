@@ -1,6 +1,7 @@
 ﻿namespace IGP.Tools.IO
 {
     using System;
+    using System.Security.Cryptography;
     using SBL.Common;
     using SBL.Common.Annotations;
 
@@ -30,6 +31,11 @@
             Data = data;
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public bool Equals(PortState state)
         {
             return Name.Equals(state.Name, StringComparison.InvariantCultureIgnoreCase);
@@ -57,6 +63,29 @@
         public static bool operator !=(PortState state1, PortState state2)
         {
             return !state1.Equals(state2);
+        }
+    }
+
+    public static class PortStateExtensions
+    {
+        public static PortState WithData(this PortState state, object data)
+        {
+            return new PortState(
+                name: state.Name,
+                description: state.Description,
+                isError: state.IsError,
+                canTransmit: state.CanTransmit,
+                data: data);
+        }
+\
+        public static PortState WithDescription(this PortState state, string description)
+        {
+            return new PortState(
+                name: state.Name,
+                description: description,
+                isError: state.IsError,
+                canTransmit: state.CanTransmit,
+                data: state.Data);
         }
     }
 }

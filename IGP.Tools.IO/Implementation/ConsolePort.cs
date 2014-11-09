@@ -45,12 +45,12 @@
 
         protected override void ConnectImplementation()
         {
-            ChangeState(WellKnownPortStates.Connected);
+            ChangeState(PortStates.Connected);
         }
 
         protected override void DisconnectImplementation()
         {
-            ChangeState(WellKnownPortStates.Disconnected);
+            ChangeState(PortStates.Disconnected);
         }
 
         protected override void TransmitImplementation(byte[] data)
@@ -60,7 +60,7 @@
 
         protected override IObservable<byte> ReceivedImplementation
         {
-            get { return s_ReceivedStream.Value.Where(_ => CurrentState == WellKnownPortStates.Connected); }
+            get { return s_ReceivedStream.Value.Where(_ => CurrentState == PortStates.Connected); }
         }
 
         protected override void Dispose(bool disposing)

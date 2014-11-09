@@ -20,9 +20,14 @@
             {
                 return new FilePort(parameters);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException exception)
             {
-                throw new FactoryException(this.GetType(), typeof (FilePort), "Cannot create file port", parameters);
+                throw new FactoryException(
+                    this.GetType(),
+                    typeof (FilePort),
+                    "Cannot create file port",
+                    parameters,
+                    exception);
             }
         }
 

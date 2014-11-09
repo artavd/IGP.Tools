@@ -8,7 +8,7 @@
     public abstract class PortBase : IPort
     {
         private readonly BehaviorSubject<PortState> _stateSubject = 
-            new BehaviorSubject<PortState>(WellKnownPortStates.Disconnected);
+            new BehaviorSubject<PortState>(PortStates.Disconnected);
 
         public abstract string Type { get; }
 
@@ -54,7 +54,7 @@
         public virtual void Connect()
         {
             CheckOnDisposed();
-            if (CurrentState != WellKnownPortStates.Connected)
+            if (CurrentState != PortStates.Connected)
             {
                 ConnectImplementation();
             }
@@ -63,7 +63,7 @@
         public virtual void Disconnect()
         {
             CheckOnDisposed();
-            if (CurrentState != WellKnownPortStates.Disconnected)
+            if (CurrentState != PortStates.Disconnected)
             {
                 DisconnectImplementation();
             }

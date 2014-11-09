@@ -36,7 +36,7 @@
 
             if (_transmitStream.CanWrite)
             {
-                ChangeState(WellKnownPortStates.Connected);
+                ChangeState(PortStates.Connected);
             }
             else
             {
@@ -55,7 +55,7 @@
             await _transmitStream.FlushAsync();
             _transmitStream.Close();
 
-            ChangeState(WellKnownPortStates.Disconnected);
+            ChangeState(PortStates.Disconnected);
         }
 
         protected override IObservable<byte> ReceivedImplementation
