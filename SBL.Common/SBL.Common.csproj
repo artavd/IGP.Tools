@@ -58,7 +58,7 @@
     <Compile Include="Extensions\FuncExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ObservableExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="ContractException.cs" />
     <Compile Include="Annotations.cs" />
     <Compile Include="FactoryException.cs" />

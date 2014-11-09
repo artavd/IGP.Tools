@@ -76,6 +76,8 @@
     <Compile Include="Implementation\Creators\FilePortCreator.cs" />
     <Compile Include="Implementation\FilterChain.cs" />
     <Compile Include="Implementation\Creators\PortCreatorBase.cs" />
+    <Compile Include="Implementation\Creators\TcpClientPortCreator.cs" />
+    <Compile Include="Implementation\TcpClientPort.cs" />
     <Compile Include="Implementation\WellKnownPortTypesPortFactory.cs" />
     <Compile Include="Module\IOExtension.cs" />
     <Compile Include="PortState.cs" />

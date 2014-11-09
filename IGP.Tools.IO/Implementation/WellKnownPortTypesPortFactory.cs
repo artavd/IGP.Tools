@@ -1,6 +1,5 @@
 ﻿namespace IGP.Tools.IO.Implementation
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using IGP.Tools.IO.Implementation.Creators;
@@ -15,6 +14,7 @@
         {
             _portCreators.Add(WellKnownPortTypes.FilePort, new FilePortCreator());
             _portCreators.Add(WellKnownPortTypes.ConsolePort, new ConsolePortCreator());
+            _portCreators.Add(WellKnownPortTypes.TcpClientPort, new TcpClientPortCreator());
         }
 
         public IPort CreatePort(string portName, string parameters)
