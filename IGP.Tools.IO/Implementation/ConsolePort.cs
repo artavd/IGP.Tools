@@ -82,12 +82,12 @@
         private static IObservable<byte> CreateConsoleReadObservable()
         {
             Func<object, ConsoleKeyInfo> consoleReadFunc = o => Console.ReadKey((bool)o);
-            var published = Observable
-                .Defer(() => consoleReadFunc.StartInTask(true, PortStopper.Token).ToObservable())
-                .Select(key => (byte)key.KeyChar)
-                .Repeat()
-                .Publish();
+            Func<IObservable<byte>> consoleDataProvider = () => consoleReadFunc
+                .StartInTask(true, PortStopper.Token)
+                .ToObservable()
+                .Select(key => (byte)key.KeyChar);
 
+            var published = consoleDataProvider.DeferRepeat().Publish();
             published.Connect();
 
             return published;
