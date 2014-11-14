@@ -1,7 +1,6 @@
 ﻿namespace IGP.Tools.IO
 {
     using System;
-    using System.Security.Cryptography;
     using SBL.Common;
     using SBL.Common.Annotations;
 
@@ -77,7 +76,7 @@
                 canTransmit: state.CanTransmit,
                 data: data);
         }
-\
+
         public static PortState WithDescription(this PortState state, string description)
         {
             return new PortState(

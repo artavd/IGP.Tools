@@ -1,10 +1,6 @@
 ﻿namespace SBL.Common.Extensions
 {
-    using System;
     using System.IO;
-    using System.Linq;
-    using System.Reactive.Linq;
-    using System.Threading.Tasks;
     using SBL.Common.Annotations;
 
     public static class Extensions

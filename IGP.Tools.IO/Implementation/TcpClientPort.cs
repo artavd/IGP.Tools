@@ -140,7 +140,7 @@
 
                 return buffer.Take(readBytes).ToObservable();
             }
-            catch (ObjectDisposedException ex)
+            catch (ObjectDisposedException)
             {
                 // To not break observable collection when port closed
                 return Observable.Empty<byte>();
