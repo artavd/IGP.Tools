@@ -14,7 +14,7 @@
         {
             var container = InitializeContainer();
 
-            var mainWindow = container.Resolve<MainWindow>();
+            var mainWindow = container.Resolve<ShellView>();
             mainWindow.Show();
         }
 

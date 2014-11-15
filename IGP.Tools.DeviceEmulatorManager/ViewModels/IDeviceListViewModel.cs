@@ -1,6 +1,7 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
 {
-    internal interface IMainWindowViewModel
+    internal interface IDeviceListViewModel
     {
+         
     }
 }

@@ -1,17 +1,15 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager.Views
 {
-    using System.Windows;
+    using System.Windows.Controls;
     using IGP.Tools.DeviceEmulatorManager.ViewModels;
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    public partial class MainWindow : Window
+    internal sealed class PortConfiguratorView : Control
     {
-        public MainWindow([NotNull] IMainWindowViewModel viewModel)
+        public PortConfiguratorView([NotNull] IPortConfiguratorViewModel viewModel)
         {
             Contract.ArgumentIsNotNull(viewModel, () => viewModel);
-
-            InitializeComponent();
 
             DataContext = viewModel;
         }
