@@ -1,5 +1,6 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager
 {
+    using IGP.Tools.DeviceEmulatorManager.Models;
     using IGP.Tools.DeviceEmulatorManager.ViewModels;
     using IGP.Tools.DeviceEmulatorManager.Views;
     using IGP.Tools.EmulatorCore.Module;
@@ -28,15 +29,22 @@
 
         public void Initialize()
         {
+            // External extensions
+            _container.AddExtension(new EmulatorCoreExtension(@"D:\OneDrive\projects\IGP\Utilities\+Files\devices"));
+            _container.AddExtension(new IOExtension());
+
+            // Models
+            _container.RegisterType<IEmulatorRepository, EmulatorRepository>(
+                new ContainerControlledLifetimeManager());
+
+            _container.RegisterType<IPortRepository, PortRepository>(
+                new ContainerControlledLifetimeManager());
+
             // View models
             _container.RegisterType<IRibbonViewModel, RibbonViewModel>();
             _container.RegisterType<IDeviceListViewModel, DeviceListViewModel>();
             _container.RegisterType<IPortConfiguratorViewModel, PortConfiguratorViewModel>();
             _container.RegisterType<IStatusBarViewModel, StatusBarViewModel>();
-
-            // External extensions
-            _container.AddExtension(new EmulatorCoreExtension("D:\\"));
-            _container.AddExtension(new IOExtension());
 
             // Views
             _regionManager.RegisterViewWithRegion(WellKnownRegions.Ribbon, typeof(RibbonView));

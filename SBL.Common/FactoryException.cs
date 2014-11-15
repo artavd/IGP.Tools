@@ -1,6 +1,7 @@
 ﻿namespace SBL.Common
 {
     using System;
+    using SBL.Common.Annotations;
 
     public class FactoryException : Exception
     {
@@ -9,13 +10,19 @@
         private readonly Type _createdType;
 
         public FactoryException(
-            Type factoryType,
-            Type createdType,
-            string message = null,
-            object parameters = null,
-            Exception innerException = null)
+            [NotNull] Type factoryType,
+            [NotNull] Type createdType,
+            [CanBeNull] string message = null,
+            [CanBeNull] object parameters = null,
+            [CanBeNull] Exception innerException = null)
             : base(message, innerException)
         {
+            Contract.ArgumentIsNotNull(factoryType, () => factoryType);
+            Contract.ArgumentIsNotNull(createdType, () => createdType);
+
+            _factoryType = factoryType;
+            _createdType = createdType;
+
             _parameters = parameters;
         }
 
