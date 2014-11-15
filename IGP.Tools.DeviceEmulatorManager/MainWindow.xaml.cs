@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
-namespace IGP.Tools.DeviceEmulatorManager
+﻿namespace IGP.Tools.DeviceEmulatorManager
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    using System.Windows;
+    using IGP.Tools.DeviceEmulatorManager.ViewModels;
+    using SBL.Common.Annotations;
+
+    internal partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow([NotNull] IMainWindowViewModel viewModel)
         {
             InitializeComponent();
+
+            DataContext = viewModel;
         }
     }
 }

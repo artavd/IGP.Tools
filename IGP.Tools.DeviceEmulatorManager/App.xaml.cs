@@ -3,7 +3,6 @@
     using System.Windows;
     using IGP.Tools.DeviceEmulatorManager.ViewModels;
     using IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation;
-    using IGP.Tools.DeviceEmulatorManager.Views;
     using IGP.Tools.EmulatorCore.Module;
     using IGP.Tools.IO.Module;
     using Microsoft.Practices.Unity;
@@ -14,7 +13,7 @@
         {
             var container = InitializeContainer();
 
-            var mainWindow = container.Resolve<ShellView>();
+            var mainWindow = container.Resolve<MainWindow>();
             mainWindow.Show();
         }
 
@@ -27,6 +26,10 @@
             container.AddExtension(new IOExtension());
 
             container.RegisterType<IMainWindowViewModel, MainWindowViewModel>();
+            container.RegisterType<IRibbonViewModel, RibbonViewModel>();
+            container.RegisterType<IDeviceListViewModel, DeviceListViewModel>();
+            container.RegisterType<IPortConfiguratorViewModel, PortConfiguratorViewModel>();
+            container.RegisterType<IStatusBarViewModel, StatusBarViewModel>();
 
             return container;
         }

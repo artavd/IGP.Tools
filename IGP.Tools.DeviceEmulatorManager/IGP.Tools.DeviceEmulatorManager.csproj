@@ -84,11 +84,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\IPortRepository.cs" />
+    <Compile Include="ViewModels\Implementation\DeviceListViewModel.cs" />
     <Compile Include="ViewModels\IDeviceListViewModel.cs" />
     <Compile Include="ViewModels\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\IPortConfiguratorViewModel.cs" />
     <Compile Include="ViewModels\IRibbonViewModel.cs" />
     <Compile Include="ViewModels\IStatusBarViewModel.cs" />
+    <Compile Include="ViewModels\Implementation\PortConfiguratorViewModel.cs" />
+    <Compile Include="ViewModels\Implementation\RibbonViewModel.cs" />
+    <Compile Include="ViewModels\Implementation\StatusBarViewModel.cs" />
     <Compile Include="Views\DeviceListView.xaml.cs">
       <DependentUpon>DeviceListView.xaml</DependentUpon>
     </Compile>

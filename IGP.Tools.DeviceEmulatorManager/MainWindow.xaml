@@ -1,8 +1,30 @@
 ﻿<Window x:Class="IGP.Tools.DeviceEmulatorManager.MainWindow"
+        x:ClassModifier="internal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Views/RibbonView.xaml" />
+                <ResourceDictionary Source="/Views/DeviceListView.xaml" />
+                <ResourceDictionary Source="/Views/PortConfiguratorView.xaml" />
+                <ResourceDictionary Source="/Views/StatusBarView.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel LastChildFill="True">
+        <ContentControl Content="{Binding Ribbon}"
+                        DockPanel.Dock="Top" />
+
+        <ContentControl Content="{Binding StatusBar}"
+                        DockPanel.Dock="Bottom" />
+
+        <ContentControl Content="{Binding DeviceList}"
+                        DockPanel.Dock="Left" />
+
+        <ContentControl Content="{Binding PortConfigurator}" />
+    </DockPanel>
 </Window>
