@@ -1,8 +1,10 @@
-﻿<Window x:Class="IGP.Tools.DeviceEmulatorManager.MainWindow"
+﻿<Window x:Class="IGP.Tools.DeviceEmulatorManager.Shell"
         x:ClassModifier="internal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="300" Width="300">
+        xmlns:prism="http://www.codeplex.com/CompositeWPF"
+        xmlns:dem="clr-namespace:IGP.Tools.DeviceEmulatorManager"
+        Title="Shell" Height="300" Width="300">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -16,15 +18,15 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="True">
-        <ContentControl Content="{Binding Ribbon}"
+        <ContentControl prism:RegionManager.RegionName="{x:Static dem:WellKnownRegions.Ribbon}"
                         DockPanel.Dock="Top" />
 
-        <ContentControl Content="{Binding StatusBar}"
+        <ContentControl prism:RegionManager.RegionName="{x:Static dem:WellKnownRegions.StatusBar}"
                         DockPanel.Dock="Bottom" />
 
-        <ContentControl Content="{Binding DeviceList}"
+        <ContentControl prism:RegionManager.RegionName="{x:Static dem:WellKnownRegions.DeviceList}"
                         DockPanel.Dock="Left" />
 
-        <ContentControl Content="{Binding PortConfigurator}" />
+        <ContentControl prism:RegionManager.RegionName="{x:Static dem:WellKnownRegions.PortConfigurator}" />
     </DockPanel>
 </Window>

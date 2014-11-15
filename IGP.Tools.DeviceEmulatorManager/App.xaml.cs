@@ -6,8 +6,9 @@
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var bootstrapper = new Bootstrapper();
+            base.OnStartup(e);
 
+            var bootstrapper = new Bootstrapper();
             bootstrapper.Run();
         }
     }

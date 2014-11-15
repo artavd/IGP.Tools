@@ -1,9 +1,7 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager
 {
     using System.Windows;
-    using IGP.Tools.DeviceEmulatorManager.ViewModels;
-    using IGP.Tools.EmulatorCore.Module;
-    using IGP.Tools.IO.Module;
+    using Microsoft.Practices.Prism.Modularity;
     using Microsoft.Practices.Prism.UnityExtensions;
     using Microsoft.Practices.Unity;
     using SBL.Common.Extensions;
@@ -12,29 +10,22 @@
     {
         protected override DependencyObject CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+            return Container.Resolve<Shell>();
         }
 
         protected override void InitializeShell()
         {
-            Application.Current.MainWindow = Shell.As<MainWindow>();
+            base.InitializeShell();
+
+            Application.Current.MainWindow = Shell.As<Shell>();
             Application.Current.MainWindow.Show();
         }
 
-        protected override void ConfigureContainer()
+        protected override void ConfigureModuleCatalog()
         {
-            base.ConfigureContainer();
+            base.ConfigureModuleCatalog();
 
-            // View models
-            Container.RegisterType<IMainWindowViewModel, MainWindowViewModel>();
-            Container.RegisterType<IRibbonViewModel, RibbonViewModel>();
-            Container.RegisterType<IDeviceListViewModel, DeviceListViewModel>();
-            Container.RegisterType<IPortConfiguratorViewModel, PortConfiguratorViewModel>();
-            Container.RegisterType<IStatusBarViewModel, StatusBarViewModel>();
-
-            // External extensions
-            Container.AddExtension(new EmulatorCoreExtension("D:\\"));
-            Container.AddExtension(new IOExtension());
+            ModuleCatalog.As<ModuleCatalog>().AddModule(typeof(PrimaryModule));
         }
     }
 }

@@ -105,14 +105,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="PrimaryModule.cs" />
+    <Compile Include="Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\IEmulatorRepository.cs" />
     <Compile Include="Models\IPortRepository.cs" />
     <Compile Include="ViewModels\Implementation\DeviceListViewModel.cs" />
     <Compile Include="ViewModels\IDeviceListViewModel.cs" />
-    <Compile Include="ViewModels\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\IPortConfiguratorViewModel.cs" />
     <Compile Include="ViewModels\IRibbonViewModel.cs" />
     <Compile Include="ViewModels\IStatusBarViewModel.cs" />
@@ -131,9 +131,9 @@
     <Compile Include="Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WellKnownRegions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\Implementation\MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -179,7 +179,7 @@
     <Folder Include="Views\StyleDictionaries\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Shell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
