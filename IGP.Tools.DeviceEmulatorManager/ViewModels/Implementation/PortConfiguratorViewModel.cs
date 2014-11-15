@@ -1,4 +1,4 @@
-﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation
+﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
 {
     internal sealed class PortConfiguratorViewModel : IPortConfiguratorViewModel
     {

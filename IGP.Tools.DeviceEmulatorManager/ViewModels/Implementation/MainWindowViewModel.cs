@@ -1,4 +1,4 @@
-﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation
+﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
 {
     using SBL.Common;
     using SBL.Common.Annotations;
