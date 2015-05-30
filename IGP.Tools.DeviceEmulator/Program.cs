@@ -1,13 +1,14 @@
 ﻿namespace IGP.Tools.DeviceEmulator
 {
     using System;
-    using System.Net;
-    using System.Text;
     using System.Threading;
+
     using IGP.Tools.EmulatorCore.Module;
-    using IGP.Tools.IO.Implementation;
     using IGP.Tools.IO.Module;
+
     using Microsoft.Practices.Unity;
+
+    using SBL.Common.Extensions;
 
     internal static class Program
     {
@@ -15,37 +16,6 @@
 
         private static void Main(string[] args)
         {
-            var port = new TcpClientPort(new IPEndPoint(IPAddress.Loopback, 4001));
-
-            port.StateFeed.Subscribe(x => Console.WriteLine("state changed: {0}", x));
-            port.ReceivedFeed.Subscribe(x => Console.WriteLine("received: {0}", x));
-
-            Console.WriteLine("Enter to transmit...");
-            bool work = true;
-            while (work)
-            {
-                var text = Console.ReadLine();
-                switch(text)
-                {
-                    case "quit":
-                        work = false;
-                        break;
-
-                    case "open":
-                        port.Connect();
-                        break;
-
-                    case "close":
-                        port.Disconnect();
-                        break;
-
-                    default:
-                        port.Transmit(Encoding.ASCII.GetBytes(text));
-                        break;
-                }
-            }
-
-            return;
             AppDomain.CurrentDomain.UnhandledException += OnException;
 
             var options = ApplicationOptions.Parse(args);
@@ -100,7 +70,7 @@
         {
             Exit(string.Format(
                 "Application error occured:{0}{1}",
-                Environment.NewLine, e.ExceptionObject.ToString()), 1);
+                Environment.NewLine, e.ExceptionObject.As<Exception>().Message), 1);
         }
     }
 }
