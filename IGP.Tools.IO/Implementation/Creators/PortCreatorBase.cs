@@ -1,10 +1,11 @@
 ﻿namespace IGP.Tools.IO.Implementation.Creators
 {
     using System.Text.RegularExpressions;
+
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    internal abstract class PortCreatorBase
+    public abstract class PortCreatorBase : IPortCreator
     {
         protected PortCreatorBase([NotNull] string type)
         {
@@ -15,10 +16,9 @@
 
         protected string Type { get; private set; }
 
-        [NotNull]
-        public abstract IPort CreatePort([NotNull] string portName, [CanBeNull] string parameters);
+        public abstract IPort CreatePort(string portName, string parameters);
 
-        public bool CanBeCreatedFrom([NotNull] string portName)
+        public bool CanBeCreatedFrom(string portName)
         {
             Contract.ArgumentIsNotNull(portName, () => portName);
 
@@ -35,7 +35,7 @@
             if (!CanBeCreatedFrom(portName))
             {
                 string message = string.Format("{0} port cannot be created from {1}", Type, portName);
-                throw new FactoryException(this.GetType(), typeof (T), message);
+                throw new FactoryException(GetType(), typeof (T), message);
             }
         }
     }

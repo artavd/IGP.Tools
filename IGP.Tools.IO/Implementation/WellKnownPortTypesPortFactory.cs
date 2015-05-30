@@ -2,19 +2,34 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using IGP.Tools.IO.Implementation.Creators;
-    using SBL.Common;
 
-    internal class WellKnownPortTypesPortFactory : IPortFactory
+    using IGP.Tools.IO.Implementation.Creators;
+
+    using SBL.Common;
+    using SBL.Common.Annotations;
+
+    public sealed class WellKnownPortTypesPortFactory : IPortFactory
     {
-        private readonly IDictionary<string, PortCreatorBase> _portCreators =
-            new Dictionary<string, PortCreatorBase>();
+        private readonly IDictionary<string, IPortCreator> _portCreators =
+            new Dictionary<string, IPortCreator>();
 
         public WellKnownPortTypesPortFactory()
         {
-            _portCreators.Add(WellKnownPortTypes.FilePort, new FilePortCreator());
-            _portCreators.Add(WellKnownPortTypes.ConsolePort, new ConsolePortCreator());
-            _portCreators.Add(WellKnownPortTypes.TcpClientPort, new TcpClientPortCreator());
+            RegisterWellKnownPortType(WellKnownPortTypes.FilePort, new FilePortCreator());
+            RegisterWellKnownPortType(WellKnownPortTypes.ConsolePort, new ConsolePortCreator());
+            RegisterWellKnownPortType(WellKnownPortTypes.TcpClientPort, new TcpClientPortCreator());
+        }
+
+        public void RegisterWellKnownPortType([NotNull] string portType, [NotNull] IPortCreator creator)
+        {
+            Contract.ArgumentIsNotNull(portType, () => portType);
+            Contract.ArgumentIsNotNull(creator, () => creator);
+
+            Contract.IsTrue(
+                !_portCreators.Keys.Select(k => k.ToLower()).Contains(portType.ToLower()),
+                () => string.Format("WellKnownPortTypesFactory already contains creator for '{0}' port type", portType));
+
+            _portCreators.Add(portType, creator);
         }
 
         public IPort CreatePort(string portName, string parameters)
