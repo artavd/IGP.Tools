@@ -14,6 +14,8 @@
     {
         public static readonly object ExitLock = new object();
 
+        private static DeviceEmulatorApplication _application;
+
         private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += OnException;
@@ -25,9 +27,9 @@
             }
 
             var container = InitializeContainer(options);
-            var application = container.Resolve<DeviceEmulatorApplication>();
+            _application = container.Resolve<DeviceEmulatorApplication>();
 
-            application.Start();
+            _application.Start();
 
             WaitForExitSignal();
             Exit();
@@ -48,9 +50,6 @@
                 Console.WriteLine(message);
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
             Environment.Exit(exitCode);
         }
 
@@ -68,8 +67,10 @@
 
         private static void OnException(object sender, UnhandledExceptionEventArgs e)
         {
+            _application.Stop(true);
+
             Exit(string.Format(
-                "Application error occured:{0}{1}",
+                "Application error occured:{0}{1}{0}",
                 Environment.NewLine, e.ExceptionObject.As<Exception>().Message), 1);
         }
     }
