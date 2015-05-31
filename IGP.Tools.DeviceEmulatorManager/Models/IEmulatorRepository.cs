@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using IGP.Tools.EmulatorCore;
-    using IGP.Tools.IO;
     using SBL.Common.Annotations;
 
     internal interface IEmulatorRepository
@@ -15,9 +14,9 @@
         void RemoveDevice(DeviceEmulatorInfo info);
     }
 
-    internal class EmulatorRepository : IEmulatorRepository
+    internal sealed class EmulatorRepository : IEmulatorRepository
     {
-        public IList<DeviceEmulatorInfo> _devices = new List<DeviceEmulatorInfo>();
+        private readonly IList<DeviceEmulatorInfo> _devices = new List<DeviceEmulatorInfo>();
 
         public EmulatorRepository([NotNull] IDeviceFactory deviceFactory, [NotNull] IPortRepository ports)
         {

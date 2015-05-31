@@ -30,7 +30,7 @@
         public void Initialize()
         {
             // External extensions
-            _container.AddExtension(new EmulatorCoreExtension(@"D:\OneDrive\projects\IGP\Utilities\+Files\devices"));
+            _container.AddExtension(new EmulatorCoreExtension(@"D:\Develop\IGP.Tools\Configs\devices"));
             _container.AddExtension(new IOExtension());
 
             // Models

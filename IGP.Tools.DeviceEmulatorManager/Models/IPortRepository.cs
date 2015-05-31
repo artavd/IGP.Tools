@@ -4,7 +4,7 @@
     using IGP.Tools.IO;
     using SBL.Common.Annotations;
 
-    public interface IPortRepository
+    internal interface IPortRepository
     {
         IEnumerable<IPort> Ports { get; }
 
@@ -13,7 +13,7 @@
         void RemovePort([NotNull] IPort port);
     }
 
-    class PortRepository : IPortRepository
+    internal sealed class PortRepository : IPortRepository
     {
         private readonly IList<IPort> _ports = new List<IPort>();
 
