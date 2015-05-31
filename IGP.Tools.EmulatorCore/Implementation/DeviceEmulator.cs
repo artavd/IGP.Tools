@@ -13,7 +13,7 @@
     {
         private readonly BehaviorSubject<bool> _switcher = new BehaviorSubject<bool>(true);
 
-        public IList<IObservable<byte[]>> Messages { get; private set; }
+        public IEnumerable<IObservable<byte[]>> Messages { get; private set; }
 
         public string Name { get; private set; }
 
@@ -46,14 +46,11 @@
             IsTimeIncluded = false;
             IsStarted = true;
 
-            Messages = new List<IObservable<byte[]>>();
-
-            messageProviders
+            Messages = messageProviders
                 .Select(x => Observable
                     .Interval(x.Interval)
                     .Pausable(_switcher)
-                    .Select(n => encoder.Encode(Decorate(x.GetNextMessage(), n))))
-                .Foreach(Messages.Add);
+                    .Select(n => encoder.Encode(Decorate(x.GetNextMessage(), n))));
         }
 
         private string Decorate(string source, long number)

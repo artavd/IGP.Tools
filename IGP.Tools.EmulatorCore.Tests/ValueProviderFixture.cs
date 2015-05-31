@@ -18,6 +18,9 @@
             
             // When
             provider.GetNextValue();
+
+            // Then
+            // Exception
         }
 
         [TestCase("")]
@@ -31,6 +34,9 @@
 
             // When
             provider.AddValue(value);
+
+            // Then
+            // Exception
         }
 
         [TestCase("")]
@@ -45,6 +51,9 @@
 
             // When
             provider.AddValueRange(range);
+
+            // Then
+            // Exception
         }
 
         [Test]
@@ -56,12 +65,9 @@
             provider.AddValue(value);
             
             // When
-            int n = 5;
-            var results = new string[n];
-            for (int i = 0; i < n; i++)
-            {
-                results[i] = provider.GetNextValue();
-            }
+            var results = Enumerable
+                .Repeat(new Func<string>(() => provider.GetNextValue()), 5)
+                .Select(x => x());
 
             // Then
             Assert.That(results, Is.All.EqualTo(value));
@@ -76,12 +82,9 @@
             provider.AddValueRange(values);
 
             // When
-            int n = 3;
-            var results = new string[values.Length * n];
-            for (int i = 0; i < values.Length * n; i++)
-            {
-                results[i] = provider.GetNextValue();
-            }
+            var results = Enumerable
+                .Repeat(new Func<string>(() => provider.GetNextValue()), values.Length * 3)
+                .Select(x => x());
 
             // Then
             var expectedResults = Enumerable.Repeat(values, 3).SelectMany(arr => arr as IEnumerable<string>);

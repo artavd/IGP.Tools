@@ -10,6 +10,6 @@
         string Name { get; }
 
         [NotNull] 
-        IList<IObservable<byte[]>> Messages { get; }
+        IEnumerable<IObservable<byte[]>> Messages { get; }
     }
 }

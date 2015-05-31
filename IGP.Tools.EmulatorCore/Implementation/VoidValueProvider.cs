@@ -1,6 +1,6 @@
 ﻿namespace IGP.Tools.EmulatorCore.Implementation
 {
-    public class VoidValueProvider : IValueProvider
+    public sealed class VoidValueProvider : IValueProvider
     {
         public string Name { get; set; }
 
