@@ -1,6 +1,7 @@
 ﻿namespace IGP.Tools.EmulatorCore
 {
     using System;
+
     using SBL.Common.Annotations;
 
     public interface IMessageProvider

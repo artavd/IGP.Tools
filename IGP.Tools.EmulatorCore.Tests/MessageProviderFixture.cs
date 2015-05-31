@@ -21,8 +21,11 @@
         [ExpectedException(typeof(IncorrectFormatStringException))]
         public void CreatingMessageProviderWithIncorrectFormatStringShouldThrowException(string formatString)
         {
-            // Given
+            // When
             var message = new MessageProvider(formatString);
+
+            // Then
+            // Exception
         }
 
         [TestCase("correct format string", 0)]
@@ -33,7 +36,7 @@
         [TestCase("{2} correct {0} {1} format {1}{0}{2}string", 3)]
         public void CreatingMessageProviderWithCorrectFormatStringShouldCreateCorrectValuesList(string formatString, int valueCount)
         {
-            // Given
+            // When
             var message = new MessageProvider(formatString);
 
             // Then
@@ -58,12 +61,15 @@
         [TestCase(1, "format {0} string")]
         [TestCase(1, "format {0} string {1}")]
         [TestCase(1, "format {0} string {1} {2}")]
+        [TestCase(1, "format {0} string {1} {0}")]
         [TestCase(2, "format {0} string")]
         [TestCase(2, "format {0} string {1}")]
         [TestCase(2, "format {0} string {1} {2}")]
+        [TestCase(2, "format {0} string {1} {0}")]
         [TestCase(3, "format {0} string")]
         [TestCase(3, "format {0} string {1}")]
         [TestCase(3, "format {0} string {1} {2}")]
+        [TestCase(3, "format {0} string {1} {0}")]
         public void GetNextMessageForInitializedMessageProviderShouldCallGetNextValueForAllValueProviderForEveryCall(int callCount, string format)
         {
             // Given

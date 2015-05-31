@@ -3,12 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using SBL.Common;
     using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
-    internal sealed class CyclicValueProvider : IValueProvider
+    public sealed class CyclicValueProvider : IValueProvider
     {
+        private readonly List<string> _values = new List<string>();
+        private int _nextValueIndex = 0;
+
         public string Name { get; private set; }
 
         public CyclicValueProvider([NotNull] string name)
@@ -34,7 +38,7 @@
         {
             if (_values.Count == 0)
             {
-                throw new InvalidOperationException("Unnable to get next value from empty value set");
+                throw new InvalidOperationException("Unable to get next value from empty value set");
             }
 
             string result = _values.ElementAt(_nextValueIndex);
@@ -43,8 +47,5 @@
 
             return result;
         }
-
-        private readonly List<string> _values = new List<string>();
-        private int _nextValueIndex = 0;
     }
 }

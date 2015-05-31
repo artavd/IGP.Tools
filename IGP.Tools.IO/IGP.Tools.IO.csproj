@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IPort.cs" />
+    <Compile Include="Contracts\IPortCreator.cs" />
     <Compile Include="Contracts\IPortFactory.cs" />
     <Compile Include="Contracts\IPortFilter.cs" />
     <Compile Include="Contracts\PortBase.cs" />

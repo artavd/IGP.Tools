@@ -1,6 +1,8 @@
 ﻿namespace SBL.Common
 {
     using System;
+    using System.Text;
+
     using SBL.Common.Annotations;
 
     public class FactoryException : Exception
@@ -30,23 +32,32 @@
         {
             get
             {
-                var message = string.Format(
+                var messageBuilder = new StringBuilder(string.Format(
                     "{0}{1}Error occurs while creating '{2}' object with '{3}' factory.",
                     base.Message,
                     Environment.NewLine,
-                    _factoryType.Name,
-                    _createdType.Name);
+                    _createdType.Name,
+                    _factoryType.Name));
 
                 if (_parameters != null)
                 {
-                    var additionalString = string.Format(
-                        "'{0}' parameters have been used for creating.",
-                        _parameters.ToString());
-
-                    message = string.Concat(message, Environment.NewLine, additionalString);
+                    messageBuilder.AppendLine();
+                    messageBuilder.AppendFormat(
+                        " - '{0}' parameters have been used for creating.",
+                        _parameters);
                 }
 
-                return message;
+                if (InnerException != null)
+                {
+                    messageBuilder.AppendLine();
+                    messageBuilder.AppendFormat(
+                        " - Inner Exception:{2}   '{0}' of '{1}' type",
+                        InnerException.Message,
+                        InnerException.GetType(),
+                        Environment.NewLine);
+                }
+
+                return messageBuilder.ToString();
             }
         }
     }

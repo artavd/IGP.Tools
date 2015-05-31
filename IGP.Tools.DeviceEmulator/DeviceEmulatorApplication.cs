@@ -58,18 +58,27 @@
             _finisher.Add(_device);
         }
 
+        public void Stop(bool isError = false)
+        {
+            _port.Transmit(_encoder.Encode(GetGoodbyeString()));
+            _finisher.Dispose();
+
+            if (!isError)
+            {
+                lock (Program.ExitLock)
+                {
+                    Monitor.Pulse(Program.ExitLock);
+                }
+            }
+        }
+
         private void Control(char symbol)
         {
             var controller = CheckControl(_device);
             switch (symbol)
             {
                 case 'q': case 'Q':
-                    lock (Program.ExitLock)
-                    {
-                        _port.Transmit(_encoder.Encode(GetGoodbyeString()));
-                        _finisher.Dispose();
-                        Monitor.Pulse(Program.ExitLock);
-                    }
+                    Stop();
                     break;
 
                 case 's': case 'S':
@@ -121,7 +130,7 @@
 
         private string GetGoodbyeString()
         {
-            return "Device emulator work finished.";
+            return string.Format("Device emulator work finished.{0}", Environment.NewLine);
         }
 
         private string GetHeader()

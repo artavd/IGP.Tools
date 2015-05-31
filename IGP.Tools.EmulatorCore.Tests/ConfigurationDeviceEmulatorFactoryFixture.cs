@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
+
     using IGP.Tools.EmulatorCore.Configuration;
     using Moq;
     using NUnit.Framework;
@@ -100,36 +102,54 @@
         [ExpectedException(typeof(FactoryException))]
         public void CreatingOfDeviceWithoutNameShouldThrowException(string deviceType)
         {
+            // Given
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
-            factory.CreateDevice(deviceType);
+            // When
+            var device = factory.CreateDevice(deviceType);
+
+            // Then
+            // Exception
         }
 
         [Test]
         [ExpectedException(typeof(FactoryException))]
         public void CreatingOfDeviceWithValueSetsNumberInappropriateToFormatStringShouldThrowException()
         {
+            // Given
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
-            factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
+            // When
+            var device = factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
+
+            // Then
+            // Exception
         }
 
         [Test]
         [ExpectedException(typeof(FactoryException))]
         public void CreatingOfDeviceWithMessageWithoutFormatStringOrTimeIntervalShouldThrowException()
         {
+            // Given
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
-            factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
+            // When
+            var device = factory.CreateDevice(DeviceWithIncorrectValueSetNumber);
+
+            // Then
+            // Exception
         }
 
         [Test]
         public void CreatingOfEmptyDeviceShouldBeCorrect()
         {
+            // Given
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
+            // When
             var device = factory.CreateDevice(EmptyDevice);
 
+            // Then
             Assert.AreEqual(EmptyDevice, device.Name);
             Assert.IsEmpty(device.Messages);
         }
@@ -137,12 +157,15 @@
         [Test]
         public void CreatingOfNormallyFilledMessageShouldBeCorrect()
         {
+            // Given
             var factory = new ConfigurationDeviceEmulatorFactory(_mockRepository, _mockEncoder);
 
+            // When
             var device = factory.CreateDevice(GoodDevice);
 
+            // Then
             Assert.AreEqual(GoodDevice, device.Name);
-            Assert.AreEqual(2, device.Messages.Count);
+            Assert.AreEqual(2, device.Messages.Count());
 
             // TODO: check other information
             // (blocked by #13 Implement device info class and appropriate property in IDevice

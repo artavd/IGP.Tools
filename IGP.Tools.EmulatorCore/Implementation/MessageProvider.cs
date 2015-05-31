@@ -7,10 +7,13 @@
     using SBL.Common.Annotations;
     using SBL.Common.Extensions;
 
-    internal sealed class MessageProvider : IMessageProvider
+    public sealed class MessageProvider : IMessageProvider
     {
         private const uint DefaultIntervalInSeconds = 15;
 
+        private string _formatString;
+
+        // TODO: AA: Move interval to Device level ?
         public TimeSpan Interval { get; set; }
 
         [NotNull]
@@ -105,7 +108,5 @@
             Values = new IValueProvider[length];
             Enumerable.Range(0, length).Foreach(i => Values[i] = new VoidValueProvider());
         }
-
-        private string _formatString;
     }
 }
