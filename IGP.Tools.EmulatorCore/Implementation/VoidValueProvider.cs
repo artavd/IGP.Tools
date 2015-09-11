@@ -9,9 +9,6 @@
             Name = "<Void Value Provider>";
         }
 
-        public string GetNextValue()
-        {
-            return "<null>";
-        }
+        public string GetNextValue() => "<null>";
     }
 }

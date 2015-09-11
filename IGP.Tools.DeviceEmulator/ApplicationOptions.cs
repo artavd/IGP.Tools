@@ -1,4 +1,7 @@
-﻿namespace IGP.Tools.DeviceEmulator
+﻿// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable UnusedMember.Global
+namespace IGP.Tools.DeviceEmulator
 {
     using System;
     using System.Linq;
@@ -21,13 +24,10 @@
         private const string SplitterString = "----------------------------------------------------------------------";
         private const string ErrorsHeaderText = "Argument parsing error(s):";
 
-        private static readonly string UsageText = string.Format("Usage:{0}  IGP.Tools.DeviceEmulator [OPTIONS] -p [PORT] -d [DEVICE_TYPE]", Environment.NewLine);
-        private static readonly string ExampleText = string.Format("Example:{0}  IGP.Tools.DeviceEmulator -p COM10 -d CL31", Environment.NewLine);
+        private static readonly string UsageText = $"Usage:{Environment.NewLine}  IGP.Tools.DeviceEmulator [OPTIONS] -p [PORT] -d [DEVICE_TYPE]";
+        private static readonly string ExampleText = $"Example:{Environment.NewLine}  IGP.Tools.DeviceEmulator -p COM10 -d CL31";
 
-        public bool HasError
-        {
-            get { return LastParserState.Eval(x => x.Errors.Any(), () => false); }
-        }
+        public bool HasError => LastParserState.Eval(x => x.Errors.Any(), () => false);
 
         public bool Help { get; private set; }
 
@@ -40,10 +40,7 @@
         [Option("repository", DefaultValue = "devices", HelpText = RepoHelpText)]
         public string DeviceRepository { get; set; }
 
-        public string PortParameters
-        {
-            get { return Address ?? ComParameters ?? OutputFile; }
-        }
+        public string PortParameters => Address ?? ComParameters ?? OutputFile;
 
         [Option("com", MutuallyExclusiveSet = "serial", HelpText = ComHelpText)]
         public string Address { get; set; }
@@ -63,7 +60,7 @@
             var assembly = Assembly.GetEntryAssembly().GetName();
             var help = new HelpText
             {
-                Heading = new HeadingInfo(assembly.Name, string.Format("Version {0}", assembly.Version.ToString(2))),
+                Heading = new HeadingInfo(assembly.Name, $"Version {assembly.Version.ToString(2)}"),
                 Copyright = new CopyrightInfo("Artem Avdosev", 2014),
                 AddDashesToOption = true
             };

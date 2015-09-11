@@ -14,10 +14,7 @@
 
         public abstract string Name { get; }
 
-        public PortState CurrentState
-        {
-            get { return _stateSubject.Value; }
-        }
+        public PortState CurrentState => _stateSubject.Value;
 
         public IObservable<PortState> StateFeed
         {

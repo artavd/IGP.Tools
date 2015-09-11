@@ -30,16 +30,6 @@
             Data = data;
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        public bool Equals(PortState state)
-        {
-            return Name.Equals(state.Name, StringComparison.InvariantCultureIgnoreCase);
-        }
-
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -49,20 +39,13 @@
             return obj is PortState && Equals((PortState)obj);
         }
 
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode();
-        }
+        public override string ToString() => Name;
+        public override int GetHashCode() => Name.GetHashCode();
 
-        public static bool operator ==(PortState state1, PortState state2)
-        {
-            return state1.Equals(state2);
-        }
+        public bool Equals(PortState state) => Name.Equals(state.Name, StringComparison.InvariantCultureIgnoreCase);
 
-        public static bool operator !=(PortState state1, PortState state2)
-        {
-            return !state1.Equals(state2);
-        }
+        public static bool operator ==(PortState state1, PortState state2) => state1.Equals(state2);
+        public static bool operator !=(PortState state1, PortState state2) => !state1.Equals(state2);
     }
 
     public static class PortStateExtensions

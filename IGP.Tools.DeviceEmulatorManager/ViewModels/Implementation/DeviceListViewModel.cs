@@ -9,7 +9,7 @@
     {
         private readonly IEmulatorRepository _emulators;
 
-        public ObservableCollection<DeviceEmulatorInfo> Devices { get; private set; } 
+        public ObservableCollection<DeviceEmulatorInfo> Devices { get; } 
 
         public DeviceListViewModel([NotNull] IEmulatorRepository emulators)
         {

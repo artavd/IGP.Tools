@@ -13,7 +13,7 @@
         private readonly List<string> _values = new List<string>();
         private int _nextValueIndex = 0;
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public CyclicValueProvider([NotNull] string name)
         {

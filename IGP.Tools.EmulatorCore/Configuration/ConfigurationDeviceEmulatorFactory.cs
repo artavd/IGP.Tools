@@ -85,7 +85,7 @@
                 throw new FactoryException(
                     typeof (ConfigurationDeviceEmulatorFactory),
                     typeof (DeviceEmulator),
-                    string.Format("Unable to create device of {0} type.", deviceType),
+                    $"Unable to create device of {deviceType} type.",
                     deviceType,
                     ex);
             }

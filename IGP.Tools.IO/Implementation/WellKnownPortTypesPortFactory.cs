@@ -27,7 +27,7 @@
 
             Contract.IsTrue(
                 !_portCreators.Keys.Select(k => k.ToLower()).Contains(portType.ToLower()),
-                () => string.Format("WellKnownPortTypesFactory already contains creator for '{0}' port type", portType));
+                () => $"WellKnownPortTypesFactory already contains creator for '{portType}' port type");
 
             _portCreators.Add(portType, creator);
         }
@@ -42,7 +42,7 @@
                 throw new FactoryException(
                     typeof (WellKnownPortTypesPortFactory),
                     typeof (IPort),
-                    string.Format("Unable to find a creator for port with '{0}' name", portName),
+                    $"Unable to find a creator for port with '{portName}' name",
                     parameters);
             }
 

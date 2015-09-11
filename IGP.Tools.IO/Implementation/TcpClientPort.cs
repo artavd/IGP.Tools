@@ -42,15 +42,10 @@
             _dataFeed.Connect();
         }
 
-        public override string Type
-        {
-            get { return WellKnownPortTypes.TcpClientPort; }
-        }
+        public override string Type => WellKnownPortTypes.TcpClientPort;
+        public override string Name => $"TCP Client Port [{_remoteHost}]";
 
-        public override string Name
-        {
-            get { return string.Format("TCP Client Port [{0}]", _remoteHost.ToString()); }
-        }
+        protected override IObservable<byte> ReceivedImplementation => _dataFeed;
 
         protected override async void ConnectImplementation()
         {
@@ -83,11 +78,6 @@
             ChangeState(PortStates.Disconnected);
         }
 
-        protected override IObservable<byte> ReceivedImplementation
-        {
-            get { return _dataFeed; }
-        }
-
         protected override async void TransmitImplementation(byte[] data)
         {
             if (!CurrentState.CanTransmit)
@@ -115,12 +105,11 @@
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                _readEvent.Dispose();
-                _client.DisposeIfPossible();
-                _dataFeed.DisposeIfPossible();
-            }
+            if (!disposing) return;
+
+            _readEvent.Dispose();
+            _client.DisposeIfPossible();
+            _dataFeed.DisposeIfPossible();
         }
 
         private async Task<IObservable<byte>> ReadData()

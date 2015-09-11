@@ -4,14 +4,8 @@
 
     internal sealed class AsciiEncoder : IEncoder
     {
-        public byte[] Encode(string source)
-        {
-            return Encoding.ASCII.GetBytes(source);
-        }
+        public byte[] Encode(string source) => Encoding.ASCII.GetBytes(source);
 
-        public string Decode(byte[] data)
-        {
-            return Encoding.ASCII.GetString(data);
-        }
+        public string Decode(byte[] data) => Encoding.ASCII.GetString(data);
     }
 }

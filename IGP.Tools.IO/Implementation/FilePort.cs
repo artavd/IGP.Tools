@@ -18,17 +18,10 @@
             OutputFilePath = Path.GetFullPath(filename);
         }
 
-        public string OutputFilePath { get; private set; }
+        public string OutputFilePath { get; }
 
-        public override string Type
-        {
-            get { return WellKnownPortTypes.FilePort; }
-        }
-
-        public override string Name
-        {
-            get { return string.Format("File Port [{0}]", OutputFilePath); }
-        }
+        public override string Type => WellKnownPortTypes.FilePort;
+        public override string Name => $"File Port [{OutputFilePath}]";
 
         protected override void ConnectImplementation()
         {
@@ -42,7 +35,7 @@
             {
                 var error = new PortState(
                     name: "file connecting error",
-                    description: string.Format("{0} cannot open file to write", Name),
+                    description: $"{Name} cannot open file to write",
                     isError: true,
                     canTransmit: false);
 
@@ -58,10 +51,7 @@
             ChangeState(PortStates.Disconnected);
         }
 
-        protected override IObservable<byte> ReceivedImplementation
-        {
-            get { return Observable.Empty<byte>(); }
-        }
+        protected override IObservable<byte> ReceivedImplementation => Observable.Empty<byte>();
 
         protected async override void TransmitImplementation(byte[] data)
         {

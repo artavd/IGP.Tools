@@ -14,7 +14,7 @@
             Type = type;
         }
 
-        protected string Type { get; private set; }
+        protected string Type { get; }
 
         public abstract IPort CreatePort(string portName, string parameters);
 
@@ -25,16 +25,13 @@
             return GetMatchingRegex().IsMatch(portName.ToLower());
         }
 
-        protected virtual Regex GetMatchingRegex()
-        {
-            return new Regex(string.Format("^{0}([0-9]+)$", Type.ToLower()));
-        }
+        protected virtual Regex GetMatchingRegex() => new Regex($"^{Type.ToLower()}([0-9]+)$");
 
         protected void CheckPortName<T>([NotNull] string portName) where T : IPort
         {
             if (!CanBeCreatedFrom(portName))
             {
-                string message = string.Format("{0} port cannot be created from {1}", Type, portName);
+                string message = $"{Type} port cannot be created from {portName}";
                 throw new FactoryException(GetType(), typeof (T), message);
             }
         }

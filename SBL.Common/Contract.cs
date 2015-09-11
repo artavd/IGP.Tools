@@ -17,10 +17,7 @@
             if (value == null)
             {
                 throw new ArgumentNullException(
-                    string.Format(
-                        "Argument '{0}' is null in '{1}' method",
-                        valueName.GetFieldName(),
-                        caller));
+                    $"Argument '{valueName.GetFieldName()}' is null in '{caller}' method");
             }
         }
 
@@ -34,10 +31,7 @@
             if (!checker(value))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        "Argument '{0}' doesn't satisfied expression in '{1}' method",
-                        valueName.GetFieldName(),
-                        caller));
+                    $"Argument '{valueName.GetFieldName()}' doesn't satisfied expression in '{caller}' method");
             }
         }
 
@@ -50,7 +44,7 @@
             if (value == null)
             {
                 string message = messageProvider == null ?
-                    string.Format("Object is null in '{0}' method", caller) :
+                    $"Object is null in '{caller}' method" :
                     messageProvider();
 
                 throw new ContractException(message);
@@ -66,7 +60,7 @@
             if (!value)
             {
                 string message = messageProvider == null ?
-                    string.Format("Expression should be true but was false in '{0}' method", caller) :
+                    $"Expression should be true but was false in '{caller}' method" :
                     messageProvider();
 
                 throw new ContractException(message);
@@ -82,11 +76,8 @@
             if (!(value is T))
             {
                 string message = messageProvider == null ?
-                    string.Format(
-                        "Object should be of type '{0}' but was '{1}' in '{2}' method",
-                        typeof (T).ToString(),
-                        value.GetType().ToString(),
-                        caller) :
+                    $"Object should be of type '{typeof (T)}' but was '{value.GetType()}' in '{caller}' method"
+                    :
                     messageProvider();
 
                 throw new ContractException(message);
@@ -96,7 +87,7 @@
         private static string GetFieldName(this LambdaExpression expression)
         {
             var ex = expression.Body as MemberExpression;
-            return ex == null ? "<unknown name>" : ex.Member.Name;
+            return ex?.Member.Name ?? "<unknown name>";
         }
     }
 }

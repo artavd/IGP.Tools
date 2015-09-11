@@ -18,9 +18,6 @@
             return new ConsolePort();
         }
 
-        protected override Regex GetMatchingRegex()
-        {
-            return new Regex(Type.ToLower());
-        }
+        protected override Regex GetMatchingRegex() => new Regex(Type.ToLower());
     }
 }

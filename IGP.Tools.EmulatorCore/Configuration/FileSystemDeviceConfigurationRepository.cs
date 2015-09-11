@@ -19,18 +19,12 @@
             _repositoryPath = repositoryPath;
         }
 
-        public IEnumerable<string> KnownDeviceTypes
-        {
-            get
-            {
-                return Directory
-                    .GetFiles(
-                        _repositoryPath,
-                        string.Format("*{0}", DeviceFileFormat),
-                        SearchOption.TopDirectoryOnly)
-                    .Select(Path.GetFileNameWithoutExtension);
-            }
-        }
+        public IEnumerable<string> KnownDeviceTypes => Directory
+            .GetFiles(
+                _repositoryPath,
+                $"*{DeviceFileFormat}",
+                SearchOption.TopDirectoryOnly)
+            .Select(Path.GetFileNameWithoutExtension);
 
         public Stream GetDeviceConfigurationStream(string deviceType)
         {
@@ -38,8 +32,8 @@
             Contract.ArgumentSatisfied(deviceType, () => deviceType, KnownDeviceTypes.Contains);
 
             return File.OpenRead(Path.Combine(
-                _repositoryPath, 
-                string.Format("{0}{1}", deviceType, DeviceFileFormat)));
+                _repositoryPath,
+                $"{deviceType}{DeviceFileFormat}"));
         }
     }
 }

@@ -13,9 +13,9 @@
     {
         private readonly BehaviorSubject<bool> _switcher = new BehaviorSubject<bool>(true);
 
-        public IEnumerable<IObservable<byte[]>> Messages { get; private set; }
+        public IEnumerable<IObservable<byte[]>> Messages { get; }
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public bool IsTimeIncluded { get; set; }
 
@@ -53,12 +53,8 @@
                     .Select(n => encoder.Encode(Decorate(x.GetNextMessage(), n))));
         }
 
-        private string Decorate(string source, long number)
-        {
-            return IsTimeIncluded ?
-                string.Format("{0} | {1:D4} | {2}", DateTime.Now.ToLocalTime(), number, source) :
-                source;
-        }
+        private string Decorate(string source, long number) =>
+            IsTimeIncluded ? $"{DateTime.Now.ToLocalTime()} | {number:D4} | {source}" : source;
 
         #region Disposing
         public void Dispose()

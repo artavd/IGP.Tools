@@ -128,16 +128,13 @@
             return sb.ToString();
         }
 
-        private string GetGoodbyeString()
-        {
-            return string.Format("Device emulator work finished.{0}", Environment.NewLine);
-        }
+        private static string GetGoodbyeString() => $"Device emulator work finished.{Environment.NewLine}";
 
         private string GetHeader()
         {
             var assembly = Assembly.GetEntryAssembly().GetName();
 
-            var productName = string.Format("= {0} Version {1} =", assembly.Name, assembly.Version.ToString(2));
+            var productName = $"= {assembly.Name} Version {assembly.Version.ToString(2)} =";
             var dashLine = string.Empty.PadRight(productName.Length, '=');
 
             return string.Format("{0}{1}{2}{1}{0}", dashLine, Environment.NewLine, productName);

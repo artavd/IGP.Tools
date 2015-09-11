@@ -6,9 +6,7 @@
 
     internal class FilePortCreator : PortCreatorBase
     {
-        public FilePortCreator() : base(WellKnownPortTypes.FilePort)
-        {
-        }
+        public FilePortCreator() : base(WellKnownPortTypes.FilePort) { }
 
         public override IPort CreatePort(string portName, string parameters)
         {
@@ -23,7 +21,7 @@
             catch (ArgumentException exception)
             {
                 throw new FactoryException(
-                    this.GetType(),
+                    GetType(),
                     typeof (FilePort),
                     "Cannot create file port",
                     parameters,
@@ -31,9 +29,6 @@
             }
         }
 
-        protected override Regex GetMatchingRegex()
-        {
-            return new Regex(Type.ToLower());
-        }
+        protected override Regex GetMatchingRegex() => new Regex(Type.ToLower());
     }
 }

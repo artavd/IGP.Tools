@@ -28,53 +28,57 @@
             Contract.ArgumentIsNotNull(element, () => element);
             Contract.IsTrue(
                 element.Name == DeviceEmulatorRootName,
-                () => string.Format("Wrong XML element for device emulator: {0}", element));
+                () => $"Wrong XML element for device emulator: {element}");
 
-            var result = new DeviceEmulatorConfigurationElement();
-            
-            result.DeviceName = element.Attribute(DeviceNameAttribute).Value;
-            
-            result.IsTimeIncluded = bool.Parse(element.Attribute(IsTimeIncludedAttribute).Eval(
-                x => x.Value,
-                () => "false"));
-            
-            result.Messages = element
-                .Descendants(MessageRootName)
-                .Select(x => x.DeserializeMessage())
-                .ToArray();
+            var result = new DeviceEmulatorConfigurationElement
+            {
+                DeviceName = element.Attribute(DeviceNameAttribute).Value,
+
+                IsTimeIncluded = bool.Parse(element.Attribute(IsTimeIncludedAttribute).Eval(
+                    x => x.Value,
+                    () => "false")),
+
+                Messages = element
+                    .Descendants(MessageRootName)
+                    .Select(x => x.DeserializeMessage())
+                    .ToArray()
+            };
 
             return result;
         }
 
         [NotNull]
-        public static MessageConfigurationElement DeserializeMessage([NotNull] this XElement element)
+        private static MessageConfigurationElement DeserializeMessage([NotNull] this XElement element)
         {
             Contract.ArgumentIsNotNull(element, () => element);
             Contract.IsTrue(
                 element.Name == MessageRootName,
-                () => string.Format("Wrong XML element for message: {0}.", element));
+                () => $"Wrong XML element for message: {element}.");
 
-            var result = new MessageConfigurationElement();
-            result.FormatString = element.Attribute(FormatStringAttribute).Value;
-            result.TimeInterval = uint.Parse(element.Attribute(TimeIntervalAttribute).Value);
-            result.ValuesSets = element
-                .Descendants(ValueSetRootName)
-                .Select(x => x.DeserializeValueSet())
-                .ToArray();
+            var result = new MessageConfigurationElement
+            {
+                FormatString = element.Attribute(FormatStringAttribute).Value,
+
+                TimeInterval = uint.Parse(element.Attribute(TimeIntervalAttribute).Value),
+
+                ValuesSets = element
+                    .Descendants(ValueSetRootName)
+                    .Select(x => x.DeserializeValueSet())
+                    .ToArray()
+            };
 
             return result;
         }
 
         [NotNull]
-        public static ValueSetConfigurationElement DeserializeValueSet([NotNull] this XElement element)
+        private static ValueSetConfigurationElement DeserializeValueSet([NotNull] this XElement element)
         {
             Contract.ArgumentIsNotNull(element, () => element);
             Contract.IsTrue(
                 element.Name == ValueSetRootName,
-                () => string.Format("Wrong XML element for value set: {0}.", element));
+                () => $"Wrong XML element for value set: {element}.");
 
-            var result = new ValueSetConfigurationElement();
-            result.Name = element.Attribute(NameAttribute).Value;
+            var result = new ValueSetConfigurationElement { Name = element.Attribute(NameAttribute).Value };
 
             var values = element.Descendants(ValueSetValueName);
             Contract.IsTrue(values.Any(), () => "Value set must contain at least one value.");

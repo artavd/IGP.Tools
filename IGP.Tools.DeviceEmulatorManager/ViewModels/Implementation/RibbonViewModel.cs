@@ -2,10 +2,7 @@
 {
     internal sealed class RibbonViewModel : IRibbonViewModel
     {
-        public string Title
-        {
-            get { return "RIBBON"; }
-        }
+        public string Title => "RIBBON";
 
         public RibbonViewModel()
         {

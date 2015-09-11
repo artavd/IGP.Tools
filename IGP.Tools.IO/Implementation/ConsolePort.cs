@@ -33,15 +33,8 @@
             }
         }
 
-        public override string Type
-        {
-            get { return WellKnownPortTypes.ConsolePort; }
-        }
-
-        public override string Name
-        {
-            get { return string.Format("Console Port [{0}]", _portNumber); }
-        }
+        public override string Type => WellKnownPortTypes.ConsolePort;
+        public override string Name => $"Console Port [{_portNumber}]";
 
         protected override void ConnectImplementation()
         {
