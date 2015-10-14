@@ -5,9 +5,9 @@
     using IGP.Tools.DeviceEmulatorManager.Views;
     using IGP.Tools.EmulatorCore.Module;
     using IGP.Tools.IO.Module;
-    using Microsoft.Practices.Prism.Modularity;
-    using Microsoft.Practices.Prism.Regions;
     using Microsoft.Practices.Unity;
+    using Prism.Modularity;
+    using Prism.Regions;
     using SBL.Common;
     using SBL.Common.Annotations;
 

@@ -1,9 +1,9 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager
 {
     using System.Windows;
-    using Microsoft.Practices.Prism.Modularity;
-    using Microsoft.Practices.Prism.UnityExtensions;
     using Microsoft.Practices.Unity;
+    using Prism.Modularity;
+    using Prism.Unity;
     using SBL.Common.Extensions;
 
     internal sealed class Bootstrapper : UnityBootstrapper

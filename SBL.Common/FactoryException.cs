@@ -40,7 +40,7 @@
                 if (_parameters != null)
                 {
                     messageBuilder.AppendLine();
-                    messageBuilder.Append($" - '{_parameters}' parameters have been used for creating.";
+                    messageBuilder.Append($" - '{_parameters}' parameters have been used for creating.");
                 }
 
                 if (InnerException != null)

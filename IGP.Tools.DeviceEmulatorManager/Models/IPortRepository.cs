@@ -17,10 +17,7 @@
     {
         private readonly IList<IPort> _ports = new List<IPort>();
 
-        public IEnumerable<IPort> Ports
-        {
-            get { return _ports; }
-        }
+        public IEnumerable<IPort> Ports => _ports;
 
         public PortRepository([NotNull] IPortFactory portFactory)
         {

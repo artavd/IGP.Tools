@@ -2,11 +2,10 @@
 {
     using System.Windows.Controls;
     using IGP.Tools.DeviceEmulatorManager.ViewModels;
-    using Microsoft.Practices.Prism.Mvvm;
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    internal sealed class DeviceListView : Control, IView
+    internal sealed class DeviceListView : Control
     {
         public DeviceListView([NotNull] IDeviceListViewModel viewModel)
         {
