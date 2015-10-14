@@ -1,6 +1,7 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager
 {
     using IGP.Tools.DeviceEmulatorManager.Models;
+    using IGP.Tools.DeviceEmulatorManager.Services;
     using IGP.Tools.DeviceEmulatorManager.ViewModels;
     using IGP.Tools.DeviceEmulatorManager.Views;
     using IGP.Tools.EmulatorCore.Module;
@@ -32,6 +33,9 @@
             // External extensions
             _container.AddExtension(new EmulatorCoreExtension(@"D:\Develop\IGP.Tools\Configs\devices"));
             _container.AddExtension(new IOExtension());
+
+            // Services
+            _container.RegisterType<IStatusMessageService, StatusMessageService>(new ContainerControlledLifetimeManager());
 
             // Models
             _container.RegisterType<IEmulatorRepository, EmulatorRepository>(

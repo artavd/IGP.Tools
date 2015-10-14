@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dem="clr-namespace:IGP.Tools.DeviceEmulatorManager"
         xmlns:prism="http://prismlibrary.com/"
-        Title="Shell" Height="300" Width="300">
+        Title="Shell" MinHeight="600" MinWidth="800"
+        SizeToContent="WidthAndHeight">
 
     <Window.Resources>
         <ResourceDictionary>
