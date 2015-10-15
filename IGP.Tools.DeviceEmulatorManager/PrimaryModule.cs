@@ -34,16 +34,6 @@
             _container.AddExtension(new EmulatorCoreExtension(@"D:\Develop\IGP.Tools\Configs\devices"));
             _container.AddExtension(new IOExtension());
 
-            // Services
-            _container.RegisterType<IStatusMessageService, StatusMessageService>(new ContainerControlledLifetimeManager());
-
-            // Models
-            _container.RegisterType<IEmulatorRepository, EmulatorRepository>(
-                new ContainerControlledLifetimeManager());
-
-            _container.RegisterType<IPortRepository, PortRepository>(
-                new ContainerControlledLifetimeManager());
-
             // View models
             _container.RegisterType<IRibbonViewModel, RibbonViewModel>();
             _container.RegisterType<IDeviceListViewModel, DeviceListViewModel>();

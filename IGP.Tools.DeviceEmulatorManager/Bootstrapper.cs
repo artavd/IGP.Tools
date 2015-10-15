@@ -1,6 +1,9 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager
 {
+    using System.Reflection.Emit;
     using System.Windows;
+    using IGP.Tools.DeviceEmulatorManager.Models;
+    using IGP.Tools.DeviceEmulatorManager.Services;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
     using Prism.Unity;
@@ -26,6 +29,21 @@
             base.ConfigureModuleCatalog();
 
             ModuleCatalog.As<ModuleCatalog>().AddModule(typeof(PrimaryModule));
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+
+            Register<IStatusMessageService, StatusMessageService>();
+
+            Register<IEmulatorRepository, EmulatorRepository>();
+            Register<IPortRepository, PortRepository>();
+        }
+
+        private void Register<TTo, TFrom>(bool isSingleton = true)
+        {
+            RegisterTypeIfMissing(typeof(TTo), typeof(TFrom), isSingleton);
         }
     }
 }
