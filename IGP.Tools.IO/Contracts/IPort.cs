@@ -1,6 +1,7 @@
 ﻿namespace IGP.Tools.IO
 {
     using System;
+    using System.Threading.Tasks;
     using SBL.Common.Annotations;
 
     public interface IPort : IDisposable
@@ -19,7 +20,7 @@
         [NotNull]
         IObservable<byte> ReceivedFeed { get; }
 
-        void Transmit([NotNull] byte[] data);
+        Task<bool> Transmit([NotNull] byte[] data);
 
         void Connect();
 

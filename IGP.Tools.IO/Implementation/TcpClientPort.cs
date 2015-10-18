@@ -78,7 +78,7 @@
             ChangeState(PortStates.Disconnected);
         }
 
-        protected override async void TransmitImplementation(byte[] data)
+        protected override async Task<bool> TransmitImplementation(byte[] data)
         {
             if (!CurrentState.CanTransmit)
             {
@@ -89,6 +89,7 @@
             try
             {
                 await _dataStream.WriteAsync(data, 0, data.Length);
+                return true;
             }
             catch (IOException ex)
             {
@@ -100,6 +101,8 @@
 
                 ChangeState(PortStates.UnknownErrorOccur.WithDescription(
                     "Unknown error occur while transmitting"));
+
+                return false;
             }
         }
 

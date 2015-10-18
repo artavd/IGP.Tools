@@ -52,7 +52,7 @@
             _finisher.Add(_port.ReceivedFeed.Select(data => (char)data).Subscribe(Control));
 
             _device = _deviceFactory.CreateDevice(_options.DeviceType);
-            _device.Messages.Foreach(m => _finisher.Add(m.Subscribe(_port.Transmit)));
+            _device.Messages.Foreach(m => _finisher.Add(m.Subscribe(data => _port.Transmit(data))));
 
             _finisher.Add(_port);
             _finisher.Add(_device);

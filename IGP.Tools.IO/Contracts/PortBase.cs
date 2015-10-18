@@ -2,6 +2,7 @@
 {
     using System;
     using System.Reactive.Subjects;
+    using System.Threading.Tasks;
     using SBL.Common;
     using SBL.Common.Annotations;
 
@@ -34,7 +35,7 @@
             }
         }
 
-        public void Transmit(byte[] data)
+        public Task<bool> Transmit(byte[] data)
         {
             Contract.ArgumentIsNotNull(data, () => data);
             
@@ -42,10 +43,11 @@
 
             if (!CurrentState.CanTransmit)
             {
-                throw new InvalidOperationException("Only opened port can transmit data.");
+                // Log this instead of exception: throw new InvalidOperationException("Only opened port can transmit data.");
+                return Task.FromResult(false);
             }
 
-            TransmitImplementation(data);
+            return TransmitImplementation(data);
         }
 
         public virtual void Connect()
@@ -78,7 +80,7 @@
         [NotNull]
         protected abstract IObservable<byte> ReceivedImplementation { get; }
 
-        protected abstract void TransmitImplementation([NotNull] byte[] data);
+        protected abstract Task<bool> TransmitImplementation([NotNull] byte[] data);
 
         #region IDisposable
         private bool _isDisposed = false;

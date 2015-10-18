@@ -80,9 +80,10 @@
                 ChangeState(PortStates.Disconnected);
             }
 
-            protected override void TransmitImplementation(byte[] data)
+            protected override Task<bool> TransmitImplementation(byte[] data)
             {
                 _statusService.ShowStatusMessage(_encoder.Decode(data), TimeSpan.Zero);
+                return Task.FromResult(true);
             }
         }
     }

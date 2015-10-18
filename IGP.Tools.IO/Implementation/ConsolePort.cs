@@ -6,6 +6,7 @@
     using System.Reactive.Linq;
     using System.Reactive.Threading.Tasks;
     using System.Threading;
+    using System.Threading.Tasks;
     using SBL.Common.Extensions;
 
     public class ConsolePort : PortBase
@@ -46,9 +47,10 @@
             ChangeState(PortStates.Disconnected);
         }
 
-        protected override void TransmitImplementation(byte[] data)
+        protected override Task<bool> TransmitImplementation(byte[] data)
         {
             data.Select(x => (char)x).Foreach(Console.Write);
+            return Task.FromResult(true);
         }
 
         protected override IObservable<byte> ReceivedImplementation
