@@ -5,7 +5,10 @@
 
     <DataTemplate DataType="{x:Type viewModels:PortConfiguratorViewModel}">
         <Border Background="LightGreen">
-            <TextBlock>Port Configurator</TextBlock>
+            <StackPanel>
+                <TextBlock>Port Configurator</TextBlock>
+                <TextBlock Text="{Binding Test}" />
+            </StackPanel>
         </Border>
     </DataTemplate>
 

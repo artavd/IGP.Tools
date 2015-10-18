@@ -60,7 +60,7 @@
         public string DeviceName => EndPoint.Device.Name;
         public string PortName => EndPoint.OutputPort?.Name ?? "Not set";
 
-        private DeviceEmulatorEndPoint EndPoint { get; }
+        public DeviceEmulatorEndPoint EndPoint { get; }
 
         private void UpdateCommandState(object sender = null, EventArgs args = null)
         {

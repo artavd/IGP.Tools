@@ -1,24 +1,50 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
 {
+    using System.Collections;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows.Controls;
+    using System.Windows.Input;
     using IGP.Tools.DeviceEmulatorManager.Models;
+    using Prism.Commands;
+    using Prism.Events;
     using SBL.Common;
     using SBL.Common.Annotations;
 
     internal sealed class DeviceListViewModel : IDeviceListViewModel
     {
-        private readonly IEmulatorRepository _emulators;
+        private readonly IEventAggregator _eventAggregator;
 
-        public DeviceListViewModel([NotNull] IEmulatorRepository emulators)
+        public DeviceListViewModel(
+            [NotNull] IEmulatorRepository emulators,
+            [NotNull] IEventAggregator eventAggregator)
         {
             Contract.ArgumentIsNotNull(emulators, () => emulators);
+            Contract.ArgumentIsNotNull(eventAggregator, () => eventAggregator);
 
-            _emulators = emulators;
+            _eventAggregator = eventAggregator;
 
-            Devices = new ObservableCollection<IDeviceViewModel>(_emulators.Emulators.Select(x => new DeviceViewModel(x)));
+            Devices = new ObservableCollection<IDeviceViewModel>(
+                emulators.Emulators.Select(x => new DeviceViewModel(x)));
+
+            DeviceSelectionChangedCommand = new DelegateCommand<IList>(PublishSelectionChangedEvent);
         }
 
         public ObservableCollection<IDeviceViewModel> Devices { get; }
+
+        public ICommand DeviceSelectionChangedCommand { get; }
+
+        private void PublishSelectionChangedEvent(IList selectedItems)
+        {
+            var items = selectedItems
+                .Cast<IDeviceViewModel>()
+                .Select(x => x.EndPoint);
+
+            _eventAggregator.GetEvent<DeviceSelectionChangedEvent>().Publish(items.ToArray());
+        }
+    }
+
+    internal sealed class DeviceSelectionChangedEvent : PubSubEvent<DeviceEmulatorEndPoint[]>
+    {
     }
 }
