@@ -13,25 +13,7 @@
     {
         private readonly BehaviorSubject<bool> _switcher = new BehaviorSubject<bool>(true);
 
-        public IEnumerable<IObservable<byte[]>> Messages { get; }
-
-        public string Name { get; }
-
-        public bool IsTimeIncluded { get; set; }
-
-        public bool IsStarted { get; private set; }
-
-        public void Start()
-        {
-            _switcher.OnNext(true);
-            IsStarted = true;
-        }
-
-        public void Stop()
-        {
-            _switcher.OnNext(false);
-            IsStarted = false;
-        }
+        private bool _isStarted;
 
         public DeviceEmulator(
             [NotNull] string name,
@@ -52,6 +34,36 @@
                     .Pausable(_switcher)
                     .Select(n => encoder.Encode(Decorate(x.GetNextMessage(), n))));
         }
+
+        public IEnumerable<IObservable<byte[]>> Messages { get; }
+
+        public string Name { get; }
+
+        public bool IsTimeIncluded { get; set; }
+
+        public bool IsStarted
+        {
+            get { return _isStarted; }
+            private set
+            {
+                _isStarted = value; 
+                StateChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void Start()
+        {
+            _switcher.OnNext(true);
+            IsStarted = true;
+        }
+
+        public void Stop()
+        {
+            _switcher.OnNext(false);
+            IsStarted = false;
+        }
+
+        public event EventHandler StateChanged;
 
         private string Decorate(string source, long number) =>
             IsTimeIncluded ? $"{DateTime.Now.ToLocalTime()} | {number:D4} | {source}" : source;

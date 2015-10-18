@@ -17,30 +17,24 @@
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Foreground" Value="White" />
                 </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Trigger.Setters>
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Trigger.Setters>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
             </Border.Resources>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding DeviceName}" />
                 <TextBlock Text="{Binding PortName}" />
 
-                <Button Command="{Binding StartEmulatorCommand}"
-                        Content="Start"
-                        Visibility="{Binding IsEmulatorStarted,
-                                             Converter={StaticResource InvertedVisibilityConverter}}" />
-
-                <Button Command="{Binding StopEmulatorCommand}"
-                        Content="Stop"
-                        Visibility="{Binding IsEmulatorStarted,
-                                             Converter={StaticResource VisibilityConverter}}" />
-
-                <Button Command="{Binding ConnectCommand}"
-                        Content="Connect"
-                        Visibility="{Binding IsPortConnected,
-                                             Converter={StaticResource InvertedVisibilityConverter}}" />
-
-                <Button Command="{Binding DisconnectCommand}"
-                        Content="Disconnect"
-                        Visibility="{Binding IsPortConnected,
-                                             Converter={StaticResource VisibilityConverter}}" />
+                <Button Command="{Binding StartEmulatorCommand}" Content="Start" />
+                <Button Command="{Binding StopEmulatorCommand}" Content="Stop" />
+                <Button Command="{Binding ConnectCommand}" Content="Connect" />
+                <Button Command="{Binding DisconnectCommand}" Content="Disconnect" />
 
             </StackPanel>
         </Border>
