@@ -1,35 +1,24 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
 {
     using System;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using IGP.Tools.DeviceEmulatorManager.Services;
+    using Prism.Mvvm;
+    using SBL.Common.Annotations;
 
-    internal sealed class StatusBarViewModel : IStatusBarViewModel, INotifyPropertyChanged
+    internal sealed class StatusBarViewModel : BindableBase, IStatusBarViewModel
     {
         private string _statusMessage;
 
-        public StatusBarViewModel([SBL.Common.Annotations.NotNull] IStatusMessageService status)
+        public StatusBarViewModel([NotNull] IStatusMessageService status)
         {
+            // TODO: AA: Unsubscribe
             status.StatusMessageFeed.Subscribe(x => StatusMessage = x);
         }
 
         public string StatusMessage
         {
             get { return _statusMessage; }
-            private set
-            {
-                if (value == _statusMessage) return;
-                _statusMessage = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            private set { SetProperty(ref _statusMessage, value); }
         }
     }
 }
