@@ -1,6 +1,7 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
 {
     using System.Collections.ObjectModel;
+    using System.Linq;
     using IGP.Tools.DeviceEmulatorManager.Models;
     using SBL.Common;
     using SBL.Common.Annotations;
@@ -9,15 +10,15 @@
     {
         private readonly IEmulatorRepository _emulators;
 
-        public ObservableCollection<DeviceEmulatorInfo> Devices { get; } 
-
         public DeviceListViewModel([NotNull] IEmulatorRepository emulators)
         {
             Contract.ArgumentIsNotNull(emulators, () => emulators);
 
             _emulators = emulators;
 
-            Devices = new ObservableCollection<DeviceEmulatorInfo>(_emulators.Emulators);
+            Devices = new ObservableCollection<IDeviceViewModel>(_emulators.Emulators.Select(x => new DeviceViewModel(x)));
         }
+
+        public ObservableCollection<IDeviceViewModel> Devices { get; }
     }
 }

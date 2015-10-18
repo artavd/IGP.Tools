@@ -5,7 +5,7 @@
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    internal sealed class DeviceListView : Control
+    internal sealed class DeviceListView : ContentControl
     {
         public DeviceListView([NotNull] IDeviceListViewModel viewModel)
         {

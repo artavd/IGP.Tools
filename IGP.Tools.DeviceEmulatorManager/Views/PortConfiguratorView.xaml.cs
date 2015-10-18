@@ -5,7 +5,7 @@
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    internal sealed class PortConfiguratorView : Control
+    internal sealed class PortConfiguratorView : ContentControl
     {
         public PortConfiguratorView([NotNull] IPortConfiguratorViewModel viewModel)
         {

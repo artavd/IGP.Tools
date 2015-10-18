@@ -101,6 +101,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Converters\BoolConverter.cs" />
     <Compile Include="Models\DeviceEmulatorInfo.cs" />
     <Compile Include="PrimaryModule.cs" />
     <Compile Include="Services\IStatusMessageService.cs" />
@@ -109,6 +110,7 @@
     </Compile>
     <Compile Include="Models\IEmulatorRepository.cs" />
     <Compile Include="Models\IPortRepository.cs" />
+    <Compile Include="ViewModels\IDeviceViewModel.cs" />
     <Compile Include="ViewModels\Implementation\DeviceListViewModel.cs" />
     <Compile Include="ViewModels\IDeviceListViewModel.cs" />
     <Compile Include="ViewModels\IPortConfiguratorViewModel.cs" />
@@ -152,9 +154,7 @@
       <Name>SBL.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\StyleDictionaries\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Shell.xaml">
       <SubType>Designer</SubType>

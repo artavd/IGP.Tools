@@ -5,7 +5,7 @@
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    internal sealed class RibbonView : Control
+    internal sealed class RibbonView : ContentControl
     {
         public RibbonView([NotNull] IRibbonViewModel viewModel)
         {

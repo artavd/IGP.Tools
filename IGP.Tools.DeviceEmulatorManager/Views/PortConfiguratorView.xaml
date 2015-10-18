@@ -1,18 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:IGP.Tools.DeviceEmulatorManager.ViewModels"
                     xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views">
 
+    <DataTemplate DataType="{x:Type viewModels:PortConfiguratorViewModel}">
+        <Border Background="LightGreen">
+            <TextBlock>Port Configurator</TextBlock>
+        </Border>
+    </DataTemplate>
+
     <Style TargetType="{x:Type views:PortConfiguratorView}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <TextBlock>Port Configurator</TextBlock>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Content" Value="{Binding}" />
     </Style>
 </ResourceDictionary>

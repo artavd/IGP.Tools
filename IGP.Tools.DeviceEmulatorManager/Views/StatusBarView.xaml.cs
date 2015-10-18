@@ -5,7 +5,7 @@
     using SBL.Common;
     using SBL.Common.Annotations;
 
-    internal sealed class StatusBarView : Control
+    internal sealed class StatusBarView : ContentControl
     {
         public StatusBarView([NotNull] IStatusBarViewModel viewModel)
         {
