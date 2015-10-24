@@ -33,6 +33,8 @@
             //AddPort(portFactory.CreatePort("FILE", "D:\\output2.txt"));
             //AddPort(portFactory.CreatePort("FILE", "D:\\output3.txt"));
 
+            AddPort(portFactory.CreatePort("NULL"));
+
             AddPort(new StatusMessagePort(1, status, encoder));
             AddPort(new StatusMessagePort(2, status, encoder));
             AddPort(new StatusMessagePort(3, status, encoder));

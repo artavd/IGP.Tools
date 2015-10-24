@@ -78,8 +78,10 @@
     <Compile Include="Contracts\IPortFactory.cs" />
     <Compile Include="Contracts\IPortFilter.cs" />
     <Compile Include="Contracts\PortBase.cs" />
+    <Compile Include="DummyPort.cs" />
     <Compile Include="Implementation\ConsolePort.cs" />
     <Compile Include="Implementation\Creators\ConsolePortCreator.cs" />
+    <Compile Include="Implementation\Creators\DummyPortCreator.cs" />
     <Compile Include="Implementation\FilePort.cs" />
     <Compile Include="Implementation\Creators\FilePortCreator.cs" />
     <Compile Include="Implementation\FilterChain.cs" />

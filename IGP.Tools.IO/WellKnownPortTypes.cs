@@ -9,5 +9,7 @@
         public const string TcpClientPort = "TCP";
         public const string TcpServerPort = "TCPIN";
         public const string UdpPort = "UDP";
+
+        public const string DummyPort = "DUMMY";
     }
 }

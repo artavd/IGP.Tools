@@ -6,13 +6,6 @@
 
     public struct PortState
     {
-        public readonly string Name;
-        public readonly string Description;
-        public readonly bool IsError;
-        public readonly bool CanTransmit;
-
-        public readonly object Data;
-
         public PortState(
             [NotNull] string name,
             [NotNull] string description = "",
@@ -29,6 +22,13 @@
             CanTransmit = canTransmit;
             Data = data;
         }
+
+        public string Name { get; }
+        public string Description { get; }
+        public bool IsError { get; }
+        public bool CanTransmit { get; }
+
+        public object Data { get; }
 
         public override bool Equals(object obj)
         {

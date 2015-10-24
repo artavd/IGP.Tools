@@ -52,7 +52,7 @@
             ChangeState(PortStates.Disconnected);
         }
 
-        protected override IObservable<byte> ReceivedImplementation => Observable.Empty<byte>();
+        protected override IObservable<byte> ReceivedImplementation => Observable.Never<byte>();
 
         protected async override Task<bool> TransmitImplementation(byte[] data)
         {

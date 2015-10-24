@@ -18,6 +18,8 @@
             RegisterWellKnownPortType(WellKnownPortTypes.FilePort, new FilePortCreator());
             RegisterWellKnownPortType(WellKnownPortTypes.ConsolePort, new ConsolePortCreator());
             RegisterWellKnownPortType(WellKnownPortTypes.TcpClientPort, new TcpClientPortCreator());
+
+            RegisterWellKnownPortType(WellKnownPortTypes.DummyPort, new DummyPortCreator());
         }
 
         public void RegisterWellKnownPortType([NotNull] string portType, [NotNull] IPortCreator creator)

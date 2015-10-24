@@ -14,9 +14,10 @@
         private readonly IDisposable _subscription;
         private IPort _outputPort;
 
-        public DeviceEmulatorEndPoint([NotNull] IDevice device, [CanBeNull] IPort port = null)
+        public DeviceEmulatorEndPoint([NotNull] IDevice device, [NotNull] IPort port)
         {
             Contract.ArgumentIsNotNull(device, () => device);
+            Contract.ArgumentIsNotNull(port, () => port);
             Contract.OfType<IDeviceEmulator>(device);
 
             Device = device;
@@ -33,12 +34,14 @@
 
         public IDeviceEmulator Emulator { [NotNull] get; }
 
-        [CanBeNull]
+        [NotNull]
         public IPort OutputPort
         {
             get { return _outputPort; }
             set
             {
+                Contract.ArgumentIsNotNull(value, () => OutputPort);
+
                 IPort oldValue = _outputPort;
                 _outputPort = value;
 
@@ -53,7 +56,7 @@
 
         public void Dispose()
         {
-            _subscription?.Dispose();
+            _subscription.Dispose();
         }
     }
 
