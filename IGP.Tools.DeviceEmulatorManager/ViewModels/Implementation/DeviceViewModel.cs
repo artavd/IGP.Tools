@@ -30,12 +30,12 @@
                 () => EndPoint.Emulator.IsStarted);
 
             ConnectCommand = new DelegateCommand(
-                () => EndPoint.OutputPort?.Connect(),
-                () => EndPoint.OutputPort?.CurrentState == PortStates.Disconnected);
+                () => EndPoint.OutputPort.Connect(),
+                () => !EndPoint.OutputPort.CurrentState.CanTransmit);
 
             DisconnectCommand = new DelegateCommand(
-                () => EndPoint.OutputPort?.Disconnect(),
-                () => EndPoint.OutputPort?.CurrentState != PortStates.Disconnected);
+                () => EndPoint.OutputPort.Disconnect(),
+                () => EndPoint.OutputPort.CurrentState.CanTransmit);
 
             _commands = new[] { StartEmulatorCommand, StopEmulatorCommand, ConnectCommand, DisconnectCommand }
                 .Cast<DelegateCommand>()
@@ -62,6 +62,8 @@
 
         public DeviceEmulatorEndPoint EndPoint { get; }
 
+        public bool IsPortSet => EndPoint.OutputPort != DummyPort.Instance;
+
         private void UpdateCommandState(object sender = null, EventArgs args = null)
         {
             _commands.Foreach(c => c.RaiseCanExecuteChanged());
@@ -73,6 +75,7 @@
             _portStateSubscription = SubscribeOnPortStateFeed(e.NewPort);
 
             OnPropertyChanged(() => PortName);
+            OnPropertyChanged(() => IsPortSet);
         }
 
         private IDisposable SubscribeOnPortStateFeed(IPort port)

@@ -5,52 +5,204 @@
                     xmlns:viewModels="clr-namespace:IGP.Tools.DeviceEmulatorManager.ViewModels"
                     xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Styles/Icons.xaml" />
+        <ResourceDictionary Source="../Styles/Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <converters:BoolToVisibilityConverter x:Key="VisibilityConverter" />
     <converters:InvertedBoolToVisibilityConverter x:Key="InvertedVisibilityConverter" />
 
-    <DataTemplate DataType="{x:Type viewModels:DeviceViewModel}">
-        <Border Background="DarkSlateGray"
-                BorderBrush="DarkCyan"
-                BorderThickness="2"
-                CornerRadius="3"
-                Padding="5 3">
-            <Border.Resources>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Foreground" Value="White" />
-                </Style>
-                <Style TargetType="{x:Type Button}">
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Trigger.Setters>
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </Trigger.Setters>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Resources>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding DeviceName}" />
-                <TextBlock Text="{Binding PortName}" />
+    <Style x:Key="GeometryIconButton" TargetType="{x:Type ButtonBase}">
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <Path Name="image"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Data="{TemplateBinding ButtonBase.Content}"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource BasicStrongBrush}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="image" Property="Opacity" Value="1" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-                <Button Command="{Binding StartEmulatorCommand}" Content="Start" />
-                <Button Command="{Binding StopEmulatorCommand}" Content="Stop" />
-                <Button Command="{Binding ConnectCommand}" Content="Connect" />
-                <Button Command="{Binding DisconnectCommand}" Content="Disconnect" />
+    <Style x:Key="DeviceCommandButtonStyle"
+           BasedOn="{StaticResource GeometryIconButton}"
+           TargetType="{x:Type ButtonBase}">
+        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
+        <Setter Property="Foreground" Value="{Binding Tag, RelativeSource={RelativeSource Self}}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.Setters>
+                    <Setter Property="Background" Value="{StaticResource BasicStrongBrush}" />
+                </Trigger.Setters>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Trigger.Setters>
+                    <Setter Property="Foreground" Value="{StaticResource InactiveBrush}" />
+                </Trigger.Setters>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
-            </StackPanel>
-        </Border>
-    </DataTemplate>
+    <Style x:Key="PortCommandButtonStyle"
+           BasedOn="{StaticResource DeviceCommandButtonStyle}"
+           TargetType="{x:Type ButtonBase}">
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Trigger.Setters>
+                    <Setter Property="Visibility" Value="Visible" />
+                </Trigger.Setters>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <DataTemplate DataType="{x:Type viewModels:DeviceListViewModel}">
-        <Border Background="Yellow">
+        <Border>
             <ListBox Name="deviceList"
+                     HorizontalContentAlignment="Stretch"
+                     Background="{StaticResource BasicStrongBrush}"
                      ItemsSource="{Binding Devices}"
-                     SelectionMode="Multiple">
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     SelectionMode="Extended">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding DeviceSelectionChangedCommand}" CommandParameter="{Binding ElementName=deviceList, Path=SelectedItems}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Background" Value="{StaticResource BasicStrongBrush}" />
+                        <Setter Property="Foreground" Value="{StaticResource BasicInverseStrongBrush}" />
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource AccentLightBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource AccentMediumBrush}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:DeviceViewModel}">
+                        <DockPanel ClipToBounds="True" LastChildFill="True">
+                            <!--  Port information  -->
+                            <DockPanel Name="portInfoGroup"
+                                       DockPanel.Dock="Bottom"
+                                       Visibility="Collapsed">
+                                <TextBlock Margin="10 0 0 0"
+                                           DockPanel.Dock="Left"
+                                           FontSize="10"
+                                           Text="{Binding PortName,
+                                                          StringFormat=Port: {0}}" />
+                                <TextBlock Name="portStateTextBlock"
+                                           DockPanel.Dock="Right"
+                                           FontSize="10"
+                                           Foreground="{StaticResource RedLightBrush}"
+                                           Text="disconnected"
+                                           TextAlignment="Right" />
+                            </DockPanel>
+
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+
+                                <!--  Start / Stop emulator icon button  -->
+                                <Button Command="{Binding StartEmulatorCommand}"
+                                        Content="{StaticResource EmulatorStartIcon}"
+                                        Padding="4"
+                                        Style="{StaticResource DeviceCommandButtonStyle}"
+                                        Tag="{StaticResource GreenLightBrush}" />
+
+                                <Button Command="{Binding StopEmulatorCommand}"
+                                        Content="{StaticResource EmulatorStopIcon}"
+                                        Style="{StaticResource DeviceCommandButtonStyle}"
+                                        Tag="{StaticResource RedLightBrush}" />
+
+                                <!--  Connect / Disconnect port icon buttons  -->
+                                <Grid>
+                                    <Button Name="connectPortButton"
+                                            Command="{Binding ConnectCommand}"
+                                            Content="{StaticResource PlugIcon}"
+                                            Padding="4"
+                                            Style="{StaticResource PortCommandButtonStyle}"
+                                            Tag="{StaticResource BasicInverseMediumBrush}" />
+
+                                    <Button Name="disconnectPortButton"
+                                            Command="{Binding DisconnectCommand}"
+                                            Content="{StaticResource PlugIcon}"
+                                            Padding="4"
+                                            Style="{StaticResource PortCommandButtonStyle}"
+                                            Tag="{StaticResource BasicInverseMediumBrush}" />
+
+                                    <Border Width="24"
+                                            Height="24"
+                                            Padding="10 10 3 3">
+                                        <Path Name="disconnectPortButtonDecorator"
+                                              Data="{StaticResource BanIcon}"
+                                              Fill="Red"
+                                              IsHitTestVisible="False"
+                                              Stretch="Uniform"
+                                              Stroke="{StaticResource BasicStrongBrush}"
+                                              Visibility="Collapsed" />
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--  Emulator name  -->
+                            <TextBlock HorizontalAlignment="Stretch"
+                                       FontSize="18"
+                                       Text="{Binding DeviceName}"
+                                       TextTrimming="CharacterEllipsis" />
+                        </DockPanel>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="Panel.IsMouseOver" Value="True">
+                                <Setter TargetName="portInfoGroup" Property="Panel.Visibility" Value="Visible" />
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
+                                <Setter TargetName="portInfoGroup" Property="Panel.Visibility" Value="Visible" />
+                                <Setter Property="TextElement.FontWeight" Value="Bold" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsPortSet}" Value="False">
+                                <Setter TargetName="connectPortButton" Property="IsEnabled" Value="False" />
+                                <Setter TargetName="connectPortButton" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="portInfoGroup" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <Trigger SourceName="disconnectPortButton" Property="Visibility" Value="Visible">
+                                <Setter TargetName="disconnectPortButtonDecorator" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="portStateTextBlock" Property="Foreground" Value="{StaticResource GreenLightBrush}" />
+                                <Setter TargetName="portStateTextBlock" Property="Text" Value="connected" />
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Border>
     </DataTemplate>

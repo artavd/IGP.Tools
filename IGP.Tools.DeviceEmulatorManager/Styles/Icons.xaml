@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <PathFigureCollection x:Key="TriangleFigures">M 0 0 L 3 4 L 6 0 L 0 0</PathFigureCollection>
+    <PathFigureCollection x:Key="SquareFigures">M 0 0 L 6 0 L 6 6 L 0 6 L 0 0</PathFigureCollection>
+    <PathFigureCollection x:Key="PlugFigures">M 53,30 L 53,4 C 53,1.791 51.209,0 46,0 42.791,0 41,1.791 41,4 L 41,30 19,30 19,4 C 19,1.791 16.209,0 13,0 9.791,0 7,1.791 7,4 L 7,30 0,30 0,46 C 0,60.514,10.307,72.619,24,75.398 L 24,100 36,100 36,75.398 C 49.693,72.619,60,60.514,60,46 L 60,30 53,30</PathFigureCollection>
+
+    <PathGeometry x:Key="EmulatorStartIcon" Figures="{StaticResource TriangleFigures}">
+        <PathGeometry.Transform>
+            <RotateTransform Angle="-90" CenterX="3" CenterY="2" />
+        </PathGeometry.Transform>
+    </PathGeometry>
+
+    <PathGeometry x:Key="EmulatorStopIcon" Figures="{StaticResource SquareFigures}" />
+    <PathGeometry x:Key="PlugIcon" Figures="{StaticResource PlugFigures}" />
+
+    <PathGeometry x:Key="BanIcon" Figures="M 93.874,29.808 C 85.851,21.784 72.798,21.784 64.772,29.807 56.751,37.83 56.751,50.884 64.772,58.906 72.797,66.929 85.852,66.929 93.874,58.906 101.895,50.884 101.895,37.83 93.874,29.808z M 69.234,34.267 C 73.858,29.642,80.895,28.866,86.332,31.931 L 66.898,51.365 C 63.834,45.926,64.61,38.893,69.234,34.267z M 89.412,54.444 C 84.787,59.071,77.755,59.845,72.316,56.781 L 91.748,37.347 C 94.814,42.787,94.038,49.82,89.412,54.444" />
+
+    <DrawingImage x:Key="AmberPortStatusBulb">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <EllipseGeometry Center="7,7"
+                                         RadiusX="7"
+                                         RadiusY="7" />
+                    </GeometryDrawing.Geometry>
+                    <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="#FFFFCF4E" />
+                            <GradientStop Offset="0.5" Color="#FFFFBE08" />
+                            <GradientStop Offset="0.5" Color="#FFF6B400" />
+                            <GradientStop Offset="0.95" Color="#FFCD9600" />
+                        </LinearGradientBrush>
+                    </GeometryDrawing.Brush>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+</ResourceDictionary>

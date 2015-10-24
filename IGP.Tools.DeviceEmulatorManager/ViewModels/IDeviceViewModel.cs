@@ -15,5 +15,7 @@
         string PortName { [CanBeNull] get; }
 
         DeviceEmulatorEndPoint EndPoint { [NotNull] get; }
+
+        bool IsPortSet { get; }
     }
 }

@@ -1,7 +1,5 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager
 {
-    using IGP.Tools.DeviceEmulatorManager.Models;
-    using IGP.Tools.DeviceEmulatorManager.Services;
     using IGP.Tools.DeviceEmulatorManager.ViewModels;
     using IGP.Tools.DeviceEmulatorManager.Views;
     using IGP.Tools.EmulatorCore.Module;
