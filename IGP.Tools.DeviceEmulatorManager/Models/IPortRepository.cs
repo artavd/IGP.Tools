@@ -82,7 +82,10 @@
 
             protected override Task<bool> TransmitImplementation(byte[] data)
             {
-                _statusService.ShowStatusMessage(_encoder.Decode(data), TimeSpan.Zero);
+                string time = DateTime.Now.ToLongTimeString();
+                string message = $"[{time}] Data from {Name}:{Environment.NewLine}{_encoder.Decode(data)}";
+                _statusService.ShowStatusMessage(message, TimeSpan.Zero);
+
                 return Task.FromResult(true);
             }
         }

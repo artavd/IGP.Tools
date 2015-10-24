@@ -7,7 +7,36 @@
         <Border Background="LightGreen">
             <StackPanel>
                 <TextBlock>Port Configurator</TextBlock>
-                <TextBlock Text="{Binding Test}" />
+                <DockPanel LastChildFill="True">
+                    <Button Command="{Binding BindPortCommand}"
+                            Content="Bind"
+                            DockPanel.Dock="Right" />
+                    <ComboBox HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding AvailablePorts}"
+                              SelectedItem="{Binding SelectedPort, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel LastChildFill="True">
+                                    <TextBlock DockPanel.Dock="Right">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Text" Value="[connected]" />
+                                                <Setter Property="Foreground" Value="DarkGreen" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsConnected}" Value="False">
+                                                        <Setter Property="Text" Value="[disconnected]" />
+                                                        <Setter Property="Foreground" Value="DarkRed" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Port.Name}" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </DockPanel>
             </StackPanel>
         </Border>
     </DataTemplate>
