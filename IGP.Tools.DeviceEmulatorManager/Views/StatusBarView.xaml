@@ -3,9 +3,13 @@
                     xmlns:viewModels="clr-namespace:IGP.Tools.DeviceEmulatorManager.ViewModels"
                     xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <DataTemplate DataType="{x:Type viewModels:StatusBarViewModel}">
-        <Border Background="Gray">
-            <TextBlock Text="{Binding StatusMessage, Mode=OneWay}" />
+        <Border Height="24" Background="{StaticResource AccentMediumBrush}">
+            <TextBlock VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding StatusMessage, Mode=OneWay}" />
         </Border>
     </DataTemplate>
 

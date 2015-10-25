@@ -16,9 +16,10 @@
     {
         private readonly DelegateCommand _bindPortCommand;
         private DeviceEmulatorEndPoint[] _targetEndPoints;
+        private IPortViewModel _selectedPort;
 
         public PortConfiguratorViewModel(
-            [NotNull] IEventAggregator eventAggregator, 
+            [NotNull] IEventAggregator eventAggregator,
             [NotNull] IPortRepository portRepository)
         {
             Contract.ArgumentIsNotNull(eventAggregator, () => eventAggregator);
@@ -34,11 +35,22 @@
 
         public ICommand BindPortCommand => _bindPortCommand;
         public ObservableCollection<IPortViewModel> AvailablePorts { get; }
-        public IPortViewModel SelectedPort { get; set; }
+
+        public IPortViewModel SelectedPort
+        {
+            get { return _selectedPort; }
+            set { SetProperty(ref _selectedPort, value); }
+        }
 
         private void UpdateTargetEndPoints(DeviceEmulatorEndPoint[] targetEndPoints)
         {
             _targetEndPoints = targetEndPoints;
+
+            if (targetEndPoints.Select(x => x.OutputPort).Distinct().Count() == 1)
+            {
+                SelectedPort = AvailablePorts.First(x => x.Port.Equals(_targetEndPoints.First().OutputPort));
+            }
+
             _bindPortCommand.RaiseCanExecuteChanged();
         }
 

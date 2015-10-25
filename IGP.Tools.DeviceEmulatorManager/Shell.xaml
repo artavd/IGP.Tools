@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dem="clr-namespace:IGP.Tools.DeviceEmulatorManager"
         xmlns:prism="http://prismlibrary.com/"
-        Title="Shell"
+        Title="Device Emulator Manager v0.9 beta"
         MinWidth="800"
         MinHeight="600"
         SizeToContent="WidthAndHeight"
@@ -16,6 +16,8 @@
                 <ResourceDictionary Source="/Views/DeviceListView.xaml" />
                 <ResourceDictionary Source="/Views/PortConfiguratorView.xaml" />
                 <ResourceDictionary Source="/Views/StatusBarView.xaml" />
+
+                <ResourceDictionary Source="/Styles/Brushes.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -27,8 +29,8 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250" MinWidth="200" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="250" MinWidth="150" />
+                <ColumnDefinition Width="3" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -37,6 +39,7 @@
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
+                          Background="{StaticResource BasicInverseLightBrush}"
                           ResizeBehavior="BasedOnAlignment" />
 
             <ContentControl Grid.Column="2" prism:RegionManager.RegionName="{x:Static dem:WellKnownRegions.PortConfigurator}" />

@@ -4,7 +4,7 @@
                     xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views">
 
     <DataTemplate DataType="{x:Type viewModels:PortConfiguratorViewModel}">
-        <Border Background="LightGreen">
+        <Border>
             <StackPanel>
                 <TextBlock>Port Configurator</TextBlock>
                 <DockPanel LastChildFill="True">
