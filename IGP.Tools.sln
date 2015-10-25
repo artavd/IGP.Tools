@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.EmulatorCore", "IGP.Tools.EmulatorCore\IGP.Tools.EmulatorCore.csproj", "{86B9BCB5-8E72-4627-BB05-8E640C083BA3}"
 EndProject
@@ -54,6 +54,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devices", "Devices", "{0241
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.DeviceEmulatorManager", "IGP.Tools.DeviceEmulatorManager\IGP.Tools.DeviceEmulatorManager.csproj", "{494C2101-912A-43FE-B685-28C309526E9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBL.WPF.Controls", "SBL.WPF.Controls\SBL.WPF.Controls.csproj", "{445D12E0-6A41-43FB-95D3-45CB05D102BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{494C2101-912A-43FE-B685-28C309526E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{494C2101-912A-43FE-B685-28C309526E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{494C2101-912A-43FE-B685-28C309526E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{445D12E0-6A41-43FB-95D3-45CB05D102BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{445D12E0-6A41-43FB-95D3-45CB05D102BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{445D12E0-6A41-43FB-95D3-45CB05D102BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{445D12E0-6A41-43FB-95D3-45CB05D102BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
