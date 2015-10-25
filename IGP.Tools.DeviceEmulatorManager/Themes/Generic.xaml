@@ -31,13 +31,22 @@
         <Setter Property="Foreground" Value="{StaticResource BasicInverseStrongBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource AccentMediumBrush}" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type dem:Shell}">
-                    <Border Background="Transparent" BorderThickness="4">
-                        <Border Background="{TemplateBinding Background}"
+                    <Grid>
+                        <Border Margin="8"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border.Effect>
+                                <!--  TODO: AA: Converter from brush ({TemplateBinding BorderBrush}) to glow color  -->
+                                <DropShadowEffect BlurRadius="8"
+                                                  ShadowDepth="0"
+                                                  Color="{StaticResource AccentMediumColor}" />
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="32" />
@@ -86,7 +95,7 @@
 
                             </Grid>
                         </Border>
-                    </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="restoreWindowButton" Property="Visibility" Value="Visible" />
@@ -100,10 +109,10 @@
         </Setter>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="36"
+                <WindowChrome CaptionHeight="32"
                               CornerRadius="0"
                               GlassFrameThickness="0"
-                              ResizeBorderThickness="4" />
+                              ResizeBorderThickness="8" />
             </Setter.Value>
         </Setter>
     </Style>
