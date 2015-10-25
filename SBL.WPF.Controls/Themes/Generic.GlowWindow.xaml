@@ -6,16 +6,29 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:GlowWindow}">
-                    <Border Background="Transparent" SnapsToDevicePixels="True">
-                        <Grid Name="Root">
-                            <Border Name="Blur">
-                                <Border.Effect>
-                                    <BlurEffect Radius="8" />
-                                </Border.Effect>
-                            </Border>
-                            <Border Name="Border" />
-                        </Grid>
+                    <Border Name="Root"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="Transparent">
+                        <Border Name="Glow"
+                                Margin="4"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="2"
+                                Opacity="1">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="8"
+                                                  Opacity="1"
+                                                  ShadowDepth="0"
+                                                  Color="Red" />
+                            </Border.Effect>
+                        </Border>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsGlowing" Value="False">
+                            <Setter TargetName="Glow" Property="BorderBrush" Value="{Binding InactiveGlowBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

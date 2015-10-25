@@ -1,7 +1,9 @@
 ﻿<Window x:Class="IGP.Tools.DeviceEmulatorManager.Shell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:SBL.WPF.Controls;assembly=SBL.WPF.Controls"
         xmlns:dem="clr-namespace:IGP.Tools.DeviceEmulatorManager"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:prism="http://prismlibrary.com/"
         Title="Device Emulator Manager v0.9 beta"
         MinWidth="800"
@@ -21,6 +23,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+
+    <i:Interaction.Behaviors>
+        <controls:GlowChromeBehavior ActiveGlowBrush="{StaticResource AccentStrongBrush}" InactiveGlowBrush="{StaticResource InactiveBrush}" />
+    </i:Interaction.Behaviors>
 
     <DockPanel LastChildFill="True">
         <ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static dem:WellKnownRegions.Ribbon}" />

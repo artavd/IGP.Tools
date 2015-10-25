@@ -155,6 +155,10 @@
       <Project>{7cfd3478-c25c-48dc-8129-1317447c9cbb}</Project>
       <Name>SBL.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SBL.WPF.Controls\SBL.WPF.Controls.csproj">
+      <Project>{445D12E0-6A41-43FB-95D3-45CB05D102BA}</Project>
+      <Name>SBL.WPF.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

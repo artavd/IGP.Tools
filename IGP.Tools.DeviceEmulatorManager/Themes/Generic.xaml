@@ -37,16 +37,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type dem:Shell}">
                     <Grid>
-                        <Border Margin="8"
-                                Background="{TemplateBinding Background}"
+                        <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
-                            <Border.Effect>
-                                <!--  TODO: AA: Converter from brush ({TemplateBinding BorderBrush}) to glow color  -->
-                                <DropShadowEffect BlurRadius="8"
-                                                  ShadowDepth="0"
-                                                  Color="{StaticResource AccentMediumColor}" />
-                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="32" />
