@@ -1,4 +1,6 @@
-﻿namespace SBL.Common
+﻿using JetBrains.Annotations;
+
+namespace SBL.Common
 {
     using System;
     using System.Diagnostics;
@@ -8,8 +10,9 @@
     public static class Contract
     {
         [DebuggerStepThrough]
+        [AssertionMethod]
         public static void ArgumentIsNotNull<T>(
-            T value,
+            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] T value,
             Expression<Func<T>> valueName,
             [CallerMemberName] string caller = "")
             where T : class
@@ -22,6 +25,7 @@
         }
 
         [DebuggerStepThrough]
+        [AssertionMethod]
         public static void ArgumentSatisfied<T>(
             T value,
             Expression<Func<T>> valueName,
@@ -36,8 +40,9 @@
         }
 
         [DebuggerStepThrough]
+        [AssertionMethod]
         public static void IsNotNull<T>(
-            T value,
+            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] T value,
             Func<string> messageProvider = null,
             [CallerMemberName] string caller = "") where T : class
         {
@@ -52,8 +57,9 @@
         }
 
         [DebuggerStepThrough]
+        [AssertionMethod]
         public static void IsTrue(
-            bool value,
+            [AssertionCondition(AssertionConditionType.IS_TRUE)] bool value,
             Func<string> messageProvider = null,
             [CallerMemberName] string caller = "")
         {
@@ -68,6 +74,7 @@
         }
 
         [DebuggerStepThrough]
+        [AssertionMethod]
         public static void OfType<T>(
             object value,
             Func<string> messageProvider = null,
