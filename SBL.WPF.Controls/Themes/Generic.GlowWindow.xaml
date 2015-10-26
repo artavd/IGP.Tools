@@ -13,8 +13,8 @@
                         <Border Name="Glow"
                                 Margin="4"
                                 Background="Transparent"
-                                BorderBrush="White"
-                                BorderThickness="2"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 Opacity="1">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="8"
@@ -24,11 +24,6 @@
                             </Border.Effect>
                         </Border>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsGlowing" Value="False">
-                            <Setter TargetName="Glow" Property="BorderBrush" Value="{Binding InactiveGlowBrush, RelativeSource={RelativeSource TemplatedParent}}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

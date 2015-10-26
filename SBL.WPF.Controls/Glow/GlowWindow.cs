@@ -2,12 +2,12 @@
 {
     using System;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Data;
+    using System.Windows.Interop;
     using System.Windows.Media;
     using SBL.Common;
     using SBL.Common.Annotations;
-    using SBL.Common.Extensions;
+    using SBL.WPF.Controls.Win32;
 
     internal sealed class GlowWindow : Window
     {
@@ -15,6 +15,8 @@
         private readonly GlowWindowHandler _handler;
 
         private bool _isClosed = false;
+        private IntPtr _handle;
+        private IntPtr _ownerHandle;
 
         static GlowWindow()
         {
@@ -55,8 +57,12 @@
                 new Binding(nameof(behavior.InactiveGlowBrush)) { Source = behavior, Mode = BindingMode.OneWay });
 
             SetBinding(
-                VisibilityProperty,
-                new Binding(nameof(_owner.Visibility)) { Source = _owner, Mode = BindingMode.OneWay });
+                BorderBrushProperty,
+                new Binding(nameof(_owner.BorderBrush)) { Source = _owner, Mode = BindingMode.OneWay });
+
+            SetBinding(
+                BorderThicknessProperty,
+                new Binding(nameof(_owner.BorderThickness)) { Source = _owner, Mode = BindingMode.OneWay });
 
             _owner.ContentRendered += (s, e) =>
             {
@@ -95,18 +101,53 @@
         {
             if (_isClosed) return;
 
+            if (_ownerHandle == IntPtr.Zero)
+            {
+                _ownerHandle = new WindowInteropHelper(_owner).Handle;
+            }
+
             IsGlowing = _owner.IsActive;
 
-            Left = _owner.Left - 4;
-            Top = _owner.Top - 4;
-            Width = _owner.Width + 8;
-            Height = _owner.Height + 8;
+            int left = (int)Math.Round(_owner.Left - 4);
+            int top = (int)Math.Round(_owner.Top - 4);
+            int width = (int)Math.Round(_owner.Width + 8);
+            int height = (int)Math.Round(_owner.Height + 8);
+
+            API.SetWindowPos(_handle, _ownerHandle, left, top, width, height, SetWindowPosParam.SWP_NOACTIVATE);
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            var source = PresentationSource.FromVisual(this) as HwndSource;
+            if (source != null)
+            {
+                _handle = source.Handle;
+                SetWindowStyle();
+                source.AddHook(WndProc);
+            }
+
+            Owner = _owner;
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             _isClosed = true;
+        }
+
+        private void SetWindowStyle()
+        {
+            // To remove from Alt + Tab selection
+            WindowStylesEx style = _handle.GetWindowLongExStyle();
+            style |= WindowStylesEx.WSEX_TOOLWINDOW;
+            _handle.SetWindowLongExStyle(style);
+        }
+
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
+        {
+            return IntPtr.Zero;
         }
     }
 }

@@ -63,6 +63,13 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <Compile Include="Win32\ClassStyles.cs" />
+    <Compile Include="Win32\SetClassLongParam.cs" />
+    <Compile Include="Win32\SetWindowLongParam.cs" />
+    <Compile Include="Win32\SetWindowPosParam.cs" />
+    <Compile Include="Win32\API.cs" />
+    <Compile Include="Win32\WindowStyles.cs" />
+    <Compile Include="Win32\WindowStylesEx.cs" />
     <Page Include="Themes\Generic.GlowWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
