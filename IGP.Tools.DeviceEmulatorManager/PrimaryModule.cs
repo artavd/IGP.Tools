@@ -29,7 +29,7 @@
         public void Initialize()
         {
             // External extensions
-            _container.AddExtension(new EmulatorCoreExtension(@"D:\Develop\IGP.Tools\Configs\devices"));
+            _container.AddExtension(new EmulatorCoreExtension(@"..\..\..\Configs\devices"));
             _container.AddExtension(new IOExtension());
 
             // View models

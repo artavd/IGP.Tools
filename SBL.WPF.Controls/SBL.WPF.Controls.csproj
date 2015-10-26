@@ -56,6 +56,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BrushToColorConverter.cs" />
+    <Compile Include="Converters\BorderThicknessMultiplyConverter.cs" />
     <Compile Include="Glow\GlowChromeBehavior.cs" />
     <Compile Include="Glow\GlowWindow.cs" />
     <Compile Include="Glow\GlowWindowHandler.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="Win32\SetClassLongParam.cs" />
     <Compile Include="Win32\SetWindowLongParam.cs" />
     <Compile Include="Win32\SetWindowPosParam.cs" />
-    <Compile Include="Win32\API.cs" />
+    <Compile Include="Win32\WinAPI.cs" />
     <Compile Include="Win32\WindowStyles.cs" />
     <Compile Include="Win32\WindowStylesEx.cs" />
     <Page Include="Themes\Generic.GlowWindow.xaml">

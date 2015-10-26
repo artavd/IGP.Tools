@@ -108,12 +108,12 @@
 
             IsGlowing = _owner.IsActive;
 
-            int left = (int)Math.Round(_owner.Left - 4);
-            int top = (int)Math.Round(_owner.Top - 4);
-            int width = (int)Math.Round(_owner.Width + 8);
-            int height = (int)Math.Round(_owner.Height + 8);
+            int left = (int)Math.Round(_owner.Left - 8);
+            int top = (int)Math.Round(_owner.Top - 8);
+            int width = (int)Math.Round(_owner.Width + 16);
+            int height = (int)Math.Round(_owner.Height + 16);
 
-            API.SetWindowPos(_handle, _ownerHandle, left, top, width, height, SetWindowPosParam.SWP_NOACTIVATE);
+            WinAPI.SetWindowPos(_handle, _ownerHandle, left, top, width, height, SetWindowPosParam.SWP_NOACTIVATE);
         }
 
         protected override void OnSourceInitialized(EventArgs e)

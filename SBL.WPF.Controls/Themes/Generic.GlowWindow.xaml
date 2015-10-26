@@ -1,6 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:SBL.WPF.Controls">
+                    xmlns:controls="clr-namespace:SBL.WPF.Controls"
+                    xmlns:converters="clr-namespace:SBL.WPF.Controls.Converters">
+
+    <converters:BorderThicknessMultiplyConverter x:Key="GlowBorderThicknessConverter" />
 
     <Style TargetType="{x:Type controls:GlowWindow}">
         <Setter Property="Template">
@@ -11,16 +14,15 @@
                             VerticalAlignment="Stretch"
                             Background="Transparent">
                         <Border Name="Glow"
-                                Margin="4"
+                                Margin="8"
                                 Background="Transparent"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderThickness="{TemplateBinding BorderThickness,
+                                                                  Converter={StaticResource GlowBorderThicknessConverter},
+                                                                  ConverterParameter=2}"
                                 Opacity="1">
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="8"
-                                                  Opacity="1"
-                                                  ShadowDepth="0"
-                                                  Color="Red" />
+                                <BlurEffect KernelType="Gaussian" Radius="8" />
                             </Border.Effect>
                         </Border>
                     </Border>

@@ -3,7 +3,7 @@
     using System;
     using System.Runtime.InteropServices;
 
-    public static class API
+    public static class WinAPI
     {
         [DllImport("user32.dll", EntryPoint = "GetWindowLongA", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
