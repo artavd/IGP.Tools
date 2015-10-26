@@ -66,10 +66,12 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="Win32\ClassStyles.cs" />
+    <Compile Include="Win32\HitTest.cs" />
     <Compile Include="Win32\SetClassLongParam.cs" />
     <Compile Include="Win32\SetWindowLongParam.cs" />
     <Compile Include="Win32\SetWindowPosParam.cs" />
     <Compile Include="Win32\WinAPI.cs" />
+    <Compile Include="Win32\WindowsMessages.cs" />
     <Compile Include="Win32\WindowStyles.cs" />
     <Compile Include="Win32\WindowStylesEx.cs" />
     <Page Include="Themes\Generic.GlowWindow.xaml">

@@ -103,7 +103,7 @@
                 <WindowChrome CaptionHeight="32"
                               CornerRadius="0"
                               GlassFrameThickness="0"
-                              ResizeBorderThickness="8" />
+                              ResizeBorderThickness="0" />
             </Setter.Value>
         </Setter>
     </Style>

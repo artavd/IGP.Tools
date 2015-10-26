@@ -3,7 +3,6 @@
                     xmlns:converters="clr-namespace:SBL.WPF.Controls.Converters"
                     xmlns:glow="clr-namespace:SBL.WPF.Controls.Glow">
 
-    <converters:BorderThicknessMultiplyConverter x:Key="GlowBorderThicknessConverter" />
     <converters:IntToThicknessConverter x:Key="GlowRadiusToMarginConverter" />
 
     <Style TargetType="{x:Type glow:GlowWindow}">

@@ -1,6 +1,10 @@
 ﻿// ReSharper disable InconsistentNaming
+
+using System;
+
 namespace SBL.WPF.Controls.Win32
 {
+    [Flags]
     public enum ClassStyles : uint
     {
         /// <summary>
