@@ -101,8 +101,6 @@
                 SetWindowStyle();
                 source.AddHook(WndProc);
             }
-
-            Owner = _owner;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -140,7 +138,7 @@
                 _owner.Activate();
 
                 // pass to non-client area handler
-                _handle.PostMessage(WindowsMessages.WM_NCLBUTTONDOWN, (IntPtr)GetHitTest(lparam.ToPoint()), IntPtr.Zero);
+                _ownerHandle.PostMessage(WindowsMessages.WM_NCLBUTTONDOWN, (IntPtr)GetHitTest(lparam.ToPoint()), IntPtr.Zero);
                 handled = true;
             }
 
@@ -149,7 +147,7 @@
                 HitTest hitTest = GetHitTest(lparam.ToPoint());
                 if (hitTest == HitTest.HTTOP || hitTest == HitTest.HTBOTTOM)
                 {
-                    _handle.SendMessage(WindowsMessages.WM_NCLBUTTONDBLCLK, (IntPtr)hitTest, IntPtr.Zero);
+                    _ownerHandle.SendMessage(WindowsMessages.WM_NCLBUTTONDBLCLK, (IntPtr)hitTest, IntPtr.Zero);
                 }
 
                 handled = true;
