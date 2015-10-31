@@ -1,6 +1,5 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager
 {
-    using System.Reflection.Emit;
     using System.Windows;
     using IGP.Tools.DeviceEmulatorManager.Models;
     using IGP.Tools.DeviceEmulatorManager.Services;

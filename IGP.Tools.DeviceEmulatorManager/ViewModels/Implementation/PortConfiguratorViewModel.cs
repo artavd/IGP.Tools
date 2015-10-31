@@ -1,6 +1,7 @@
-﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
+﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Input;
@@ -15,7 +16,7 @@
     internal sealed class PortConfiguratorViewModel : ViewModelBase, IPortConfiguratorViewModel
     {
         private readonly DelegateCommand _bindPortCommand;
-        private DeviceEmulatorEndPoint[] _targetEndPoints;
+        private IEnumerable<DeviceEmulatorEndPoint> _targetEndPoints;
         private IPortViewModel _selectedPort;
 
         public PortConfiguratorViewModel(
@@ -28,7 +29,7 @@
                 .GetEvent<DeviceSelectionChangedEvent>()
                 .Subscribe(UpdateTargetEndPoints));
 
-            _bindPortCommand = new DelegateCommand(Bind, () => (_targetEndPoints?.Length ?? 0) > 0);
+            _bindPortCommand = new DelegateCommand(Bind, () => _targetEndPoints?.Any() ?? false);
 
             AvailablePorts = new ObservableCollection<IPortViewModel>(portRepository.Ports.Select(p => new PortViewModel(p)));
         }
@@ -42,11 +43,11 @@
             set { SetProperty(ref _selectedPort, value); }
         }
 
-        private void UpdateTargetEndPoints(DeviceEmulatorEndPoint[] targetEndPoints)
+        private void UpdateTargetEndPoints(IDeviceViewModel[] targetEndPoints)
         {
-            _targetEndPoints = targetEndPoints;
+            _targetEndPoints = targetEndPoints.Select(x => x.EndPoint);
 
-            if (targetEndPoints.Select(x => x.OutputPort).Distinct().Count() == 1)
+            if (_targetEndPoints.Select(x => x.OutputPort).Distinct().Count() == 1)
             {
                 SelectedPort = AvailablePorts.First(x => x.Port.Equals(_targetEndPoints.First().OutputPort));
             }

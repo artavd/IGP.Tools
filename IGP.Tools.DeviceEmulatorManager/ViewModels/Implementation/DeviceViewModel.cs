@@ -1,4 +1,4 @@
-﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
+﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation
 {
     using System;
     using System.Linq;

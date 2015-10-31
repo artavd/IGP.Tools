@@ -1,9 +1,8 @@
-﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
+﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation
 {
     using System.Collections;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Windows.Controls;
     using System.Windows.Input;
     using IGP.Tools.DeviceEmulatorManager.Models;
     using Prism.Commands;
@@ -36,15 +35,14 @@
 
         private void PublishSelectionChangedEvent(IList selectedItems)
         {
-            var items = selectedItems
-                .Cast<IDeviceViewModel>()
-                .Select(x => x.EndPoint);
-
-            _eventAggregator.GetEvent<DeviceSelectionChangedEvent>().Publish(items.ToArray());
+            var items = selectedItems.Cast<IDeviceViewModel>().ToArray();
+            _eventAggregator
+                .GetEvent<DeviceSelectionChangedEvent>()
+                .Publish(items);
         }
     }
 
-    internal sealed class DeviceSelectionChangedEvent : PubSubEvent<DeviceEmulatorEndPoint[]>
+    internal sealed class DeviceSelectionChangedEvent : PubSubEvent<IDeviceViewModel[]>
     {
     }
 }

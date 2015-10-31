@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:IGP.Tools.DeviceEmulatorManager.ViewModels"
+                    xmlns:viewmodels="clr-namespace:IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation"
                     xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views">
 
-    <DataTemplate DataType="{x:Type viewModels:PortConfiguratorViewModel}">
+    <DataTemplate DataType="{x:Type viewmodels:PortConfiguratorViewModel}">
         <Border>
             <StackPanel>
                 <TextBlock>Port Configurator</TextBlock>
@@ -13,7 +13,8 @@
                             DockPanel.Dock="Right" />
                     <ComboBox HorizontalContentAlignment="Stretch"
                               ItemsSource="{Binding AvailablePorts}"
-                              SelectedItem="{Binding SelectedPort, Mode=TwoWay}">
+                              SelectedItem="{Binding SelectedPort,
+                                                     Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel LastChildFill="True">
