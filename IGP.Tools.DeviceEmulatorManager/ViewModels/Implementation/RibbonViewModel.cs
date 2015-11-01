@@ -1,10 +1,8 @@
 ﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation
 {
-    using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Windows.Input;
     using IGP.Tools.DeviceEmulatorManager.Services;
-    using Prism.Commands;
     using Prism.Events;
     using SBL.Common;
     using SBL.Common.Annotations;
@@ -13,37 +11,38 @@
 
     internal sealed class RibbonViewModel : IRibbonViewModel
     {
-        private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(5);
-
+        private readonly IRibbonCommandsProvider _ribbonCommandsProvider;
         private IDeviceViewModel[] _lastSelectedDevices;
 
         private AggregatedCommand _startEmulatorsCommand;
         private AggregatedCommand _stopEmulatorsCommand;
 
-        public RibbonViewModel([NotNull] IStatusMessageService status, [NotNull] IEventAggregator eventAggregator)
+        public RibbonViewModel(
+            [NotNull] IRibbonService ribbonService,
+            [NotNull] IRibbonCommandsProvider ribbonCommandsProvider,
+            [NotNull] IEventAggregator eventAggregator)
         {
-            Contract.ArgumentIsNotNull(status, () => status);
+            Contract.ArgumentIsNotNull(ribbonService, () => ribbonService);
+            Contract.ArgumentIsNotNull(ribbonCommandsProvider, () => ribbonCommandsProvider);
             Contract.ArgumentIsNotNull(eventAggregator, () => eventAggregator);
+
+            _ribbonCommandsProvider = ribbonCommandsProvider;
 
             _startEmulatorsCommand = new AggregatedCommand { CanExecuteMode = CanExecuteMode.IfAny };
             _stopEmulatorsCommand = new AggregatedCommand { CanExecuteMode = CanExecuteMode.IfAny };
 
-            AddDeviceCommand = new DelegateCommand(() => status.ShowStatusMessage("Device added", DefaultTimeout));
-            RemoveDeviceCommand = new DelegateCommand(() => status.ShowStatusMessage("Device removed", DefaultTimeout));
-            SaveConfigCommand = new DelegateCommand(() => status.ShowStatusMessage("Config saved", DefaultTimeout));
-            LoadConfigCommand = new DelegateCommand(() => status.ShowStatusMessage("Config loaded", DefaultTimeout));
-
             eventAggregator
-                .GetEvent<DeviceSelectionChangedEvent>()
+                .GetEvent<ActiveDevicesChanged>()
                 .Subscribe(UpdateDevicesCommands);
-        }
 
-        public ICommand StartEmulatorsCommand => _startEmulatorsCommand;
-        public ICommand StopEmulatorsCommand => _stopEmulatorsCommand;
-        public ICommand AddDeviceCommand { get; }
-        public ICommand RemoveDeviceCommand { get; }
-        public ICommand SaveConfigCommand { get; }
-        public ICommand LoadConfigCommand { get; }
+            ribbonService.RegisterRibbonCommand(
+                new RibbonCommandInfo("Start emulators") { Description = "Start active device emulators", Icon = "StartEmulatorsIcon"},
+                _startEmulatorsCommand);
+
+            ribbonService.RegisterRibbonCommand(
+                new RibbonCommandInfo("Stop emulators") { Description = "Stop active device emulators", Icon = "StopEmulatorsIcon" },
+                _stopEmulatorsCommand);
+        }
 
         private void UpdateDevicesCommands(IDeviceViewModel[] selectedDevices)
         {
@@ -60,5 +59,7 @@
                 _stopEmulatorsCommand.RegisterCommand(x.StopEmulatorCommand);
             });
         }
+
+        public IEnumerable<RibbonCommand> Commands => _ribbonCommandsProvider.Commands;
     }
 }

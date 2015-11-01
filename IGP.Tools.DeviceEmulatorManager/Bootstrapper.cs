@@ -35,6 +35,8 @@
             base.ConfigureContainer();
 
             Register<IStatusMessageService, StatusMessageService>();
+            Register<IRibbonService, RibbonService>();
+            Register<IRibbonCommandsProvider, RibbonService>();
 
             Register<IEmulatorRepository, EmulatorRepository>();
             Register<IPortRepository, PortRepository>();

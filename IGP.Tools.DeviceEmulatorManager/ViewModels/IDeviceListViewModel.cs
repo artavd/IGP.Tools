@@ -8,6 +8,6 @@
     {
         ObservableCollection<IDeviceViewModel> Devices { [NotNull] get; }
 
-        ICommand DeviceSelectionChangedCommand { [NotNull] get; }
+        ICommand ActiveDevicesChangedCommand { [NotNull] get; }
     }
 }

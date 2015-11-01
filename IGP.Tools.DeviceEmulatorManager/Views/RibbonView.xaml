@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewmodels="clr-namespace:IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation"
-                    xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views">
+                    xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views"
+                    xmlns:services="clr-namespace:IGP.Tools.DeviceEmulatorManager.Services">
 
     <DataTemplate DataType="{x:Type viewmodels:RibbonViewModel}">
         <DataTemplate.Resources>
@@ -12,14 +13,20 @@
             </Style>
         </DataTemplate.Resources>
         <Border>
-            <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding StartEmulatorsCommand}" Content="Start emulator" />
-                <Button Command="{Binding StopEmulatorsCommand}" Content="Stop emulator" />
-                <Button Command="{Binding AddDeviceCommand}" Content="Add device" />
-                <Button Command="{Binding RemoveDeviceCommand}" Content="Remove device" />
-                <Button Command="{Binding SaveConfigCommand}" Content="Save config" />
-                <Button Command="{Binding LoadConfigCommand}" Content="Load config" />
-            </StackPanel>
+            <ListBox ItemsSource="{Binding Commands}">
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <StackPanel IsItemsHost="True" Orientation="Horizontal" />
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type services:RibbonCommand}">
+                        <Button Content="{Binding Info.Name}"
+                                ToolTip="{Binding Info.Description}"
+                                Command="{Binding Command}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Border>
     </DataTemplate>
 

@@ -104,6 +104,7 @@
     <Compile Include="Converters\BoolConverter.cs" />
     <Compile Include="Models\DeviceEmulatorEndPoint.cs" />
     <Compile Include="PrimaryModule.cs" />
+    <Compile Include="Services\IRibbonService.cs" />
     <Compile Include="Services\IStatusMessageService.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>

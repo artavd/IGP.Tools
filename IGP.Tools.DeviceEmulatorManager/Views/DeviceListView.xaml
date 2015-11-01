@@ -49,7 +49,7 @@
                      SelectionMode="Extended">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding DeviceSelectionChangedCommand}" CommandParameter="{Binding ElementName=deviceList, Path=SelectedItems}" />
+                        <i:InvokeCommandAction Command="{Binding ActiveDevicesChangedCommand}" CommandParameter="{Binding ElementName=deviceList, Path=SelectedItems}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListBox.ItemContainerStyle>

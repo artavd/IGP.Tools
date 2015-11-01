@@ -26,7 +26,7 @@
             Contract.ArgumentIsNotNull(eventAggregator, () => eventAggregator);
 
             RegisterForDisposing(eventAggregator
-                .GetEvent<DeviceSelectionChangedEvent>()
+                .GetEvent<ActiveDevicesChanged>()
                 .Subscribe(UpdateTargetEndPoints));
 
             _bindPortCommand = new DelegateCommand(Bind, () => _targetEndPoints?.Any() ?? false);

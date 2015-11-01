@@ -1,12 +1,10 @@
-﻿using System.Windows.Input;
-using SBL.Common.Annotations;
-
-namespace IGP.Tools.DeviceEmulatorManager.ViewModels
+﻿namespace IGP.Tools.DeviceEmulatorManager.ViewModels
 {
+    using System.Collections.Generic;
+    using IGP.Tools.DeviceEmulatorManager.Services;
+
     internal interface IRibbonViewModel
     {
-        ICommand StartEmulatorsCommand { [NotNull] get; }
-
-        ICommand StopEmulatorsCommand { [NotNull] get; }
+        IEnumerable<RibbonCommand> Commands { get; }
     }
 }

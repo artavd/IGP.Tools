@@ -11,6 +11,13 @@
     {
         private readonly HashSet<ICommand> _commands = new HashSet<ICommand>();
 
+        public AggregatedCommand() { }
+        public AggregatedCommand([NotNull] IEnumerable<ICommand> commands)
+        {
+            Contract.ArgumentIsNotNull(commands, () => commands);
+            commands.Foreach(RegisterCommand);
+        }
+
         public CanExecuteMode CanExecuteMode { get; set; } = CanExecuteMode.IfAll;
 
         [NotNull]
@@ -23,7 +30,7 @@
             Contract.ArgumentIsNotNull(command, () => command);
             if (_commands.Add(command))
             {
-                command.CanExecuteChanged += CanExecuteChanged;
+                command.CanExecuteChanged += RaiseCanExecuteChanged;
                 RaiseCanExecuteChanged();
             }
         }
@@ -35,7 +42,7 @@
 
             _commands.Remove(command);
 
-            command.CanExecuteChanged -= CanExecuteChanged;
+            command.CanExecuteChanged -= RaiseCanExecuteChanged;
             RaiseCanExecuteChanged();
         }
 
@@ -61,6 +68,11 @@
         private void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void RaiseCanExecuteChanged(object sender, EventArgs args)
+        {
+            RaiseCanExecuteChanged();
         }
     }
 
