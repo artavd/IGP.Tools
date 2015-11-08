@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Windows.Input;
     using IGP.Tools.DeviceEmulatorManager.Models;
+    using IGP.Tools.DeviceEmulatorManager.Services;
     using IGP.Tools.IO;
     using Prism.Commands;
     using Prism.Events;
@@ -15,15 +16,21 @@
 
     internal sealed class PortConfiguratorViewModel : ViewModelBase, IPortConfiguratorViewModel
     {
+        private readonly IThemeService _themeService;
         private readonly DelegateCommand _bindPortCommand;
         private IEnumerable<DeviceEmulatorEndPoint> _targetEndPoints;
         private IPortViewModel _selectedPort;
 
         public PortConfiguratorViewModel(
             [NotNull] IEventAggregator eventAggregator,
-            [NotNull] IPortRepository portRepository)
+            [NotNull] IPortRepository portRepository,
+            [NotNull] IThemeService themeService)
         {
             Contract.ArgumentIsNotNull(eventAggregator, () => eventAggregator);
+            Contract.ArgumentIsNotNull(portRepository, () => portRepository);
+            Contract.ArgumentIsNotNull(themeService, () => themeService);
+
+            _themeService = themeService;
 
             RegisterForDisposing(eventAggregator
                 .GetEvent<ActiveDevicesChanged>()
@@ -41,6 +48,28 @@
         {
             get { return _selectedPort; }
             set { SetProperty(ref _selectedPort, value); }
+        }
+
+        public string Theme
+        {
+            set
+            {
+                if (value != null)
+                {
+                    _themeService.ChangeTheme(WellKnownThemes.GetTheme(value));
+                }
+            }
+        }
+
+        public string Accents
+        {
+            set
+            {
+                if (value != null)
+                {
+                    _themeService.ChangeAccents(WellKnownThemes.GetAccents(value));
+                }
+            }
         }
 
         private void UpdateTargetEndPoints(IDeviceViewModel[] targetEndPoints)

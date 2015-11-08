@@ -38,6 +38,16 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </DockPanel>
+                <TextBlock>Themes:</TextBlock>
+                <ComboBox SelectedValue="{Binding Theme, Mode=OneWayToSource}" SelectedValuePath="Content">
+                    <ComboBoxItem>Dark</ComboBoxItem>
+                    <ComboBoxItem>Light</ComboBoxItem>
+                </ComboBox>
+                <ComboBox SelectedValue="{Binding Accents, Mode=OneWayToSource}" SelectedValuePath="Content">
+                    <ComboBoxItem>Blue</ComboBoxItem>
+                    <ComboBoxItem>Orange</ComboBoxItem>
+                    <ComboBoxItem>Purple</ComboBoxItem>
+                </ComboBox>
             </StackPanel>
         </Border>
     </DataTemplate>
