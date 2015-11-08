@@ -45,7 +45,7 @@
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
-                          Background="{StaticResource BasicInverseLightBrush}"
+                          Background="{DynamicResource BorderBrushKey}"
                           ResizeBehavior="BasedOnAlignment" />
 
             <ContentControl Grid.Column="2" prism:RegionManager.RegionName="{x:Static dem:WellKnownRegions.PortConfigurator}" />

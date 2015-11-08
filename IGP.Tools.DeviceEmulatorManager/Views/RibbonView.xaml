@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:services="clr-namespace:IGP.Tools.DeviceEmulatorManager.Services"
                     xmlns:viewmodels="clr-namespace:IGP.Tools.DeviceEmulatorManager.ViewModels.Implementation"
-                    xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views"
-                    xmlns:services="clr-namespace:IGP.Tools.DeviceEmulatorManager.Services">
+                    xmlns:views="clr-namespace:IGP.Tools.DeviceEmulatorManager.Views">
 
     <DataTemplate DataType="{x:Type viewmodels:RibbonViewModel}">
         <DataTemplate.Resources>
@@ -21,9 +21,9 @@
                 </ListBox.Template>
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type services:RibbonCommand}">
-                        <Button Content="{Binding Info.Name}"
-                                ToolTip="{Binding Info.Description}"
-                                Command="{Binding Command}" />
+                        <Button Command="{Binding Command}"
+                                Content="{Binding Info.Name}"
+                                ToolTip="{Binding Info.Description}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

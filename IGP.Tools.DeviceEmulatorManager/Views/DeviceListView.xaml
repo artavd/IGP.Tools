@@ -13,12 +13,11 @@
     <Style x:Key="DeviceCommandButtonStyle"
            BasedOn="{StaticResource GeometryIconButtonStyle}"
            TargetType="{x:Type ButtonBase}">
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
         <Setter Property="Foreground" Value="{Binding Tag, RelativeSource={RelativeSource Self}}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.Setters>
-                    <Setter Property="Background" Value="{StaticResource BasicStrongBrush}" />
+                    <Setter Property="Background" Value="{DynamicResource BackgroundBrushKey}" />
                 </Trigger.Setters>
             </Trigger>
         </Style.Triggers>
@@ -38,11 +37,11 @@
     </Style>
 
     <DataTemplate DataType="{x:Type viewmodels:DeviceListViewModel}">
-        <Border Background="{StaticResource BasicStrongBrush}">
+        <Border Background="{DynamicResource BackgroundBrushKey}">
             <ListBox Name="deviceList"
                      HorizontalContentAlignment="Stretch"
-                     Background="{StaticResource TransparentBrush}"
-                     BorderBrush="{StaticResource BasicInverseLightBrush}"
+                     Background="Transparent"
+                     BorderBrush="{DynamicResource BorderBrushKey}"
                      BorderThickness="0 1 0 0"
                      ItemsSource="{Binding Devices}"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -54,8 +53,7 @@
                 </i:Interaction.Triggers>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
-                        <Setter Property="Background" Value="{StaticResource BasicStrongBrush}" />
-                        <Setter Property="Foreground" Value="{StaticResource BasicInverseStrongBrush}" />
+                        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushKey}" />
                         <Setter Property="Padding" Value="5" />
                         <Setter Property="Template">
                             <Setter.Value>
@@ -65,10 +63,11 @@
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource AccentLightBrush}" />
+                                            <Setter Property="Background" Value="{DynamicResource ActiveBackgroundBrushKey}" />
                                         </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource AccentStrongBrush}" />
+                                            <Setter Property="Background" Value="{DynamicResource AccentActiveBrushKey}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource AccentForegroundBrushKey}" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -118,13 +117,13 @@
                                             Command="{Binding ConnectCommand}"
                                             Content="{StaticResource PlugIcon}"
                                             Style="{StaticResource PortCommandButtonStyle}"
-                                            Tag="{StaticResource BasicInverseMediumBrush}" />
+                                            Tag="{DynamicResource SemiactiveForegroundBrushKey}" />
 
                                     <Button Name="disconnectPortButton"
                                             Command="{Binding DisconnectCommand}"
                                             Content="{StaticResource PlugIcon}"
                                             Style="{StaticResource PortCommandButtonStyle}"
-                                            Tag="{StaticResource BasicInverseMediumBrush}" />
+                                            Tag="{DynamicResource SemiactiveForegroundBrushKey}" />
 
                                     <Border Width="24"
                                             Height="24"
@@ -134,7 +133,7 @@
                                               Fill="Red"
                                               IsHitTestVisible="False"
                                               Stretch="Uniform"
-                                              Stroke="{StaticResource BasicStrongBrush}"
+                                              Stroke="{DynamicResource BackgroundBrushKey}"
                                               Visibility="Collapsed" />
                                     </Border>
                                 </Grid>

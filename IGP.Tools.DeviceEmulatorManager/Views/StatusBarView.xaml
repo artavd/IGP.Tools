@@ -8,8 +8,12 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type viewModels:StatusBarViewModel}">
-        <Border Height="24" Background="{StaticResource AccentMediumBrush}">
-            <TextBlock VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding StatusMessage, Mode=OneWay}" />
+        <Border Height="24" Background="{DynamicResource AccentBrushKey}">
+            <TextBlock VerticalAlignment="Center"
+                       Foreground="{DynamicResource AccentForegroundBrushKey}"
+                       Text="{Binding StatusMessage,
+                                      Mode=OneWay}"
+                       TextTrimming="CharacterEllipsis" />
         </Border>
     </DataTemplate>
 

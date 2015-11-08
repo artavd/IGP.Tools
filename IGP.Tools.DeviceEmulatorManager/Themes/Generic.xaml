@@ -11,8 +11,8 @@
     <Style x:Key="TitleBarButtonStyle"
            BasedOn="{StaticResource GeometryIconButtonStyle}"
            TargetType="Button">
-        <Setter Property="Foreground" Value="{StaticResource BasicInverseStrongBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BasicInverseStrongBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushKey}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ForegroundBrushKey}" />
         <Setter Property="Width" Value="32" />
         <Setter Property="Height" Value="32" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
@@ -21,15 +21,15 @@
         <Setter Property="RenderOptions.EdgeMode" Value="Aliased" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="BorderBrush" Value="{StaticResource InactiveBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource InactiveBackgroundBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="{x:Type Window}" TargetType="{x:Type Window}">
-        <Setter Property="Background" Value="{StaticResource BasicMediumBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource BasicInverseStrongBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource AccentMediumBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeBrushKey}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushKey}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrushKey}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -49,7 +49,7 @@
                                     <TextBlock Margin="10 0 0 0"
                                                VerticalAlignment="Center"
                                                DockPanel.Dock="Left"
-                                               Foreground="{StaticResource BasicInverseMediumBrush}"
+                                               Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
                                                Text="{TemplateBinding Title}" />
 
                                     <StackPanel HorizontalAlignment="Right"

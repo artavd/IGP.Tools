@@ -8,8 +8,8 @@
         <Setter Property="Width" Value="24" />
         <Setter Property="Height" Value="24" />
         <Setter Property="Padding" Value="4" />
-        <Setter Property="Background" Value="{StaticResource BasicMediumBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BasicStrongBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BackgroundBrushKey}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -28,10 +28,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource BasicLightBrush}" />
+                <Setter Property="Background" Value="{DynamicResource ActiveBackgroundBrushKey}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource InactiveBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource InactiveBackgroundBrushKey}" />
             </Trigger>
         </Style.Triggers>
     </Style>
