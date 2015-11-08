@@ -19,8 +19,11 @@
         {
             base.InitializeShell();
 
-            Application.Current.MainWindow = Shell.As<Shell>();
-            Application.Current.MainWindow.Show();
+            IThemeService theme = Container.Resolve<IThemeService>();
+            theme.Initialize(Application, DefaultTheme, DefaultAccents);
+
+            Application.MainWindow = Shell.As<Shell>();
+            Application.MainWindow.Show();
         }
 
         protected override void ConfigureModuleCatalog()
@@ -37,6 +40,7 @@
             Register<IStatusMessageService, StatusMessageService>();
             Register<IRibbonService, RibbonService>();
             Register<IRibbonCommandsProvider, RibbonService>();
+            Register<IThemeService, ThemeService>();
 
             Register<IEmulatorRepository, EmulatorRepository>();
             Register<IPortRepository, PortRepository>();
@@ -46,5 +50,9 @@
         {
             RegisterTypeIfMissing(typeof(TTo), typeof(TFrom), isSingleton);
         }
+
+        private Application Application => Application.Current;
+        private ResourceDictionary DefaultTheme => WellKnownThemes.DarkTheme;
+        private ResourceDictionary DefaultAccents => WellKnownThemes.BlueAccents;
     }
 }
