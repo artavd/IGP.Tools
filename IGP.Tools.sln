@@ -54,7 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devices", "Devices", "{0241
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGP.Tools.DeviceEmulatorManager", "IGP.Tools.DeviceEmulatorManager\IGP.Tools.DeviceEmulatorManager.csproj", "{494C2101-912A-43FE-B685-28C309526E9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBL.WPF.Controls", "SBL.WPF.Controls\SBL.WPF.Controls.csproj", "{445D12E0-6A41-43FB-95D3-45CB05D102BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBL.Common.WPF", "SBL.Common.WPF\SBL.Common.WPF.csproj", "{445D12E0-6A41-43FB-95D3-45CB05D102BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

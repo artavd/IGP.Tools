@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SBL.WPF.Controls")]
-[assembly: AssemblyDescription("Shared WPF controls by Artem Avdosev")]
+[assembly: AssemblyTitle("SBL.Common.WPF")]
+[assembly: AssemblyDescription("Common library for using with WPF Artem Avdosev")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SBL")]
-[assembly: AssemblyProduct("SBL.WPF.Controls")]
+[assembly: AssemblyProduct("SBL.Common.WPF")]
 [assembly: AssemblyCopyright("Copyright ©  2015 Artem Avdosev")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

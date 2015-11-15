@@ -95,8 +95,8 @@
         private static ResourceDictionary CreateTheme(string name, bool isAccent = false)
         {
             string uri = isAccent ?
-                $@"pack://application:,,,/SBL.WPF.Controls;component/Themes/Accents/{name}.xaml" :
-                $@"pack://application:,,,/SBL.WPF.Controls;component/Themes/{name}.xaml";
+                $@"pack://application:,,,/SBL.Common.WPF;component/Themes/Accents/{name}.xaml" :
+                $@"pack://application:,,,/SBL.Common.WPF;component/Themes/{name}.xaml";
 
             return new ResourceDictionary { Source = new Uri(uri, UriKind.Absolute) };
         }
